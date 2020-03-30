@@ -1,18 +1,18 @@
 # Reference:
 # https://www.dev-log.me/Deploying_Haskell:_Painless_CICD_with_Travis,_Docker_and_Digital_Ocean_(or_any_linux_VM)/
-sudo: false
+sudo: 'required'
 dist: xenial
 language: generic
 cache:
   directories:
     - $HOME/.stack
-
+services:
+  - 'docker'
 addons:
   apt:
     packages:
       - libgmp-dev
-services:
-  - docker
+
 
 before_install:
   - cd server/
