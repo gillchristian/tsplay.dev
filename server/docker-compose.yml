@@ -1,0 +1,9 @@
+version: '2'
+services:
+  my-app:
+    build:
+      context: .
+      args:
+        - BINARY_PATH
+    image: "gillchristian/tsplay.dev:${VERSION}"
+
