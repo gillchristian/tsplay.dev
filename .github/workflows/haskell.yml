@@ -37,22 +37,14 @@ jobs:
         ARGS: "--resolver lts-15.5"
       working-directory: server
 
-    - name: Build
-      run: |
-        set -ex
-        stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
-        set +ex
-      env:
-        ARGS: "--resolver lts-15.5"
-      working-directory: server
-
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       env:
-        BINARY_PATH: ".stack-work/dist/x86_64-linux/Cabal-2.4.0.1/build/tsplay-exe/tsplay-exe"
+        BINARY_PATH: ".stack-work/dist/x86_64-linux/Cabal-3.0.1.0/build/tsplay-exe/tsplay-exe"
       with:
         name: gillchristian/tsplay
         username: gillchristian
         password: ${{ secrets.docker_password }}
         workdir: server
+        context: .
         buildargs: BINARY_PATH
