@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "REACT_APP_BASE_URL": "https://tsplay.dev/"
+    }
+  }
+}
+

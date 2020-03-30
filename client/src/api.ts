@@ -26,13 +26,13 @@ type CreateResult =
   | {code: 400; payload: Error}
   | {code: 500; payload: Error}
 
-const base = process.env.REACT_APP_BASE_URL || 'http://localhost:9000'
+const base = process.env.REACT_APP_BASE_URL || 'http://localhost:9000/'
 
 type Result = E.Either<Errors, CreateResponse>
 
 export const createShort = (body: CreateBody) =>
   pipe(
-    new Fetcher<CreateResult, Result>(`${base}/create`, {
+    new Fetcher<CreateResult, Result>(`${base}create`, {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),
