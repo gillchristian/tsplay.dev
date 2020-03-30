@@ -152,7 +152,7 @@ loadAppEnv = do
   env <- case mbConf of
     Just conf -> pure $ AppEnv conf $ Hashids.hashidsMinimum salt 6
     Nothing -> Exit.die "Invalid configuration"
-  port <- maybe 9000 read <$> Sys.lookupEnv "PORT"
+  port <- maybe 8080 read <$> Sys.lookupEnv "PORT"
   pure (env, port)
 
 appMiddleware :: Wai.Middleware -> B.ByteString -> Wai.Middleware
