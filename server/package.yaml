@@ -1,0 +1,70 @@
+name:                tsplay
+version:             0.0.1.0
+github:              "gillchristian/tsplay"
+license:             MIT
+author:              "Christian Gill"
+maintainer:          "gillchristiang@gmail.com"
+copyright:           "2020 Christian Gill"
+
+extra-source-files:
+- readme.md
+- ChangeLog.md
+
+synopsis:            Link shortener for TypeScript Playground
+category:            Web
+
+description:         Please see the README on GitHub at <https://github.com/gillchristian/tsplay#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- aeson
+- bson
+- bytestring
+- casing
+- data-default-class
+- hashids
+- http-client
+- http-media
+- http-types
+- lens
+- mongoDB
+- network-uri
+- mtl
+- parsec
+- servant
+- servant-checked-exceptions
+- servant-server
+- text
+- time
+- transformers
+- utf8-string
+- wai
+- wai-cors
+- wai-extra
+- warp
+- wreq
+
+library:
+  source-dirs: src
+
+executables:
+  tsplay-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - tsplay
+
+tests:
+  tsplay-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - tsplay
