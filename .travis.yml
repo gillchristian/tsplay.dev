@@ -6,10 +6,13 @@ language: generic
 cache:
   directories:
     - $HOME/.stack
+
 addons:
   apt:
     packages:
       - libgmp-dev
+services:
+  - docker
 
 before_install:
   - cd server/
