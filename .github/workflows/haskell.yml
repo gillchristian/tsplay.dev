@@ -7,7 +7,14 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        plan:
+          - { stack-lts: "15.5", resolver: "--resolver lts-15.5" }
+
+    runs-on: ${{ matrix.os }}
+
     steps:
     - name: Install OS Packages
       uses: mstksg/get-package@v1
@@ -19,13 +26,21 @@ jobs:
     - name: Setup stack
       uses: mstksg/setup-stack@v1
 
+    - uses: actions/cache@v1
+      name: Cache ~/.stack
+      id: cache
+      with:
+        path: ~/.stack
+        key: ${{runner.os }}-stack-lts-${{ matrix.plan.stack-lts }}-${{ hashFiles('server/(package|stack).yaml') }}
+
     - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
       run: |
         set -ex
         stack --no-terminal --install-ghc $ARGS test --bench --only-dependencies
         set +ex
       env:
-        ARGS: "--resolver lts-15.5"
+        ARGS: ${{ matrix.plan.resolver }}
       working-directory: server
 
     - name: Build
@@ -34,7 +49,7 @@ jobs:
         stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
         set +ex
       env:
-        ARGS: "--resolver lts-15.5"
+        ARGS: ${{ matrix.plan.resolver }}
       working-directory: server
 
     - name: Publish to Registry
