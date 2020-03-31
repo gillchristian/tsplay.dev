@@ -9,7 +9,7 @@ jobs:
   release:
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-16.04]
         plan:
           - { stack-lts: "15.5", resolver: "--resolver lts-15.5" }
 
@@ -31,7 +31,7 @@ jobs:
       id: cache
       with:
         path: ~/.stack
-        key: ${{runner.os }}-stack-lts-${{ matrix.plan.stack-lts }}-${{ hashFiles('server/(package|stack).yaml') }}
+        key: ${{runner.os }}-stack-lts-${{ matrix.plan.stack-lts }}-${{ hashFiles('server/package.yaml') }}-${{ hashFiles('server/stack.yaml') }}-${{ hashFiles('server/stack.yaml.lock') }}
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
@@ -52,6 +52,10 @@ jobs:
         ARGS: ${{ matrix.plan.resolver }}
       working-directory: server
 
+    - name: Tag name
+      id: tag
+      run: echo "::set-output name=version_tag::$(cat package.yaml | grep version | sed -e 's/ //g' | cut -d ':' -f 2)"
+
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       env:
@@ -61,5 +65,6 @@ jobs:
         username: gillchristian
         password: ${{ secrets.docker_password }}
         workdir: server
+        tags: "latest,${{ steps.tag.outputs.version_tag }}"
         context: .
         buildargs: BINARY_PATH
