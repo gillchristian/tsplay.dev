@@ -33,6 +33,7 @@ import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Database.MongoDB as Mongo
 import Database.MongoDB ((=:))
+import Database.MongoDB.Transport.Tls as DBTLS
 import GHC.Generics
 import Network.HTTP.Types.Status (status302)
 import Network.URI (URI)
@@ -56,15 +57,15 @@ type App = ReaderT AppEnv Servant.Handler
 
 runDb :: Mongo.Action IO a -> App a
 runDb action = do
-  -- TODO: check this pipeline
-  -- TODO: can I have a pool of connections in de Reader instead?
   dbConf <- appDatabase . conf <$> ask
-  pipe <- liftIO $ Mongo.connect (Mongo.host (dbHostname dbConf))
-  -- Have to check if it isn't authorized
-  _ <- lift $ Mongo.access pipe Mongo.master (dbName dbConf) $ Mongo.auth (dbUser dbConf) (dbPassword dbConf)
+  env <- appEnv . conf <$> ask
+  pipe <- liftIO $ case env of
+    Production -> DBTLS.connect (dbHostname dbConf) (Mongo.PortNumber 27017)
+    Development -> Mongo.connect $ Mongo.host $ dbHostname dbConf
+  void $ Mongo.access pipe Mongo.master "admin" $ Mongo.auth (dbUser dbConf) (dbPassword dbConf)
   result <- liftIO $ Mongo.access pipe Mongo.master (dbName dbConf) action
   liftIO $ Mongo.close pipe
-  return result
+  pure result
 
 findUrlById :: String -> App (Maybe ShortenedUrl)
 findUrlById _id = do
@@ -242,6 +243,10 @@ dropLabelPrefix :: String -> Json.Options
 dropLabelPrefix prefix =
   Json.defaultOptions {Json.fieldLabelModifier = camel . stripPrefix prefix}
 
+camelTags :: Json.Options
+camelTags =
+  Json.defaultOptions {Json.constructorTagModifier = camel}
+
 data CreateBody
   = CreateBody
       { createUrl :: String,
@@ -279,11 +284,23 @@ data DbConfig
 instance Json.FromJSON DbConfig where
   parseJSON = Json.genericParseJSON $ dropLabelPrefix "db"
 
+data Environment
+  = Production
+  | Development
+  deriving (Generic, Show)
+
+instance Json.FromJSON Environment where
+  parseJSON = Json.genericParseJSON camelTags
+
+instance Json.ToJSON Environment where
+  toJSON = Json.genericToJSON camelTags
+
 data AppConfig
   = AppConfig
       { appDatabase :: DbConfig,
         appBaseUrl :: String,
-        appClientUrl :: String
+        appClientUrl :: String,
+        appEnv :: Environment
       }
   deriving (Generic, Show)
 
