@@ -18,13 +18,20 @@ export const Layout = () => (
 
     <footer className="Footer">
       <div>
-        by{' '}
         <a
           href="https://gillchristian.xyz"
           target="_blank"
           rel="noopener noreferrer"
         >
           gillchristian
+        </a>
+        <span> / </span>
+        <a
+          href="https://github.com/gillchristian/tsplay.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {'tsplay.dev'}
         </a>
       </div>
     </footer>
