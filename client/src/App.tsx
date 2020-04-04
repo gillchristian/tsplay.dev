@@ -1,14 +1,15 @@
 import React, {FC, FormEvent, ChangeEvent, useState, useEffect} from 'react'
+import * as E from 'fp-ts/lib/Either'
 import * as TE from 'fp-ts/lib/TaskEither'
 import * as T from 'fp-ts/lib/Task'
 import {pipe} from 'fp-ts/lib/pipeable'
+import {constVoid} from 'fp-ts/lib/function'
 import isUrl from 'is-url'
+import cx from 'classnames'
 
 import './App.css'
 
 import {createShort, Errors, CreateResponse} from './api'
-
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
 type RemoteData =
   | {type: 'idle'}
@@ -34,25 +35,45 @@ const Failure: FC<{error: Errors}> = ({error}) => (
   </div>
 )
 
+const voidTask: T.Task<void> = T.of(undefined)
+
+const writeToClipboard = (str: string) =>
+  pipe(
+    E.tryCatch(() => navigator.clipboard.writeText(str), constVoid),
+    TE.fromEither,
+    TE.chain((p) => TE.tryCatch(() => p, constVoid)),
+  )
+
+function runTask<A = unknown>(task: T.Task<A>) {
+  return task()
+}
+
+const delay = (ms: number) => () => T.delay(ms)(voidTask)
+
 const Result: FC<{result: RemoteData}> = ({result}) => {
   type CopyStatus = 'idle' | 'did_copy' | 'failure'
   const [copyStatus, setStatus] = useState<CopyStatus>('idle')
-
-  const onCopy = () => {
-    if (result.type !== 'success' || copyStatus === 'did_copy') return
-
-    navigator.clipboard
-      .writeText(result.shortened)
-      .then(() => setStatus('did_copy'))
-      .then(() => delay(2500))
-      .then(() => setStatus('idle'))
-      .catch(() => setStatus('failure'))
-  }
 
   useEffect(() => {
     onCopy()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result.type])
+
+  const onCopy = () => {
+    if (result.type !== 'success' || copyStatus === 'did_copy') return
+
+    pipe(
+      result.shortened,
+      writeToClipboard,
+      TE.fold(
+        () => T.task.map(voidTask, () => setStatus('failure')),
+        () => T.task.map(voidTask, () => setStatus('did_copy')),
+      ),
+      T.chain(delay(2500)),
+      T.map(() => setStatus('idle')),
+      runTask,
+    )
+  }
 
   return (
     <div className="result">
@@ -62,12 +83,12 @@ const Result: FC<{result: RemoteData}> = ({result}) => {
           <div className="link">
             {result.shortened.replace(/https?:\/\//, '')}
           </div>
-          <div className="copy">
+          <div className={cx('copy', {failure: copyStatus === 'failure'})}>
             {copyStatus === 'did_copy'
               ? 'Copied!'
               : copyStatus === 'idle'
               ? 'Copy'
-              : 'Failed to copy'}
+              : 'Cannot copy'}
           </div>
         </div>
       ) : result.type === 'failure' ? (
@@ -94,7 +115,8 @@ export const App = () => {
         (error) => T.of({type: 'failure', error}),
         ({shortened}) => T.of({type: 'success', shortened, prev: url}),
       ),
-      (task) => task().then(setStatus),
+      runTask,
+      (p) => p.then(setStatus),
     )
   }
 
@@ -130,4 +152,3 @@ export const App = () => {
     </div>
   )
 }
-
