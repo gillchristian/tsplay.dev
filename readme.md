@@ -1,14 +1,13 @@
-<h1 align="center">
+# [tsplay.dev](https://tsplay.dev)
 
-[tsplay.dev](https://tsplay.dev)
+> A link shortener for the [TypeScript Playground](https://www.typescriptlang.org/play)
 
-</h1>
+## How to
 
-<h3 align="center">
-
-A link shortener for the TypeScript Playground
-
-</h3>
+Short versions of the shareable playground links can be created at
+[tsplay.dev](https://tsplay.dev) or on the playground itself using the plugin
+(`typescript-playground-link-shortener`). See
+[instructions here](https://github.com/gillchristian/tsplay.dev/tree/master/playground#typescript-playground-link-shortener).
 
 ## LICENSE
 

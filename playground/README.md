@@ -31,6 +31,6 @@ title "TS Short" should be available.
 
 <img src="./assets/plugins-03.png" style="max-width: 80%;"/>
 
-#### Step 5. Share it!
+#### Step 5. Create a link and share it!
 
 #### Step 6. Profit :smirk:
