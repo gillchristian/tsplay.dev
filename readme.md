@@ -5,9 +5,13 @@
 ## How to
 
 Short versions of the shareable playground links can be created at
-[tsplay.dev](https://tsplay.dev) or on the playground itself using the plugin
-(`typescript-playground-link-shortener`). See
-[instructions here](https://github.com/gillchristian/tsplay.dev/tree/master/playground#typescript-playground-link-shortener).
+[tsplay.dev](https://tsplay.dev) or on the playground itself.
+
+Use the
+[install link](https://typescriptlang.org/play?install-plugin=typescript-playground-link-shortener)
+for the plugin, or check
+[the instructions](https://github.com/gillchristian/tsplay.dev/tree/master/playground#typescript-playground-link-shortener)
+to install manually.
 
 ## LICENSE
 

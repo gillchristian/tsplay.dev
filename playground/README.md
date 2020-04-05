@@ -9,6 +9,9 @@ Bootstrapped with [gojutin/typescript-playground-plugin-react](https://github.co
 
 ## How to use
 
+Follow the [install link](https://typescriptlang.org/play?install-plugin=typescript-playground-link-shortener)
+and skip to [Step 4](#step-4-plugin-is-enabled). Or install manually from Step 1.
+
 #### Step 1. Open [the Playground](https://www.typescriptlang.org/play)
 
 NOTE: plugins only works on the new (v2) version of the Playground.
