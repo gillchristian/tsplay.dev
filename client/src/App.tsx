@@ -1,24 +1,15 @@
-import React, {FC, FormEvent, ChangeEvent, useState, useEffect} from 'react'
-import * as E from 'fp-ts/lib/Either'
+import React, {FC, FormEvent, ChangeEvent, useState} from 'react'
 import * as TE from 'fp-ts/lib/TaskEither'
 import * as T from 'fp-ts/lib/Task'
 import {pipe} from 'fp-ts/lib/pipeable'
-import {constVoid} from 'fp-ts/lib/function'
 import isUrl from 'is-url'
-import cx from 'classnames'
 
 import './App.css'
 
 import {createShort, Errors, CreateResponse} from './api'
-
-type RemoteData =
-  | {type: 'idle'}
-  | {type: 'loading'}
-  | {type: 'success'; shortened: string; prev: string}
-  | {type: 'failure'; error: Errors}
-
-const isLoading = ({type}: RemoteData) => type === 'loading'
-const isFailure = ({type}: RemoteData) => type === 'failure'
+import {runTask} from './util'
+import {Result} from './Result'
+import {RemoteData, isLoading, isFailure} from './RemoteData'
 
 const shouldDisable = (current: string, status: RemoteData) =>
   status.type === 'success'
@@ -29,76 +20,7 @@ const shouldDisable = (current: string, status: RemoteData) =>
     ? !/typescriptlang.org/.test(current)
     : true
 
-const Failure: FC<{error: Errors}> = ({error}) => (
-  <div className="failure">
-    {error === 'invalid_url' ? 'Invalid URL' : 'Something went wrong =/'}
-  </div>
-)
-
-const voidTask: T.Task<void> = T.of(undefined)
-
-const writeToClipboard = (str: string) =>
-  pipe(
-    E.tryCatch(() => navigator.clipboard.writeText(str), constVoid),
-    TE.fromEither,
-    TE.chain((p) => TE.tryCatch(() => p, constVoid)),
-  )
-
-function runTask<A = unknown>(task: T.Task<A>) {
-  return task()
-}
-
-const delay = (ms: number) => () => T.delay(ms)(voidTask)
-
-const Result: FC<{result: RemoteData}> = ({result}) => {
-  type CopyStatus = 'idle' | 'did_copy' | 'failure'
-  const [copyStatus, setStatus] = useState<CopyStatus>('idle')
-
-  useEffect(() => {
-    onCopy()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result.type])
-
-  const onCopy = () => {
-    if (result.type !== 'success' || copyStatus === 'did_copy') return
-
-    pipe(
-      result.shortened,
-      writeToClipboard,
-      TE.fold(
-        () => T.task.map(voidTask, () => setStatus('failure')),
-        () => T.task.map(voidTask, () => setStatus('did_copy')),
-      ),
-      T.chain(delay(2500)),
-      T.map(() => setStatus('idle')),
-      runTask,
-    )
-  }
-
-  return (
-    <div className="result">
-      {result.type === 'success' ? (
-        <div className="success" onClick={onCopy}>
-          <div>Short link created!</div>
-          <div className="link">
-            {result.shortened.replace(/https?:\/\//, '')}
-          </div>
-          <div className={cx('copy', {failure: copyStatus === 'failure'})}>
-            {copyStatus === 'did_copy'
-              ? 'Copied!'
-              : copyStatus === 'idle'
-              ? 'Copy'
-              : 'Cannot copy'}
-          </div>
-        </div>
-      ) : result.type === 'failure' ? (
-        <Failure error={result.error} />
-      ) : null}
-    </div>
-  )
-}
-
-export const App = () => {
+export const App: FC = () => {
   const [url, setUrl] = useState('')
   const [status, setStatus] = useState<RemoteData>({type: 'idle'})
 

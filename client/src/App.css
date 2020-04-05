@@ -29,7 +29,7 @@
 
 .shorten {
   display: flex;
-  flex-direction: rwo;
+  flex-direction: row;
 }
 
 .shorten-input,
