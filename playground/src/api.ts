@@ -27,8 +27,7 @@ export type Errors = InvalidUrl | ServerError | Unknown | Decoding
 const statusToError = (status: number): Errors =>
   status === 400 ? 'invalid_url' : status === 500 ? 'server_error' : 'unknown'
 
-// TODO use prod
-const base = 'http://localhost:9000/'
+const base = 'https://tsplay.dev/'
 
 const fetcher = (url: string, init?: RequestInit): Promise<unknown> =>
   fetch(url, init).then((res) =>
