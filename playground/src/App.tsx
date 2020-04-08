@@ -24,6 +24,12 @@ interface CreatedLink {
 
 type WIP = O.Option<{link: string; code: string}>
 
+const urlWithCode = /typescriptlang\.org\/.*code\/[A-Za-z0-9]+/
+const hasEncodedCode = (url: string) => urlWithCode.test(url)
+
+const matchesOtherLinks = (code: string, links: CreatedLink[]) =>
+  links.some((link) => link.code === code.trim())
+
 const shouldDisable = (
   activeCode: string,
   current: string,
@@ -32,10 +38,11 @@ const shouldDisable = (
 ) =>
   isLoading(status) ||
   (isSuccess(status) && current === status.prev) ||
-  links.some((link) => link.code.trim() === activeCode.trim())
+  !hasEncodedCode(current) ||
+  matchesOtherLinks(activeCode, links)
 
 const App: React.FC = () => {
-  const {code, setDebounce, flashInfo, setCode} = usePlugin()
+  const {code, setDebounce, flashInfo, setCode, markers} = usePlugin()
 
   const [links, setLinks] = useState<CreatedLink[]>([])
   const [status, setStatus] = useState<RemoteData>({type: 'idle'})
@@ -85,13 +92,19 @@ const App: React.FC = () => {
 
         onCopy(newStatus.shortened)
         setLinks((prev) =>
-          prev.concat([{url: newStatus.shortened, code: shortenedCode}]),
+          prev.concat([{url: newStatus.shortened, code: shortenedCode.trim()}]),
         )
         flashInfo('Short link created!')
       }),
       runTask,
     )
   }
+
+  // eslint-disable-next-line no-restricted-globals
+  const currentUrl = location.href
+
+  // MarkerSeverity.Error === 8
+  const hasErrors = markers.filter((v) => v.severity === 8).length > 0
 
   return (
     <div className={wrapperClass}>
@@ -101,11 +114,33 @@ const App: React.FC = () => {
         <button
           className={createBtnClass}
           onClick={createShortLink}
-          // eslint-disable-next-line no-restricted-globals
-          disabled={shouldDisable(code, location.href, status, links)}
+          disabled={shouldDisable(code, currentUrl, status, links)}
         >
           Create short link
         </button>
+
+        {hasErrors && (
+          <div className={failureClass + ' ' + textCenter}>
+            <div>
+              <small>There are erros in the editor</small>
+            </div>
+            <div>
+              <small>Are you sure you want to crete a short link?</small>
+            </div>
+          </div>
+        )}
+
+        {!hasEncodedCode(currentUrl) && (
+          <div className={warningClass + ' ' + textCenter}>
+            <small>No encoded code in the URL</small>
+          </div>
+        )}
+
+        {matchesOtherLinks(code, links) && (
+          <div className={warningClass + ' ' + textCenter}>
+            <small>Already creted a short link for the current code</small>
+          </div>
+        )}
 
         {copyStatus === 'did_copy' ? (
           <div className={successClass}>Copied!</div>
@@ -172,6 +207,14 @@ const createBtnClass = css`
 
 const failureClass = css`
   color: #721c24;
+`
+
+const warningClass = css`
+  color: #856404;
+`
+
+const textCenter = css`
+  text-align: center;
 `
 
 const createClass = css`
