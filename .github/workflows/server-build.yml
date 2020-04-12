@@ -1,9 +1,11 @@
-name: tsplay.dev Server Docker Image
+name: Server: Test & Build
 
-on:
+on: 
   push:
     branches:
-      - master
+      - !master
+    paths:
+      - 'server/**'
 
 jobs:
   release:
@@ -31,7 +33,7 @@ jobs:
       id: cache
       with:
         path: ~/.stack
-        key: ${{runner.os }}-stack-lts-${{ matrix.plan.stack-lts }}-${{ hashFiles('server/package.yaml') }}-${{ hashFiles('server/stack.yaml') }}-${{ hashFiles('server/stack.yaml.lock') }}
+        key: ${{ matrix.os }}-stack-lts-${{ matrix.plan.stack-lts }}-${{ hashFiles('server/package.yaml') }}-${{ hashFiles('server/stack.yaml') }}-${{ hashFiles('server/stack.yaml.lock') }}
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
@@ -43,7 +45,7 @@ jobs:
         ARGS: ${{ matrix.plan.resolver }}
       working-directory: server
 
-    - name: Build
+    - name: Test & Build
       run: |
         set -ex
         stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
@@ -51,20 +53,3 @@ jobs:
       env:
         ARGS: ${{ matrix.plan.resolver }}
       working-directory: server
-
-    - name: Tag name
-      id: tag
-      run: echo "::set-output name=version_tag::$(cat package.yaml | grep version | sed -e 's/ //g' | cut -d ':' -f 2)"
-
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      env:
-        BINARY_PATH: ".stack-work/dist/x86_64-linux/Cabal-3.0.1.0/build/tsplay-exe/tsplay-exe"
-      with:
-        name: gillchristian/tsplay
-        username: gillchristian
-        password: ${{ secrets.docker_password }}
-        workdir: server
-        tags: "latest,${{ steps.tag.outputs.version_tag }}"
-        context: .
-        buildargs: BINARY_PATH
