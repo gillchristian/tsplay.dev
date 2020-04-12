@@ -6,6 +6,7 @@ on:
       - 'master'
     paths:
       - 'server/**'
+      - '.github/workflows/server-*'
 
 # TODO: user 'Server: Test & Build' output here
 jobs:
