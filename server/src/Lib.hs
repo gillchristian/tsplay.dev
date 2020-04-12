@@ -1,5 +1,6 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE ExtendedDefaultRules #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE InstanceSigs #-}
@@ -9,68 +10,53 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TypeOperators #-}
 
-module Lib where
+module Lib
+  ( runServer,
+  )
+where
 
--- TODO use qualified
-
-import Codec.Binary.UTF8.String as UTF8
-import Control.Concurrent (forkIO)
-import Control.Monad (void, when)
+import qualified Control.Monad as Monad
 import Control.Monad.IO.Class (liftIO)
-import Control.Monad.Reader hiding (ask)
-import Control.Monad.Trans (lift)
-import Control.Monad.Trans.Reader
+import qualified Control.Monad.Trans.Reader as ReaderT
 import qualified Data.Aeson as Json
-import Data.Aeson ((.:))
 import qualified Data.Bson as Bson
 import qualified Data.ByteString.Char8 as B
-import qualified Data.ByteString.Lazy as BC
 import Data.Default.Class (Default (def))
-import Data.Foldable (fold)
 import qualified Data.List as List
 import qualified Data.Maybe as Maybe
 import Data.Text (Text)
-import qualified Data.Text as Text
 import qualified Database.MongoDB as Mongo
 import Database.MongoDB ((=:))
 import Database.MongoDB.Transport.Tls as DBTLS
 import GHC.Generics
 import Network.HTTP.Types.Status (status302)
-import Network.URI (URI)
 import qualified Network.URI as URI
 import qualified Network.Wai as Wai
 import qualified Network.Wai.Handler.Warp as Warp
-import Network.Wai.Middleware.AddHeaders (addHeaders)
 import Network.Wai.Middleware.Cors (CorsResourcePolicy (..), cors)
 import qualified Network.Wai.Middleware.RequestLogger as Log
 import Network.Wai.Middleware.RequestLogger.JSON (formatAsJSON)
-import qualified Network.Wreq as Wreq
 import Servant ((:<|>) (..), (:>), Context ((:.), EmptyContext))
 import qualified Servant
-import Servant.Server.Internal.ServerError (ServerError)
 import qualified System.Environment as Sys
 import qualified System.Exit as Exit
 import Text.Casing (camel)
 import qualified Web.Hashids as Hashids
+import Prelude
 
-type App = ReaderT AppEnv Servant.Handler
+type App = ReaderT.ReaderT AppEnv Servant.Handler
 
 runDb :: Mongo.Action IO a -> App a
 runDb action = do
-  dbConf <- appDatabase . conf <$> ask
-  env <- appEnv . conf <$> ask
+  dbConf <- appDatabase . conf <$> ReaderT.ask
+  env <- appEnv . conf <$> ReaderT.ask
   pipe <- liftIO $ case env of
     Production -> DBTLS.connect (dbHostname dbConf) (Mongo.PortNumber 27017)
     Development -> Mongo.connect $ Mongo.host $ dbHostname dbConf
-  void $ Mongo.access pipe Mongo.master "admin" $ Mongo.auth (dbUser dbConf) (dbPassword dbConf)
+  Monad.void $ Mongo.access pipe Mongo.master "admin" $ Mongo.auth (dbUser dbConf) (dbPassword dbConf)
   result <- liftIO $ Mongo.access pipe Mongo.master (dbName dbConf) action
   liftIO $ Mongo.close pipe
   pure result
-
-findUrlById :: String -> App (Maybe ShortenedUrl)
-findUrlById _id = do
-  doc <- runDb $ Mongo.findOne (Mongo.select ["short" =: (Bson.ObjId $ read _id)] "urls")
-  pure $ fromDoc doc
 
 findUrlByLong :: String -> App (Maybe ShortenedUrl)
 findUrlByLong url = do
@@ -79,7 +65,7 @@ findUrlByLong url = do
 
 findUrlByShort :: String -> App (Maybe ShortenedUrl)
 findUrlByShort short = do
-  doc <- runDb (Mongo.findAndModify (Mongo.select ["short" =: short] "urls") ["$inc" =: ["visits" =: 1]])
+  doc <- runDb (Mongo.findAndModify (Mongo.select ["short" =: short] "urls") ["$inc" =: ["visits" =: (1 :: Int)]])
   pure $ fromDoc $ either (const Nothing) Just doc
 
 fromDoc :: Maybe Mongo.Document -> Maybe ShortenedUrl
@@ -110,20 +96,14 @@ insertUrl shortened@ShortenedUrl {..} =
       runDb $ Mongo.save "items" $ toDoc shortened
       pure ShortenedUrl {..}
 
-removeUrl :: String -> App ()
-removeUrl _id =
-  runDb
-    $ Mongo.delete
-    $ Mongo.select ["_id" =: Bson.ObjId (read _id)] "urls"
-
 upsertOptions :: Mongo.Document -> Mongo.FindAndModifyOpts
 upsertOptions doc = Mongo.FamUpdate doc True True
 
 findAndIncCounter :: Mongo.Action IO (Either String (Maybe Mongo.Document))
 findAndIncCounter =
   Mongo.findAndModifyOpts
-    (Mongo.select ["_id" =: "counter"] "counter")
-    $ upsertOptions ["$inc" =: ["count" =: 1]]
+    (Mongo.select ["_id" =: ("counter" :: String)] "counter")
+    $ upsertOptions ["$inc" =: ["count" =: (1 :: Int)]]
 
 nextCounter :: App (Maybe Int)
 nextCounter = do
@@ -132,7 +112,7 @@ nextCounter = do
     Right (Just doc) -> pure (Bson.lookup "count" doc :: Maybe Int)
     _ -> pure Nothing
 
--- We aren't hardcoding anything secret here, only used to generate short URLs
+-- This is no secret, only used to generate short URLs
 salt :: B.ByteString
 salt = "5F,k:y]C6h<cZwN>LiEt6?^M4AEqE]|@anRG=oF<nL6M8HP2UT?Hp PZm>C4=+4>"
 
@@ -180,7 +160,7 @@ addRedirectHeaders client =
 app :: Servant.Context '[AppEnv] -> AppEnv -> Servant.Application
 app ctx env =
   Servant.serveWithContext tsplayAPI ctx $
-    Servant.hoistServerWithContext tsplayAPI tsplayCtx (`runReaderT` env) tsplayServer
+    Servant.hoistServerWithContext tsplayAPI tsplayCtx (`ReaderT.runReaderT` env) tsplayServer
 
 type TsplayAPI = CreateRoute :<|> VisitRoute -- :<|> HomeRoute
 
@@ -203,28 +183,22 @@ tsplayCtx = Servant.Proxy
 
 tsplayServer :: Servant.ServerT TsplayAPI App
 tsplayServer =
-  createHandler :<|> visitHandler -- :<|> homeHandler
+  createHandler :<|> visitHandler
 
 isValidURL :: String -> Bool
 isValidURL = (&&) <$> URI.isURI <*> List.isInfixOf "typescriptlang.org"
 
--- homeHandler :: App ()
--- homeHandler = do
---   client <- clientUrl <$> ask
---   Servant.throwError $
---     Servant.err302 {Servant.errHeaders = [("Location", client)]}
-
 createHandler :: CreateBody -> App CreateResponse
 createHandler CreateBody {..} = do
   -- TODO: use provided 'short'
-  unless (isValidURL createUrl) $ Servant.throwError Servant.err400
+  Monad.unless (isValidURL createUrl) $ Servant.throwError Servant.err400
   mbShortened <- findUrlByLong createUrl
-  baseUrl <- appBaseUrl . conf <$> ask
+  baseUrl <- appBaseUrl . conf <$> ReaderT.ask
   case mbShortened of
     Nothing -> do
       seed <- maybe (Servant.throwError Servant.err500) pure =<< nextCounter
-      short <- B.unpack . flip Hashids.encode seed . hashidsCtx <$> ask
-      void $ insertUrl $ ShortenedUrl "" short createUrl 0
+      short <- B.unpack . flip Hashids.encode seed . hashidsCtx <$> ReaderT.ask
+      Monad.void $ insertUrl $ ShortenedUrl "" short createUrl 0
       pure $ CreateResponse (baseUrl ++ "/" ++ short) -- TODO: return 201
     Just ShortenedUrl {..} ->
       pure $ CreateResponse (baseUrl ++ "/" ++ shortenedShort)
@@ -234,8 +208,14 @@ visitHandler short = do
   mbUrl <- findUrlByShort short
   case mbUrl of
     Just ShortenedUrl {..} ->
-      Servant.throwError $ Servant.err302 {Servant.errHeaders = [("Location", B.pack shortenedUrl)]}
-    Nothing -> Servant.throwError Servant.err404
+      redirectTo shortenedUrl
+    Nothing ->
+      redirectTo =<< appClientUrl . conf <$> ReaderT.ask
+
+redirectTo :: String -> App ()
+redirectTo url =
+  Servant.throwError $
+    Servant.err302 {Servant.errHeaders = [("Location", B.pack url)]}
 
 -- -- Types ---
 
@@ -252,7 +232,7 @@ data CreateBody
       { createUrl :: String,
         createShort :: Maybe String
       }
-  deriving (Generic, Show)
+  deriving stock (Generic, Show)
 
 instance Json.ToJSON CreateBody where
   toJSON = Json.genericToJSON $ dropLabelPrefix "create"
@@ -264,7 +244,7 @@ newtype CreateResponse
   = CreateResponse
       { createShortened :: String
       }
-  deriving (Generic, Show)
+  deriving stock (Generic, Show)
 
 instance Json.ToJSON CreateResponse where
   toJSON = Json.genericToJSON $ dropLabelPrefix "create"
@@ -279,7 +259,7 @@ data DbConfig
         dbUser :: Text,
         dbPassword :: Text
       }
-  deriving (Generic, Show)
+  deriving stock (Generic, Show)
 
 instance Json.FromJSON DbConfig where
   parseJSON = Json.genericParseJSON $ dropLabelPrefix "db"
@@ -287,7 +267,7 @@ instance Json.FromJSON DbConfig where
 data Environment
   = Production
   | Development
-  deriving (Generic, Show)
+  deriving stock (Generic, Show)
 
 instance Json.FromJSON Environment where
   parseJSON = Json.genericParseJSON camelTags
@@ -302,7 +282,7 @@ data AppConfig
         appClientUrl :: String,
         appEnv :: Environment
       }
-  deriving (Generic, Show)
+  deriving stock (Generic, Show)
 
 instance Json.FromJSON AppConfig where
   parseJSON = Json.genericParseJSON $ dropLabelPrefix "app"
@@ -320,7 +300,7 @@ data ShortenedUrl
         shortenedUrl :: String,
         shortenedVisits :: Int
       }
-  deriving (Generic, Show)
+  deriving stock (Generic, Show)
 
 instance Json.ToJSON ShortenedUrl where
   toJSON = Json.genericToJSON $ dropLabelPrefix "shortened"
@@ -330,16 +310,10 @@ instance Json.FromJSON ShortenedUrl where
 
 -- -- Utils ---
 
-listJoin :: [a] -> [[a]] -> [a]
-listJoin what = fold . List.intersperse what
-
 stripPrefix :: Eq a => [a] -> [a] -> [a]
 stripPrefix prefix str = Maybe.fromMaybe str $ List.stripPrefix prefix str
 
 -- -- CORS ---
-
-allowCsrf :: Wai.Middleware
-allowCsrf = addHeaders [("Access-Control-Allow-Headers", "x-csrf-token,authorization")]
 
 corsified :: Wai.Middleware
 corsified = cors (const $ Just appCorsResourcePolicy)
@@ -356,10 +330,3 @@ appCorsResourcePolicy = CorsResourcePolicy
     corsRequireOrigin = False,
     corsIgnoreFailures = False
   }
--- data HTML
-
--- instance Servant.Accept HTML where
---   contentType _ = "text" // "html" /: ("charset", "utf-8")
-
--- instance Show a => Servant.MimeRender HTML a where
---   mimeRender _ val = BC.pack $ UTF8.encode $ show val
