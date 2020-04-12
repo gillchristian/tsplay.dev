@@ -1,4 +1,4 @@
-name: Server: Test & Build
+name: 'Server: Test & Build'
 
 on: 
   push:
