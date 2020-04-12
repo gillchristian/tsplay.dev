@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6e31a33a4b011b8868b987fb662135e70babfe265f481b937aabfe7417371649
+-- hash: 83f2a7ef00753f067966bb5d8c9e8c7d489e44961edf63d84270e6e0ca0db362
 
 name:           tsplay
 version:        0.0.1.0
@@ -34,6 +34,7 @@ library
       Paths_tsplay
   hs-source-dirs:
       src
+  ghc-options: -Weverything -Werror -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-monomorphism-restriction
   build-depends:
       aeson
     , base >=4.7 && <5
