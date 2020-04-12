@@ -3,7 +3,7 @@ name: Server: Publish Docker Image
 on:
   push:
     branches:
-      - master
+      - 'master'
     paths:
       - 'server/**'
 
