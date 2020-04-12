@@ -1,0 +1,73 @@
+name: Server: Publish Docker Image
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'server/**'
+
+# TODO: user 'Server: Test & Build' output here
+jobs:
+  release:
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        plan:
+          - { stack-lts: "15.5", resolver: "--resolver lts-15.5" }
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Install OS Packages
+      uses: mstksg/get-package@v1
+      with:
+        apt-get: happy libblas-dev liblapack-dev libgmp-dev
+
+    - uses: actions/checkout@v1
+
+    - name: Setup stack
+      uses: mstksg/setup-stack@v1
+
+    - uses: actions/cache@v1
+      name: Cache ~/.stack
+      id: cache
+      with:
+        path: ~/.stack
+        key: ${{ matrix.os }}-stack-lts-${{ matrix.plan.stack-lts }}-${{ hashFiles('server/package.yaml') }}-${{ hashFiles('server/stack.yaml') }}-${{ hashFiles('server/stack.yaml.lock') }}
+
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        set -ex
+        stack --no-terminal --install-ghc $ARGS test --bench --only-dependencies
+        set +ex
+      env:
+        ARGS: ${{ matrix.plan.resolver }}
+      working-directory: server
+
+    - name: Test & Build
+      run: |
+        set -ex
+        stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
+        set +ex
+      env:
+        ARGS: ${{ matrix.plan.resolver }}
+      working-directory: server
+
+    - name: Tag name
+      id: tag_name
+      run: echo ::set-env name=TAG_NAME::$(echo $(cat package.yaml | grep version | sed -e 's/ //g' | cut -d ':' -f 2))
+
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      env:
+        BINARY_PATH: ".stack-work/dist/x86_64-linux/Cabal-3.0.1.0/build/tsplay-exe/tsplay-exe"
+      with:
+        name: gillchristian/tsplay
+        username: gillchristian
+        password: ${{ secrets.docker_password }}
+        workdir: server
+        tags: "latest,${{ env.TAG_NAME }}"
+        context: .
+        buildargs: BINARY_PATH
