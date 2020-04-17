@@ -5,6 +5,9 @@
   "repository": "git@github.com:gillchristian/tsplay.dev.git",
   "author": "Christian Gill <gillchristian@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "playground-plugin"
+  ],
   "scripts": {
     "fmt": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "start": "npm run watch",
