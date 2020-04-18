@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Lib
+import Tsplay.Server
 import Prelude
 
 main :: IO ()
