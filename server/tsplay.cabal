@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 83f2a7ef00753f067966bb5d8c9e8c7d489e44961edf63d84270e6e0ca0db362
+-- hash: e540893f4a20b638c1e97b1754ab655c0f6760d77570ce395a763092bae08a13
 
 name:           tsplay
-version:        0.0.1.0
+version:        0.0.2.0
 synopsis:       Link shortener for TypeScript Playground
 description:    Please see the README on GitHub at <https://github.com/gillchristian/tsplay#readme>
 category:       Web
@@ -29,7 +29,10 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Tsplay.Api
+      Tsplay.Persistence
+      Tsplay.Server
+      Tsplay.Types
   other-modules:
       Paths_tsplay
   hs-source-dirs:
