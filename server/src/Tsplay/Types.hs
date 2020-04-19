@@ -18,6 +18,7 @@ module Tsplay.Types
     AppConfig (..),
     AppEnv (..),
     ShortenedUrl (..),
+    Stats (..),
   )
 where
 
@@ -120,6 +121,19 @@ instance Json.ToJSON ShortenedUrl where
 
 instance Json.FromJSON ShortenedUrl where
   parseJSON = Json.genericParseJSON $ dropLabelPrefix "shortened"
+
+data Stats
+  = Stats
+      { statsTotalShortened :: Int,
+        statsTotalVisits :: Int
+      }
+  deriving stock (Generic, Show)
+
+instance Json.ToJSON Stats where
+  toJSON = Json.genericToJSON $ dropLabelPrefix "stats"
+
+instance Json.FromJSON Stats where
+  parseJSON = Json.genericParseJSON $ dropLabelPrefix "stats"
 
 -- -- Utils ---
 
