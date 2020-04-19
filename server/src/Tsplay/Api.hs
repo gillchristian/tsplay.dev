@@ -18,6 +18,7 @@ import qualified Control.Monad as Monad
 import qualified Control.Monad.Trans.Reader as ReaderT
 import qualified Data.ByteString.Char8 as B
 import qualified Data.List as List
+import Data.Text (Text)
 import qualified Network.URI as URI
 import Servant ((:<|>) (..), (:>))
 import qualified Servant
@@ -26,12 +27,29 @@ import Tsplay.Types
 import qualified Web.Hashids as Hashids
 import Prelude
 
-type TsplayAPI = CreateRoute :<|> VisitRoute
+type TsplayAPI =
+  HealthzRoute
+    :<|> CreateRoute
+    :<|> ListAllRoute
+    :<|> StatsRoute
+    :<|> VisitRoute
+
+type HealthzRoute =
+  "healthz"
+    :> Servant.Get '[Servant.PlainText] Text
 
 type CreateRoute =
-  "create"
+  "api" :> "short"
     :> Servant.ReqBody '[Servant.JSON] CreateBody
     :> Servant.Post '[Servant.JSON] CreateResponse
+
+type ListAllRoute =
+  "api" :> "short"
+    :> Servant.Get '[Servant.JSON] [ShortenedUrl]
+
+type StatsRoute =
+  "api" :> "short" :> "stats"
+    :> Servant.Get '[Servant.JSON] Stats
 
 type VisitRoute =
   Servant.Capture "short" String
@@ -39,7 +57,11 @@ type VisitRoute =
 
 apiRoutes :: Servant.ServerT TsplayAPI App
 apiRoutes =
-  createHandler :<|> visitHandler
+  healthzHandler
+    :<|> createHandler
+    :<|> listAllHandler
+    :<|> statsHandler
+    :<|> visitHandler
 
 tsplayApi :: Servant.Context '[AppEnv] -> AppEnv -> Servant.Application
 tsplayApi ctx env =
@@ -49,6 +71,9 @@ tsplayApi ctx env =
     runWithEnv = (`ReaderT.runReaderT` env)
     apiProxy = Servant.Proxy :: Servant.Proxy TsplayAPI
     ctxProxy = Servant.Proxy :: Servant.Proxy '[AppEnv]
+
+healthzHandler :: App Text
+healthzHandler = pure "Ok"
 
 isValidURL :: String -> Bool
 isValidURL = (&&) <$> URI.isURI <*> List.isInfixOf "typescriptlang.org"
@@ -68,9 +93,16 @@ createHandler CreateBody {..} = do
     Just ShortenedUrl {..} ->
       pure $ CreateResponse (baseUrl ++ "/" ++ shortenedShort)
 
+-- TODO: pagination + total count
+listAllHandler :: App [ShortenedUrl]
+listAllHandler = findAllUrls
+
+statsHandler :: App Stats
+statsHandler = urlsStats
+
 visitHandler :: String -> App ()
 visitHandler short = do
-  mbUrl <- findUrlByShort short
+  mbUrl <- findUrlByShortToVisit short
   case mbUrl of
     Just ShortenedUrl {..} ->
       redirectTo shortenedUrl
