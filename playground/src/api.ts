@@ -40,7 +40,7 @@ export const createShort = (
   pipe(
     TE.tryCatch(
       () =>
-        fetcher(`${base}create`, {
+        fetcher(`${base}api/short`, {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(body),
