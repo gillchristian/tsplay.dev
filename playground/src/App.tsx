@@ -24,7 +24,7 @@ interface CreatedLink {
 
 type WIP = O.Option<{link: string; code: string}>
 
-const urlWithCode = /typescriptlang\.org\/.*code\/[A-Za-z0-9]+/
+const urlWithCode = /(typescriptlang|staging-typescript)\.org\/.*code\/[A-Za-z0-9]+/
 const hasEncodedCode = (url: string) => urlWithCode.test(url)
 
 const matchesOtherLinks = (code: string, links: CreatedLink[]) =>
