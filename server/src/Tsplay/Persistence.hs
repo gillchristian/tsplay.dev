@@ -23,7 +23,7 @@ import qualified Control.Monad as Monad
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import qualified Control.Monad.Trans.Reader as ReaderT
 import qualified Data.Bson as Bson
-import qualified Data.Maybe as Maybe
+import Data.Maybe (fromMaybe, listToMaybe, mapMaybe)
 import Data.Text (Text)
 import qualified Database.MongoDB as DB
 import Database.MongoDB ((=:))
@@ -34,70 +34,60 @@ import Prelude
 urlsCol :: Text
 urlsCol = "urls"
 
+selectAllUrls :: DB.Query
+selectAllUrls = DB.select [] urlsCol
+
 findAllUrls :: App [ShortenedUrl]
 findAllUrls = do
-  docs <- runDb $ DB.rest =<< DB.find (DB.select [] urlsCol)
-  pure $ Maybe.mapMaybe fromDoc docs
+  docs <- runDb $ DB.rest =<< DB.find selectAllUrls
+  pure $ mapMaybe fromDoc docs
 
 findUrlByLong :: String -> App (Maybe ShortenedUrl)
 findUrlByLong url = do
-  doc <- runDb $ DB.findOne query
+  doc <- runDb $ DB.findOne selectByUrl
   pure $ fromDoc =<< doc
   where
-    query = DB.select ["url" =: url] urlsCol
+    selectByUrl = DB.select ["url" =: url] urlsCol
 
 findUrlByShortToVisit :: String -> App (Maybe ShortenedUrl)
 findUrlByShortToVisit short = do
-  doc <- runDb $ DB.findAndModify query modify
+  doc <- runDb $ DB.findAndModify selectByShort incVisits
   pure $ fromDoc =<< either (const Nothing) Just doc
   where
-    query = DB.select ["short" =: short] urlsCol
-    modify = ["$inc" =: ["visits" =: (1 :: Int)]]
+    selectByShort = DB.select ["short" =: short] urlsCol
+    incVisits = ["$inc" =: ["visits" =: (1 :: Int)]]
 
 -- TODO: handle case when fails to save
 insertUrl :: ShortenedUrl -> App ShortenedUrl
-insertUrl shortened@ShortenedUrl {..} =
-  case shortenedId of
+insertUrl shortened =
+  case shortenedId shortened of
     "" -> do
-      _id <- runDb $ DB.insert urlsCol $ toNewDoc shortened
-      pure $ ShortenedUrl (show _id) shortenedShort shortenedUrl shortenedVisits
+      newId <- runDb $ DB.insert urlsCol $ toNewDoc shortened
+      pure $ shortened {shortenedId = show newId}
     _ -> do
       runDb $ DB.save urlsCol $ toDoc shortened
-      pure ShortenedUrl {..}
+      pure shortened
 
 nextShortRefCounter :: App (Maybe Int)
 nextShortRefCounter = do
   res <- runDb findAndIncCounter
-  case res of
-    Right (Just doc) -> pure (Bson.lookup "count" doc :: Maybe Int)
-    _ -> pure Nothing
+  pure $ either (const Nothing) (>>= Bson.lookup "count") res
 
-type Result = (Either String (Maybe DB.Document))
-
-findAndIncCounter :: DB.Action IO Result
-findAndIncCounter =
-  upsert query modify
+findAndIncCounter :: DB.Action IO UpsertResult
+findAndIncCounter = upsert selectCounter incCounter
   where
-    query = DB.select ["_id" =: ("counter" :: Text)] "counter"
-    modify = ["$inc" =: ["count" =: (1 :: Int)]]
+    selectCounter = DB.select ["_id" =: ("counter" :: Text)] "counter"
+    incCounter = ["$inc" =: ["count" =: (1 :: Int)]]
 
 urlsStats :: App Stats
 urlsStats = do
-  totalVisitsDoc <- runDb $ DB.aggregate urlsCol [visitsAggregate]
-  totalDocs <- runDb $ DB.count $ DB.select [] urlsCol
-  let totalVisits = Maybe.fromMaybe 0 $ Bson.lookup "totalVisits" =<< head' totalVisitsDoc
-  pure $ Stats totalDocs totalVisits
+  (visits, count) <-
+    runDb $ (,) <$> DB.aggregate urlsCol [aggVisits] <*> DB.count selectAllUrls
+  pure $ Stats count (lookupVisits visits)
   where
-    visitsAggregate =
-      [ "$group"
-          =: ["_id" =: (0 :: Int), "totalVisits" =: ["$sum" =: ("$visits" :: Text)]]
-      ]
-
-head' :: [a] -> Maybe a
-head' [] = Nothing
-head' (a : _) = Just a
-
--- "_id" := null,
+    lookupVisits = fromMaybe 0 . (Bson.lookup "visits" =<<) . listToMaybe
+    sumVisits = "visits" =: ["$sum" =: ("$visits" :: Text)]
+    aggVisits = ["$group" =: ["_id" =: (0 :: Int), sumVisits]]
 
 fromDoc :: DB.Document -> Maybe ShortenedUrl
 fromDoc doc =
@@ -134,6 +124,7 @@ runDb action = do
   liftIO $ DB.close pipe
   pure result
 
-upsert :: (MonadIO m, MonadFail m) => DB.Query -> DB.Document -> DB.Action m Result
-upsert query modify =
-  DB.findAndModifyOpts query $ DB.FamUpdate modify True True
+type UpsertResult = Either String (Maybe DB.Document)
+
+upsert :: (MonadIO m, MonadFail m) => DB.Query -> DB.Document -> DB.Action m UpsertResult
+upsert query modify = DB.findAndModifyOpts query $ DB.FamUpdate modify True True
