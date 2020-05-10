@@ -3,10 +3,17 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: wai-middleware-metrics-0.2.4@sha256:d6b6916acd41aaef4ca59a839d40a3a377f9df784ae49fd4c64926ae916b6ba2,2890
+    pantry-tree:
+      size: 330
+      sha256: 99366b831109417cd8e739fb45e9fd214cb79f28a507f8154e5528120042d0ac
+  original:
+    hackage: wai-middleware-metrics-0.2.4@sha256:d6b6916acd41aaef4ca59a839d40a3a377f9df784ae49fd4c64926ae916b6ba2,2890
 snapshots:
 - completed:
-    size: 491372
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/15/5.yaml
-    sha256: 1b549cfff328040c382a70a84a2087aac8dab6d778bf92f32a93a771a1980dfc
-  original: lts-15.5
+    size: 524996
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/27.yaml
+    sha256: 7ea31a280c56bf36ff591a7397cc384d0dff622e7f9e4225b47d8980f019a0f0
+  original: lts-14.27

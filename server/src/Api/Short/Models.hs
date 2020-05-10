@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE ExtendedDefaultRules #-}
@@ -9,83 +10,29 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeOperators #-}
 
-module Tsplay.Types
-  ( App,
-    CreateBody (..),
+module Api.Short.Models
+  ( CreateBody (..),
     CreateResponse (..),
-    DbConfig (..),
-    Environment (..),
-    AppConfig (..),
-    AppEnv (..),
     ShortenedUrl (..),
     Stats (..),
   )
 where
 
-import Control.Monad.Trans.Reader (ReaderT)
 import qualified Data.Aeson as Json
 import qualified Data.List as List
 import qualified Data.Maybe as Maybe
 import Data.Text (Text)
+import Database.PostgreSQL.Simple (FromRow)
 import GHC.Generics
-import qualified Servant
 import Text.Casing (camel)
-import qualified Web.Hashids as Hashids
 import Prelude
-
--- Application Monad
-
-type App = ReaderT AppEnv Servant.Handler
-
--- -- Environment ---
-
-data DbConfig
-  = DbConfig
-      { dbHostname :: String,
-        dbName :: Text,
-        dbUser :: Text,
-        dbPassword :: Text
-      }
-  deriving stock (Generic, Show)
-
-instance Json.FromJSON DbConfig where
-  parseJSON = Json.genericParseJSON $ dropLabelPrefix "db"
-
-data Environment
-  = Production
-  | Development
-  deriving stock (Generic, Show)
-
-instance Json.FromJSON Environment where
-  parseJSON = Json.genericParseJSON camelTags
-
-instance Json.ToJSON Environment where
-  toJSON = Json.genericToJSON camelTags
-
-data AppConfig
-  = AppConfig
-      { appDatabase :: DbConfig,
-        appBaseUrl :: String,
-        appClientUrl :: String,
-        appEnv :: Environment
-      }
-  deriving stock (Generic, Show)
-
-instance Json.FromJSON AppConfig where
-  parseJSON = Json.genericParseJSON $ dropLabelPrefix "app"
-
-data AppEnv
-  = AppEnv
-      { conf :: AppConfig,
-        hashidsCtx :: Hashids.HashidsContext
-      }
 
 -- -- Models ---
 
 data CreateBody
   = CreateBody
-      { createUrl :: String,
-        createShort :: Maybe String
+      { createUrl :: Text,
+        createShort :: Maybe Text
       }
   deriving stock (Generic, Show)
 
@@ -97,7 +44,7 @@ instance Json.FromJSON CreateBody where
 
 newtype CreateResponse
   = CreateResponse
-      { createShortened :: String
+      { createShortened :: Text
       }
   deriving stock (Generic, Show)
 
@@ -109,12 +56,12 @@ instance Json.FromJSON CreateResponse where
 
 data ShortenedUrl
   = ShortenedUrl
-      { shortenedId :: String,
-        shortenedShort :: String,
-        shortenedUrl :: String,
+      { shortenedShort :: Text,
+        shortenedUrl :: Text,
         shortenedVisits :: Int
       }
   deriving stock (Generic, Show)
+  deriving (FromRow)
 
 instance Json.ToJSON ShortenedUrl where
   toJSON = Json.genericToJSON $ dropLabelPrefix "shortened"
@@ -128,6 +75,7 @@ data Stats
         statsTotalVisits :: Int
       }
   deriving stock (Generic, Show)
+  deriving (FromRow)
 
 instance Json.ToJSON Stats where
   toJSON = Json.genericToJSON $ dropLabelPrefix "stats"
@@ -141,9 +89,9 @@ dropLabelPrefix :: String -> Json.Options
 dropLabelPrefix prefix =
   Json.defaultOptions {Json.fieldLabelModifier = camel . stripPrefix prefix}
 
-camelTags :: Json.Options
-camelTags =
-  Json.defaultOptions {Json.constructorTagModifier = camel}
+-- camelTags :: Json.Options
+-- camelTags =
+--   Json.defaultOptions {Json.constructorTagModifier = camel}
 
 stripPrefix :: Eq a => [a] -> [a] -> [a]
 stripPrefix prefix str = Maybe.fromMaybe str $ List.stripPrefix prefix str

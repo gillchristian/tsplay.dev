@@ -1,7 +1,7 @@
 module Main (main) where
 
-import Tsplay.Server
+import Init (runApp)
 import Prelude
 
 main :: IO ()
-main = runServer
+main = runApp
