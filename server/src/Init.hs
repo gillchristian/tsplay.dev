@@ -51,7 +51,7 @@ initialize :: Config -> IO Wai.Application
 initialize cfg = do
   waiMetrics <- registerWaiMetrics (configMetrics cfg ^. Metrics.metricsStore)
   let logger = setLogger (configEnv cfg)
-  Pool.withResource (configPool cfg) $ initializeDatabase "./db/migrations"
+  Pool.withResource (configPool cfg) $ initializeDatabase "./database/migrations"
   pure
     . logger
     . metrics waiMetrics
@@ -69,7 +69,7 @@ acquireConfig = do
   clientUrl <- lookupSetting "CLIENT_URL" "http://localhost:3000"
   logEnv <- defaultLogEnv
   pool <- makePool env logEnv
-  ekgServer <- forkServer "localhost" =<< lookupSetting "PORT_EKG" 9000
+  ekgServer <- forkServer "localhost" =<< lookupSetting "PORT_EKG" 8000
   let store = serverMetricStore ekgServer
   _ <- registerWaiMetrics store
   metr <- Metrics.initializeWith store
