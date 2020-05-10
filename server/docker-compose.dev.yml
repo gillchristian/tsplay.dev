@@ -1,0 +1,15 @@
+version: '3.2'
+
+services:
+  database:
+    image: "postgres"
+    env_file:
+      - database.dev.env
+    volumes:
+      - database_data:/var/lib/postgresql/data/ 
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+
+volumes:
+  database_data:

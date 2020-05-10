@@ -1,0 +1,9 @@
+version: '3.2'
+
+services:
+  tsplay:
+    image: gillchristian/tsplay:latest
+    ports:
+      - 9000:8080
+    env_file:
+      - .env
