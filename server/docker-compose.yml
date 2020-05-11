@@ -4,11 +4,10 @@ services:
   tsplay:
     image: gillchristian/tsplay:latest
     ports:
-      - 9000:8080
+      - "9000:${PORT}"
     env_file:
       - .env
     volumes:
       - type: bind
         source: ./database
-        target: /opt/database
-
+        target: /opt/tsplay/database
