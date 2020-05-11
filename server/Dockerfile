@@ -11,7 +11,8 @@ WORKDIR /opt/tsplay
 RUN apt-get update && apt-get install -y \
   ca-certificates \
   libgmp-dev \
-  netbase
+  netbase \
+  libpq-dev
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
