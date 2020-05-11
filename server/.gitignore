@@ -4,4 +4,4 @@
 .env
 
 # include sql stuff :)
-!database/*.sql
+!database/**/*.sql
