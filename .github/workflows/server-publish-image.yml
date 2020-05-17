@@ -1,6 +1,8 @@
 name: 'Server: Publish Docker Image'
 
 on:
+  release:
+      types: [published]
   push:
     branches:
       - 'master'
@@ -57,9 +59,9 @@ jobs:
         ARGS: ${{ matrix.plan.resolver }}
       working-directory: server
 
-    - name: Tag name
-      id: tag_name
-      run: echo ::set-env name=TAG_NAME::$(echo $(cat package.yaml | grep version | sed -e 's/ //g' | cut -d ':' -f 2))
+    - name: Get release version
+      id: get_version
+      run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
 
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -70,6 +72,6 @@ jobs:
         username: gillchristian
         password: ${{ secrets.docker_password }}
         workdir: server
-        tags: "latest,${{ env.TAG_NAME }}"
+        tags: "latest,${{ env.RELEASE_VERSION }}"
         context: .
         buildargs: BINARY_PATH
