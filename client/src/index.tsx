@@ -1,19 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import { Layout } from './Layout';
-import * as serviceWorker from './serviceWorker';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import GlobalStyles from './styles/GlobalStyles'
+import App from './App'
+import * as registerServiceWorker from './utils/serviceWorker'
+import GlobalToast from './components/GlobalToast'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Layout />
-  </React.StrictMode>,
+  <React.Fragment>
+    <GlobalStyles />
+    <GlobalToast />
+    <App />
+  </React.Fragment>,
   document.getElementById('root')
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-//
-// TODO: enable Service Worker
-serviceWorker.unregister();
+)
+registerServiceWorker.register()
