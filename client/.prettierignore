@@ -5,7 +5,6 @@ node_modules/
 .idea
 package-lock.json
 .git
-.idea
 .eslintignore
 .gitignore
 LICENSE
