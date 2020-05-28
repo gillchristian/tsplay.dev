@@ -1,76 +1,65 @@
-import React, {FC, FormEvent, ChangeEvent, useState} from 'react'
-import * as TE from 'fp-ts/lib/TaskEither'
-import * as T from 'fp-ts/lib/Task'
-import {pipe} from 'fp-ts/lib/pipeable'
-import isUrl from 'is-url'
+/** @jsx jsx */
+import * as React from 'react'
+import { css, jsx } from '@emotion/core'
+import Header from './components/Header'
+import TitleAndDescription from './components/TitleAndDescription'
+import Stats from './components/Stats'
+import LinkCreator from './components/LinkCreator'
+import Links from './components/Links'
+import Footer from './components/Footer'
+import { Palette } from './constants'
 
-import './App.css'
+const MAX_WIDTH = 800
 
-import {createShort, Errors, CreateResponse} from './api'
-import {runTask} from './util'
-import {Result} from './Result'
-import {RemoteData, isLoading, isFailure} from './RemoteData'
+const styles = {
+  container: css`
+    height: 100%;
+  `,
+  content: css`
+    max-width: ${MAX_WIDTH}px;
+    margin: auto;
 
-const shouldDisable = (current: string, status: RemoteData) =>
-  status.type === 'success'
-    ? current === status.prev
-    : status.type === 'loading'
-    ? true
-    : isUrl(current)
-    ? !/typescriptlang.org/.test(current)
-    : true
+    @media (max-width: 850px) {
+      padding: 0 20px;
+    }
+  `,
+  wrapper: css`
+    background: ${Palette.white};
+  `,
+}
 
-export const App: FC = () => {
-  const [url, setUrl] = useState('')
-  const [status, setStatus] = useState<RemoteData>({type: 'idle'})
+const links = [
+  'https://www.newlinkto.com/ass312dasd',
+  'https://www.newlinkto.com/wqeasasdasdas',
+  'https://www.newlinkto.com/33asasd',
+  'https://www.newlinkto.com/asoqaswe.sad',
+  'https://www.newlinkto.com/asoqwe.saad',
+  'https://www.newlinkto.com/asoqw123e.sad',
+  'https://www.newlinkto.com/asoqdawe.sad',
+  'https://www.newlinkto.com/asoq12we.sad',
+  'https://www.newlinkto.com/asoqwe.sad',
+  'https://www.newlinkto.com/asoasdxqwe.sad',
+  'https://www.newlinkto.com/asoqasawe.sad',
+  'https://www.newlinkto.com/asozqwe.sad',
+  'https://www.newlinkto.com/aso43qwe.sad',
+]
 
-  const create = (e: FormEvent) => {
-    e.preventDefault()
-
-    if (shouldDisable(url, status)) return
-
-    setStatus({type: 'loading'})
-
-    pipe(
-      createShort({url}),
-      TE.fold<Errors, CreateResponse, RemoteData>(
-        (error) => T.of({type: 'failure', error}),
-        ({shortened}) => T.of({type: 'success', shortened, prev: url}),
-      ),
-      runTask,
-      (p) => p.then(setStatus),
-    )
-  }
-
-  const onUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (isLoading(status)) return
-    if (isFailure(status)) setStatus({type: 'idle'})
-
-    setUrl(e.currentTarget.value)
-  }
-
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <form className="shorten" onSubmit={create}>
-        <input
-          className="shorten-input"
-          name="url"
-          value={url}
-          onChange={onUrlChange}
-          disabled={isLoading(status)}
-          placeholder="TypeScript playground link"
-          autoFocus
-        />
-        <button
-          type="submit"
-          className="shorten-button"
-          disabled={shouldDisable(url, status)}
-        >
-          Shorten
-        </button>
-      </form>
-
-      <Result result={status} />
+    <div css={styles.container}>
+      <div css={styles.wrapper}>
+        <Header />
+        <div css={styles.content}>
+          <TitleAndDescription />
+          <Stats />
+          <LinkCreator />
+          <Links links={[links[0]]} canDeleteItem={false} />
+          <Links links={links} canDeleteItem={true} />
+        </div>
+        <Footer />
+      </div>
     </div>
   )
 }
+
+export default App

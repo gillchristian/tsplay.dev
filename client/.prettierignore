@@ -1,0 +1,11 @@
+node_modules/
+/build
+/build/**
+package-lock.json
+.git
+.idea
+.eslintignore
+.gitignore
+LICENSE
+*.md
+*.sh
