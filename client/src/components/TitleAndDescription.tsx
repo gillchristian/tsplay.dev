@@ -55,11 +55,16 @@ const styles = {
     }
   `,
   description: css`
+    margin-top: 10px;
     font-size: 16px;
     line-height: 22px;
 
     @media (max-width: 1000px) {
       font-size: 15px;
+    }
+
+    .strong {
+      font-weight: 600;
     }
   `,
 }
@@ -70,12 +75,38 @@ const TitleAndDescription: React.FC = () => {
       <img src={home} alt="home img" css={styles.img} />
       <div css={styles.descriptionWrapper}>
         <div css={styles.title}>
-          TypeScript is <strong className="strong">Typed JavaScript at Any Scale.</strong>
+          Short-links for the{' '}
+          <strong className="strong">
+            <a href="https://www.typescriptlang.org/play/" target="_blank" rel="noopener noreferrer">
+              TypeScript playground
+            </a>
+          </strong>
+          .
         </div>
+        <div css={styles.description}>Easily share short-links to the TypeScript playground.</div>
+        {
+          // NOTE: this should be added once the new version of the TypeScript website is released
+          false && (
+            <React.Fragment>
+              <div css={styles.description}>Create short-links directly in the playground with the plugin:</div>
+              <div css={styles.description}>
+                <pre className="strong">
+                  <a
+                    href="https://www.typescriptlang.org/play?install-plugin=typescript-playground-link-shortener"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    typescript-playground-link-shortener
+                  </a>
+                </pre>
+              </div>
+            </React.Fragment>
+          )
+        }
         <div css={styles.description}>
-          TypeScript extends JavaScript by adding types to the language. TypeScript speeds up your development
-          experience by catching errors and providing fixes before you even run your code. Any browser, any OS, anywhere
-          JavaScript runs. Entirely Open Source.
+          <strong className="strong">Why a dedicated link shortener?</strong>{' '}
+          <a href="https://tsplay.dev">tsplay.dev</a> links will always redirect to the TypeScript Playground. You never
+          know where bit.ly or tinyurl.com links could take you.
         </div>
       </div>
     </div>
