@@ -133,13 +133,14 @@ const copyToClipboard: (text: string) => void = async text => {
 
 const Links: React.FC<LinksProps> = ({ links, canDeleteItem }) => {
   const divRef = React.useRef<HTMLDivElement>(null)
-  const [hasScroll, setHasScroll] = React.useState<Boolean>(false)
+  const [hasScroll, setHasScroll] = React.useState<boolean>(false)
+
   React.useEffect(() => {
     if (divRef.current) {
       const scroll = divRef.current.scrollHeight > divRef.current.clientHeight
-      setHasScroll(!!scroll)
+      setHasScroll(scroll)
     }
-  }, [links])
+  }, [links.length])
 
   return (
     <div css={styles.wrapper} className={canDeleteItem ? 'custom-scroll' : ''} ref={divRef}>
