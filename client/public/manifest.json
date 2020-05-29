@@ -1,6 +1,6 @@
 {
-  "short_name": "TS Short",
-  "name": "TS Playground Shortener",
+  "short_name": "tsplay.dev",
+  "name": "TS Playground Link Shortener",
   "icons": [
     {
       "src": "favicon.ico",
