@@ -13,18 +13,19 @@ const MAX_WIDTH = 800
 
 const styles = {
   container: css`
-    height: 100%;
+    min-height: 100vh;
+    background: ${Palette.white};
+    display: flex;
+    flex-direction: column;
   `,
   content: css`
+    flex: 1;
     max-width: ${MAX_WIDTH}px;
-    margin: auto;
+    margin: 20px auto 0;
 
     @media (max-width: 850px) {
       padding: 0 20px;
     }
-  `,
-  wrapper: css`
-    background: ${Palette.white};
   `,
 }
 
@@ -47,17 +48,15 @@ const links = [
 const App: React.FC = () => {
   return (
     <div css={styles.container}>
-      <div css={styles.wrapper}>
-        <Header />
-        <div css={styles.content}>
-          <TitleAndDescription />
-          <Stats />
-          <LinkCreator />
-          <Links links={[links[0]]} canDeleteItem={false} />
-          <Links links={links} canDeleteItem={true} />
-        </div>
-        <Footer />
+      <Header />
+      <div css={styles.content}>
+        <TitleAndDescription />
+        <Stats />
+        <LinkCreator />
+        <Links links={[links[0]]} canDeleteItem={false} />
+        <Links links={links} canDeleteItem={true} />
       </div>
+      <Footer />
     </div>
   )
 }
