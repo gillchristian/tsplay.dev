@@ -36,7 +36,7 @@ const styles = {
   `,
 }
 
-const Header: React.FC = () => {
+const Footer: React.FC = () => {
   return (
     <div css={styles.container}>
       Created with
