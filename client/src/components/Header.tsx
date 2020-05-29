@@ -28,7 +28,7 @@ const Header: React.FC = () => {
   return (
     <div css={styles.container}>
       <img src={logoImg} alt="logo" css={styles.logo} />
-      <span css={styles.title}>TS Play</span>
+      <span css={styles.title}>tsplay.dev</span>
     </div>
   )
 }
