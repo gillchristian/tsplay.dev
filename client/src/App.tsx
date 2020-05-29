@@ -30,19 +30,18 @@ const styles = {
 }
 
 const links = [
-  'https://www.newlinkto.com/ass312dasd',
-  'https://www.newlinkto.com/wqeasasdasdas',
-  'https://www.newlinkto.com/33asasd',
-  'https://www.newlinkto.com/asoqaswe.sad',
-  'https://www.newlinkto.com/asoqwe.saad',
-  'https://www.newlinkto.com/asoqw123e.sad',
-  'https://www.newlinkto.com/asoqdawe.sad',
-  'https://www.newlinkto.com/asoq12we.sad',
-  'https://www.newlinkto.com/asoqwe.sad',
-  'https://www.newlinkto.com/asoasdxqwe.sad',
-  'https://www.newlinkto.com/asoqasawe.sad',
-  'https://www.newlinkto.com/asozqwe.sad',
-  'https://www.newlinkto.com/aso43qwe.sad',
+  'tsplay.dev/Hm4ywj',
+  'tsplay.dev/react-hooks',
+  'tsplay.dev/W4ywjm',
+  'tsplay.dev/3aSa3d',
+  'tsplay.dev/ts-tuto-1',
+  'tsplay.dev/ts-tuto-2',
+  'tsplay.dev/mYpGng',
+  'tsplay.dev/yAmVwl',
+  'tsplay.dev/Wv8jVm',
+  'tsplay.dev/generics-example',
+  'tsplay.dev/qjWwVG',
+  'tsplay.dev/2pLmWY',
 ]
 
 const App: React.FC = () => {
