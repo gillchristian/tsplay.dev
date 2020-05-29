@@ -7,7 +7,7 @@ import { CONTAINER_HEIGHT } from './LinkCreator'
 import copyLogoSVG from '../assets/copy.svg'
 import { Palette } from '../constants'
 
-const SCROLL_BAR_WIDTH: number = 15
+const SCROLL_BAR_WIDTH = 15
 
 const styles = {
   wrapper: css`
