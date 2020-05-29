@@ -36,16 +36,16 @@ const Stats: React.FC = () => {
     <div css={styles.container}>
       <div css={styles.content}>
         <span role="img" aria-label="emoji">
-          👨🏻‍💻
+          🔗
         </span>
-        Visits <strong> 50 </strong>
+        Created <strong> 50 </strong>
         <span role="img" aria-label="emoji">
           │
         </span>
         <span role="img" aria-label="emoji">
-          🔗
+          👩‍💻
         </span>
-        Links <strong> 88 </strong>
+        Visited <strong> 88 </strong>
       </div>
     </div>
   )
