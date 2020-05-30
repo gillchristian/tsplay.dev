@@ -10,6 +10,10 @@ const styles = {
     align-items: center;
     margin-top: -10px;
 
+    .strong {
+      font-weight: 600;
+    }
+
     @media (max-width: 1000px) {
       margin-top: 0;
     }
@@ -49,10 +53,6 @@ const styles = {
     @media (max-width: 1000px) {
       font-size: 28px;
     }
-
-    .strong {
-      font-weight: 600;
-    }
   `,
   description: css`
     margin-top: 10px;
@@ -62,12 +62,11 @@ const styles = {
     @media (max-width: 1000px) {
       font-size: 15px;
     }
-
-    .strong {
-      font-weight: 600;
-    }
   `,
 }
+
+// NOTE: this should be added once the new version of the TypeScript website is released
+const showPluginDescription = false
 
 const TitleAndDescription: React.FC = () => {
   return (
@@ -85,8 +84,7 @@ const TitleAndDescription: React.FC = () => {
         </div>
         <div css={styles.description}>Easily share short-links to the TypeScript playground.</div>
         {
-          // NOTE: this should be added once the new version of the TypeScript website is released
-          false && (
+          showPluginDescription && (
             <React.Fragment>
               <div css={styles.description}>Create short-links directly in the playground with the plugin:</div>
               <div css={styles.description}>

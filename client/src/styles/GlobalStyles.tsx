@@ -113,6 +113,10 @@ const globalStyles: SerializedStyles = css`
     color: inherit;
     text-decoration: none;
   }
+
+  strong {
+    font-weight: 600;
+  }
 `
 
 const GlobalStyles: React.FC = () => {
