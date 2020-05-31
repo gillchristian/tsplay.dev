@@ -15,6 +15,7 @@ module Api.Short.Models
     CreateResponse (..),
     ShortenedUrl (..),
     Stats (..),
+    CreatedOn (..),
   )
 where
 
@@ -28,11 +29,25 @@ import Text.Casing (camel)
 import Prelude
 
 -- -- Models ---
+data CreatedOn
+  = Client
+  | Plugin
+  | Api
+  | Other
+  deriving stock (Generic, Show)
+
+instance Json.ToJSON CreatedOn where
+  toJSON = Json.genericToJSON camelTags
+
+instance Json.FromJSON CreatedOn where
+  parseJSON = Json.genericParseJSON camelTags
 
 data CreateBody
   = CreateBody
       { createUrl :: Text,
-        createShort :: Maybe Text
+        createShort :: Maybe Text,
+        createExpires :: Maybe Bool,
+        createCreatedOn :: Maybe CreatedOn
       }
   deriving stock (Generic, Show)
 
@@ -58,7 +73,8 @@ data ShortenedUrl
   = ShortenedUrl
       { shortenedShort :: Text,
         shortenedUrl :: Text,
-        shortenedVisits :: Int
+        shortenedVisits :: Int,
+        shortenedExpires :: Bool
       }
   deriving stock (Generic, Show)
   deriving (FromRow)
@@ -89,9 +105,9 @@ dropLabelPrefix :: String -> Json.Options
 dropLabelPrefix prefix =
   Json.defaultOptions {Json.fieldLabelModifier = camel . stripPrefix prefix}
 
--- camelTags :: Json.Options
--- camelTags =
---   Json.defaultOptions {Json.constructorTagModifier = camel}
+camelTags :: Json.Options
+camelTags =
+  Json.defaultOptions {Json.constructorTagModifier = camel}
 
 stripPrefix :: Eq a => [a] -> [a] -> [a]
 stripPrefix prefix str = Maybe.fromMaybe str $ List.stripPrefix prefix str
