@@ -3,6 +3,8 @@ import * as React from 'react'
 import { css, jsx } from '@emotion/core'
 import { lighten } from 'polished'
 import { Palette } from '../constants'
+import { toast } from 'react-toastify'
+import api from '../utils/api'
 
 export const CONTAINER_HEIGHT = 50
 
@@ -18,7 +20,7 @@ const styles = {
     }
   `,
   input: css`
-    width: 85%;
+    width: 80%;
     height: ${CONTAINER_HEIGHT}px;
     background: ${Palette.shade1};
     outline: none;
@@ -58,11 +60,49 @@ const styles = {
   `,
 }
 
-const LinkCreator: React.FC = () => {
+const typescriptBaseUrl = 'https://www.typescriptlang.org/play/?#code/'
+
+const createLink = async (
+  inputRef: HTMLInputElement | null,
+  setShortened: React.Dispatch<React.SetStateAction<number | null>>,
+  setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
+) => {
+  if (inputRef && inputRef.value.includes(typescriptBaseUrl)) {
+    try {
+      const url = inputRef.value
+      const { shortened } = await api('short', { body: { url } })
+      setShortenedCreated(shortened)
+      toast('🔗 Your link was created successfully')
+      inputRef.value = ''
+      setShortened(prev => {
+        if (typeof prev === 'number') {
+          return prev++
+        }
+        return null
+      })
+    } catch (e) {
+      console.log('Error trying to shortener URL', e)
+      toast('🛑️ There was an error, please try again')
+    }
+    return
+  }
+  toast('⚠️ The input text value is not a typescript playground URL')
+}
+
+interface ITLinkCreator {
+  setShortened: React.Dispatch<React.SetStateAction<number | null>>
+  setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
+}
+
+const LinkCreator: React.FC<ITLinkCreator> = ({ setShortened, setShortenedCreated }) => {
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
   return (
     <div css={styles.container}>
-      <input type="text" css={styles.input} />
-      <button css={styles.button}>Shorten</button>
+      <input type="text" css={styles.input} ref={inputRef} />
+      <button css={styles.button} onClick={() => createLink(inputRef.current, setShortened, setShortenedCreated)}>
+        Shorten
+      </button>
     </div>
   )
 }

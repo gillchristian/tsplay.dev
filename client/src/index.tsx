@@ -14,4 +14,4 @@ ReactDOM.render(
   </React.Fragment>,
   document.getElementById('root')
 )
-registerServiceWorker.register()
+registerServiceWorker.unregister()
