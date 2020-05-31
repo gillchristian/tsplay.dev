@@ -83,24 +83,22 @@ const TitleAndDescription: React.FC = () => {
           .
         </div>
         <div css={styles.description}>Easily share short-links to the TypeScript playground.</div>
-        {
-          showPluginDescription && (
-            <React.Fragment>
-              <div css={styles.description}>Create short-links directly in the playground with the plugin:</div>
-              <div css={styles.description}>
-                <pre className="strong">
-                  <a
-                    href="https://www.typescriptlang.org/play?install-plugin=typescript-playground-link-shortener"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    typescript-playground-link-shortener
-                  </a>
-                </pre>
-              </div>
-            </React.Fragment>
-          )
-        }
+        {showPluginDescription && (
+          <React.Fragment>
+            <div css={styles.description}>Create short-links directly in the playground with the plugin:</div>
+            <div css={styles.description}>
+              <pre className="strong">
+                <a
+                  href="https://www.typescriptlang.org/play?install-plugin=typescript-playground-link-shortener"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  typescript-playground-link-shortener
+                </a>
+              </pre>
+            </div>
+          </React.Fragment>
+        )}
         <div css={styles.description}>
           <strong className="strong">Why a dedicated link shortener?</strong>{' '}
           <a href="https://tsplay.dev">tsplay.dev</a> links will always redirect to the TypeScript Playground. You never
