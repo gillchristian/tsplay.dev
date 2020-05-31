@@ -1,27 +1,29 @@
 import { apiBaseUrl } from '../constants'
 
-// TODO: Add correct types
-const api = (endpointUrl: string, { body, ...customConfig }: any = {}) => {
-  const headers = { 'Content-Type': 'application/json' }
+type Options = Omit<RequestInit, 'body'> & { body?: unknown }
+
+const api = <Data = unknown>(endpointUrl: string, { body, ...customConfig }: Options = {}): Promise<Data> => {
+  const isPost = Boolean(body)
+  const headers = isPost ? { 'Content-Type': 'application/json' } : undefined
+
   const config = {
-    method: body ? 'POST' : 'GET',
+    method: isPost ? 'POST' : 'GET',
     ...customConfig,
     headers: {
       ...headers,
       ...customConfig.headers,
     },
   }
-  if (body) {
-    config.body = JSON.stringify(body)
+
+  let stringifiedBody: string | undefined
+
+  if (isPost) {
+    stringifiedBody = JSON.stringify(body)
   }
-  return window.fetch(`${apiBaseUrl}/${endpointUrl}`, config).then(async response => {
-    const data = await response.json()
-    if (response.ok) {
-      return data
-    } else {
-      return Promise.reject(data)
-    }
-  })
+
+  return window
+    .fetch(`${apiBaseUrl}/${endpointUrl}`, { ...config, body: stringifiedBody })
+    .then(response => (response.ok ? response.json() : Promise.reject(response.json())))
 }
 
 export default api

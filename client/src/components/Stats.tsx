@@ -36,12 +36,12 @@ const styles = {
   `,
 }
 
-interface ITStats {
-  shortened: Number | null
-  visits: Number | null
+interface Props {
+  shortened: number | null
+  visits: number | null
 }
 
-const Stats: React.FC<ITStats> = ({ shortened, visits }) => {
+const Stats: React.FC<Props> = ({ shortened, visits }) => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
