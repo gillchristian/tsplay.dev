@@ -60,17 +60,22 @@ const styles = {
   `,
 }
 
-const typescriptBaseUrl = 'https://www.typescriptlang.org/play/?#code/'
+const typescriptBaseUrl = 'https://www.typescriptlang.org/play'
+
+interface CreateResponse {
+  shortened: string;
+}
 
 const createLink = async (
   inputRef: HTMLInputElement | null,
   setShortened: React.Dispatch<React.SetStateAction<number | null>>,
-  setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
+  setShortenedCreated: (link: string) => void
 ) => {
-  if (inputRef && inputRef.value.includes(typescriptBaseUrl)) {
+  // TODO use controlled input instead
+  if (inputRef && inputRef.value.trim().startsWith(typescriptBaseUrl)) {
     try {
       const url = inputRef.value
-      const { shortened } = await api('short', { body: { url } })
+      const { shortened } = await api<CreateResponse>('short', { body: { url } })
       setShortenedCreated(shortened)
       toast('🔗 Your link was created successfully')
       inputRef.value = ''
@@ -89,12 +94,12 @@ const createLink = async (
   toast('⚠️ The input text value is not a typescript playground URL')
 }
 
-interface ITLinkCreator {
+interface Props {
   setShortened: React.Dispatch<React.SetStateAction<number | null>>
   setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
 }
 
-const LinkCreator: React.FC<ITLinkCreator> = ({ setShortened, setShortenedCreated }) => {
+const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated }) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   return (

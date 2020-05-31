@@ -7,14 +7,16 @@ if (process.env.NODE_ENV !== 'production') {
 
 const storageKey = 'tsplay.dev'
 interface LocalStorageInterface {
-  set: (key: string, data: any, duration: number | undefined) => void
-  get: (key: string) => any
+  set: (key: string, data: unknown, duration: number | undefined) => void
+  get: <Data = unknown>(key: string) => Data
   flush: () => void
 }
 
-const set = (key: string, data: any, duration: number | undefined = undefined) =>
+const set = (key: string, data: unknown, duration: number | undefined = undefined) =>
   lscache.set(`${storageKey}-${key}`, data, duration)
-const get = (key: string) => lscache.get(`${storageKey}-${key}`)
+
+const get = <Data = unknown>(key: string): Data => lscache.get(`${storageKey}-${key}`)
+
 const flush = () => lscache.flush()
 
 const localStorageService: LocalStorageInterface = { set, get, flush }
