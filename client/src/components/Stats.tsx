@@ -8,6 +8,11 @@ const styles = {
     display: flex;
     align-items: center;
     margin-top: 30px;
+    min-height: 25px;
+
+    @media (max-width: 550px) {
+      min-height: 20px;
+    }
   `,
   content: css`
     flex: 1;
@@ -31,21 +36,34 @@ const styles = {
   `,
 }
 
-const Stats: React.FC = () => {
+interface ITStats {
+  shortened: Number | null
+  visits: Number | null
+}
+
+const Stats: React.FC<ITStats> = ({ shortened, visits }) => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
-        <span role="img" aria-label="emoji">
-          🔗
-        </span>
-        Created <strong> 50 </strong>
-        <span role="img" aria-label="emoji">
-          │
-        </span>
-        <span role="img" aria-label="emoji">
-          👩‍💻
-        </span>
-        Visited <strong> 88 </strong>
+        {shortened && (
+          <React.Fragment>
+            <span role="img" aria-label="emoji">
+              🔗
+            </span>
+            Created <strong> {shortened} </strong>
+            <span role="img" aria-label="emoji">
+              │
+            </span>
+          </React.Fragment>
+        )}
+        {visits && (
+          <React.Fragment>
+            <span role="img" aria-label="emoji">
+              👩‍💻
+            </span>
+            Visited <strong> {visits} </strong>
+          </React.Fragment>
+        )}
       </div>
     </div>
   )
