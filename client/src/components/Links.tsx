@@ -6,17 +6,19 @@ import { toast } from 'react-toastify'
 import { CONTAINER_HEIGHT } from './LinkCreator'
 import copyLogoSVG from '../assets/copy.svg'
 import { Palette } from '../constants'
-
-const SCROLL_BAR_WIDTH = 15
+import { ShowToastFcType } from './CopyClipboardToast'
+import { SCROLL_BAR_WIDTH } from '../styles/GlobalStyles'
 
 const styles = {
   wrapper: css`
     margin-top: 20px;
     max-height: ${CONTAINER_HEIGHT * 4}px; // Number of rows before scroll (4)
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
 
     &.custom-scroll {
+      overflow-y: scroll;
+
       ::-webkit-scrollbar {
         width: ${SCROLL_BAR_WIDTH}px;
       }
@@ -115,23 +117,31 @@ const styles = {
   buttonWithScroll: css`
     padding-left: 29px;
   `,
+  underline: css`
+    text-decoration: underline;
+  `,
 }
 
 interface LinksProps {
   links: string[]
   canDeleteItem: boolean
+  showToast: ShowToastFcType
 }
 
-const copyToClipboard: (text: string) => void = async text => {
+const copyToClipboard: (text: string, showToast: ShowToastFcType) => void = async (text, showToast) => {
   try {
     await navigator.clipboard.writeText(text)
-    toast(`✅ ${text} copied to clipboard`)
+    showToast(
+      <span>
+        ✅ <strong css={styles.underline}>{text}</strong> copied to clipboard
+      </span>
+    )
   } catch (e) {
-    toast('⚠️ Sorry, there was an error trying to copy the link')
+    showToast('⚠️ Sorry, there was an error trying to copy the link', undefined, true)
   }
 }
 
-const Links: React.FC<LinksProps> = ({ links, canDeleteItem }) => {
+const Links: React.FC<LinksProps> = ({ links, canDeleteItem, showToast }) => {
   const divRef = React.useRef<HTMLDivElement>(null)
   const [hasScroll, setHasScroll] = React.useState<boolean>(false)
 
@@ -143,7 +153,7 @@ const Links: React.FC<LinksProps> = ({ links, canDeleteItem }) => {
   }, [links.length])
 
   return (
-    <div css={styles.wrapper} className={canDeleteItem ? 'custom-scroll' : ''} ref={divRef}>
+    <div css={styles.wrapper} className={canDeleteItem && hasScroll ? 'custom-scroll' : ''} ref={divRef}>
       {links.map((link: string) => (
         <div key={link} css={styles.container} className={canDeleteItem ? 'can-delete' : ''}>
           <span
@@ -159,7 +169,7 @@ const Links: React.FC<LinksProps> = ({ links, canDeleteItem }) => {
               ${styles.button};
               ${hasScroll ? styles.buttonWithScroll : ''}
             `}
-            onClick={() => copyToClipboard(link)}
+            onClick={() => copyToClipboard(link, showToast)}
           >
             <img alt="copy logo" src={copyLogoSVG} />
           </button>

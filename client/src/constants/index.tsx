@@ -6,3 +6,5 @@ export enum Palette {
   shade3 = '#494949',
   white = '#fff',
 }
+
+export const apiBaseUrl = 'https://tsplay.dev/api'
