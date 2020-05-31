@@ -7,7 +7,9 @@ import Stats from './components/Stats'
 import LinkCreator from './components/LinkCreator'
 import Links from './components/Links'
 import Footer from './components/Footer'
+import CopyClipboardToast from './components/CopyClipboardToast'
 import { Palette } from './constants'
+import api from './utils/api'
 
 const MAX_WIDTH = 800
 
@@ -44,16 +46,50 @@ const links = [
   'tsplay.dev/2pLmWY',
 ]
 
+export type ITStats = {
+  totalShortened: number | null
+  totalVisits: number | null
+}
+
+const fetchStats = async () => {
+  try {
+    return await api('short/stats')
+  } catch (e) {
+    console.log('Error fetching stats', console.log('error'))
+  }
+}
+
 const App: React.FC = () => {
+  const [shortened, setShortened] = React.useState<number | null>(null)
+  const [visits, setVisits] = React.useState<number | null>(null)
+  const [shortenedCreated, setShortenedCreated] = React.useState<string>('')
+
+  const setShortenedCreatedArray = React.useMemo(() => [shortenedCreated], [shortenedCreated])
+
+  // Like construct
+  React.useMemo(async () => {
+    const stats: ITStats = await fetchStats()
+    setShortened(stats.totalShortened)
+    setVisits(stats.totalVisits)
+  }, [])
+
   return (
     <div css={styles.container}>
       <Header />
       <div css={styles.content}>
         <TitleAndDescription />
-        <Stats />
-        <LinkCreator />
-        <Links links={[links[0]]} canDeleteItem={false} />
-        <Links links={links} canDeleteItem={true} />
+        <Stats shortened={shortened} visits={visits} />
+        <LinkCreator setShortened={setShortened} setShortenedCreated={setShortenedCreated} />
+        <CopyClipboardToast>
+          {({ showToast }) => (
+            <React.Fragment>
+              {shortenedCreated && (
+                <Links links={setShortenedCreatedArray} canDeleteItem={false} showToast={showToast} />
+              )}
+              <Links links={links} canDeleteItem={true} showToast={showToast} />
+            </React.Fragment>
+          )}
+        </CopyClipboardToast>
       </div>
       <Footer />
     </div>

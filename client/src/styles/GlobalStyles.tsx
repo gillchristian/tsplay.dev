@@ -2,6 +2,9 @@
 import * as React from 'react'
 import { css, jsx, Global, SerializedStyles } from '@emotion/core'
 import Fonts from './Fonts'
+import { Palette } from '../constants'
+
+export const SCROLL_BAR_WIDTH = 15
 
 const globalStyles: SerializedStyles = css`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,500');
@@ -86,6 +89,19 @@ const globalStyles: SerializedStyles = css`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-family: 'Segoe', Segoe UI, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+      width: ${SCROLL_BAR_WIDTH}px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: ${Palette.shade3};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: ${Palette.shade2};
+    }
   }
 
   body button,
