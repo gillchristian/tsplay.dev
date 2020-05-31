@@ -7,4 +7,4 @@ export enum Palette {
   white = '#fff',
 }
 
-export const apiBaseUrl = 'https://tsplay.dev/api'
+export const apiBaseUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:9000/api' : 'https://tsplay.dev/api'
