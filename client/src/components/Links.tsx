@@ -2,11 +2,11 @@
 import * as React from 'react'
 import { css, jsx } from '@emotion/core'
 import { lighten } from 'polished'
-import { toast } from 'react-toastify'
+
 import { CONTAINER_HEIGHT } from './LinkCreator'
 import copyLogoSVG from '../assets/copy.svg'
 import { Palette } from '../constants'
-import { ShowToastFcType } from './CopyClipboardToast'
+import { ShowToast } from '../hooks/useCopyClipboardToast'
 import { SCROLL_BAR_WIDTH } from '../styles/GlobalStyles'
 
 const styles = {
@@ -122,13 +122,13 @@ const styles = {
   `,
 }
 
-interface LinksProps {
+interface Props {
   links: string[]
   canDeleteItem: boolean
-  showToast: ShowToastFcType
+  showToast: ShowToast
 }
 
-const copyToClipboard: (text: string, showToast: ShowToastFcType) => void = async (text, showToast) => {
+const copyToClipboard: (text: string, showToast: ShowToast) => void = async (text, showToast) => {
   try {
     await navigator.clipboard.writeText(text)
     showToast(
@@ -141,7 +141,7 @@ const copyToClipboard: (text: string, showToast: ShowToastFcType) => void = asyn
   }
 }
 
-const Links: React.FC<LinksProps> = ({ links, canDeleteItem, showToast }) => {
+const Links: React.FC<Props> = ({ links, canDeleteItem, showToast }) => {
   const divRef = React.useRef<HTMLDivElement>(null)
   const [hasScroll, setHasScroll] = React.useState<boolean>(false)
 
