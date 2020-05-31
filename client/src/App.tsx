@@ -7,7 +7,7 @@ import Stats from './components/Stats'
 import LinkCreator from './components/LinkCreator'
 import Links from './components/Links'
 import Footer from './components/Footer'
-import CopyClipboardToast from './components/CopyClipboardToast'
+import { useCopyClipboardToast } from './hooks/useCopyClipboardToast'
 import { Palette } from './constants'
 import api from './utils/api'
 
@@ -46,31 +46,37 @@ const links = [
   'tsplay.dev/2pLmWY',
 ]
 
-export type ITStats = {
+export type StatsResponse = {
   totalShortened: number | null
   totalVisits: number | null
 }
 
 const fetchStats = async () => {
   try {
-    return await api('short/stats')
-  } catch (e) {
-    console.log('Error fetching stats', console.log('error'))
+    return await api<StatsResponse>('short/stats')
+  } catch (error) {
+    console.log('Error fetching stats')
+    console.log(error)
   }
 }
 
 const App: React.FC = () => {
   const [shortened, setShortened] = React.useState<number | null>(null)
   const [visits, setVisits] = React.useState<number | null>(null)
-  const [shortenedCreated, setShortenedCreated] = React.useState<string>('')
+  const [shortenedCreated, setShortenedCreated] = React.useState('')
+
+  const showToast = useCopyClipboardToast()
 
   const setShortenedCreatedArray = React.useMemo(() => [shortenedCreated], [shortenedCreated])
 
-  // Like construct
+  // useMemo runs before useEffect (like the class constructor)
   React.useMemo(async () => {
-    const stats: ITStats = await fetchStats()
-    setShortened(stats.totalShortened)
-    setVisits(stats.totalVisits)
+    const stats = await fetchStats()
+
+    if (stats) {
+      setShortened(stats.totalShortened)
+      setVisits(stats.totalVisits)
+    }
   }, [])
 
   return (
@@ -80,16 +86,8 @@ const App: React.FC = () => {
         <TitleAndDescription />
         <Stats shortened={shortened} visits={visits} />
         <LinkCreator setShortened={setShortened} setShortenedCreated={setShortenedCreated} />
-        <CopyClipboardToast>
-          {({ showToast }) => (
-            <React.Fragment>
-              {shortenedCreated && (
-                <Links links={setShortenedCreatedArray} canDeleteItem={false} showToast={showToast} />
-              )}
-              <Links links={links} canDeleteItem={true} showToast={showToast} />
-            </React.Fragment>
-          )}
-        </CopyClipboardToast>
+        {shortenedCreated && <Links links={setShortenedCreatedArray} canDeleteItem={false} showToast={showToast} />}
+        <Links links={links} canDeleteItem={true} showToast={showToast} />
       </div>
       <Footer />
     </div>
