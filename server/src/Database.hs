@@ -7,6 +7,7 @@ module Database
     runDbN_,
     runDbN,
     execDb1,
+    execDb1_,
   )
 where
 
@@ -52,3 +53,8 @@ execDb1 :: (MonadReader Config m, MonadIO m, PG.ToRow b) => PG.Query -> b -> m I
 execDb1 query args = do
   pool <- asks configPool
   liftIO $ Pool.withResource pool (\con -> PG.execute con query args)
+
+execDb1_ :: (MonadReader Config m, MonadIO m) => PG.Query -> m Int64
+execDb1_ query = do
+  pool <- asks configPool
+  liftIO $ Pool.withResource pool (`PG.execute_` query)

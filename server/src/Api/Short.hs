@@ -26,6 +26,7 @@ import Control.Monad.Reader (asks)
 import Data.HashMap.Lazy (HashMap)
 import Data.IORef (readIORef)
 import Data.Int (Int64)
+import Data.Maybe (fromMaybe)
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Encoding (decodeUtf8, encodeUtf8)
@@ -99,7 +100,8 @@ createHandler CreateBody {..} = do
     Nothing -> do
       seed <- maybe (Servant.throwError Servant.err500) pure =<< nextShortRefCounter
       short <- asks (decodeUtf8 . flip Hashids.encode seed . configHashidsCtx)
-      Monad.void $ insertUrl $ ShortenedUrl short createUrl 0
+      Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 (fromMaybe False createExpires)
+      incLinksCreated $ fromMaybe Other createCreatedOn
       pure $ CreateResponse (baseUrl <> "/" <> short) -- TODO: return 201
     Just ShortenedUrl {..} ->
       pure $ CreateResponse (baseUrl <> "/" <> shortenedShort)
@@ -121,7 +123,8 @@ visitHandler short = do
   Metrics.increment "visitShort"
   mbUrl <- findUrlByShortToVisit short
   case mbUrl of
-    Just ShortenedUrl {..} ->
+    Just ShortenedUrl {..} -> do
+      incLinksVisited
       redirectTo shortenedUrl
     Nothing ->
       redirectTo =<< asks configClientUrl
