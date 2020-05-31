@@ -63,7 +63,7 @@ const styles = {
 const typescriptBaseUrl = 'https://www.typescriptlang.org/play'
 
 interface CreateResponse {
-  shortened: string;
+  shortened: string
 }
 
 const createLink = async (
@@ -79,12 +79,7 @@ const createLink = async (
       setShortenedCreated(shortened)
       toast('🔗 Your link was created successfully')
       inputRef.value = ''
-      setShortened(prev => {
-        if (typeof prev === 'number') {
-          return prev++
-        }
-        return null
-      })
+      setShortened(prev => (prev ? prev + 1 : 1))
     } catch (e) {
       console.log('Error trying to shortener URL', e)
       toast('🛑️ There was an error, please try again')
