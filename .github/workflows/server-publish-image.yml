@@ -4,13 +4,10 @@ on:
   release:
       types: [published]
   push:
-    branches:
-      - 'master'
     paths:
       - 'server/**'
       - '.github/workflows/server-*'
 
-# TODO: user 'Server: Test & Build' output here
 jobs:
   release:
     strategy:
@@ -73,5 +70,4 @@ jobs:
         password: ${{ secrets.docker_password }}
         workdir: server
         tags: "latest,${{ env.RELEASE_VERSION }}"
-        context: .
         buildargs: BINARY_PATH
