@@ -102,12 +102,16 @@ const createLink = async (
       toast('🔗 Your link was created successfully')
       showToast(
         <span>
-          ✅ <strong css={styles.underline}>{shortened}</strong> copied to clipboard
+          <span role="img" aria-label="check mark">
+            ✅
+          </span>{' '}
+          <strong css={styles.underline}>{shortened}</strong> copied to clipboard
         </span>
       )
       setInputValue('')
       setShortened(prev => (prev ? prev + 1 : 1))
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('Error trying to shortener URL', e)
       toast('🛑️ There was an error, please try again')
     }
