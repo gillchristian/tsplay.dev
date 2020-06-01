@@ -6,7 +6,7 @@ import { Palette } from '../constants'
 function GlobalToast() {
   return (
     <ToastContainerStyles>
-      <ToastContainer pauseOnHover closeButton={false} autoClose={5000} closeOnClick newestOnTop />
+      <ToastContainer pauseOnHover closeButton={false} autoClose={5000} closeOnClick />
     </ToastContainerStyles>
   )
 }
