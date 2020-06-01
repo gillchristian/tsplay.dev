@@ -85,7 +85,7 @@ const App: React.FC = () => {
       <div css={styles.content}>
         <TitleAndDescription />
         <Stats shortened={shortened} visits={visits} />
-        <LinkCreator setShortened={setShortened} setShortenedCreated={setShortenedCreated} />
+        <LinkCreator setShortened={setShortened} setShortenedCreated={setShortenedCreated}  showToast={showToast} />
         {shortenedCreated && <Links links={setShortenedCreatedArray} canDeleteItem={false} showToast={showToast} />}
         <Links links={links} canDeleteItem={true} showToast={showToast} />
       </div>

@@ -119,6 +119,7 @@ const styles = {
   `,
   underline: css`
     text-decoration: underline;
+    margin-left: 5px;
   `,
 }
 
