@@ -1,11 +1,19 @@
 name: 'Client: Test & Build'
 
 on: 
+  pull_request:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+    paths:
+      - 'client/**'
+      - '.github/workflows/client-*'
   push:
     branches:
       - '*'
     tags-ignore:
-      - '*'  
+      - '*'
     paths:
       - 'client/**'
       - '.github/workflows/client-*'
@@ -29,6 +37,7 @@ jobs:
 
     - name: Install dependencies
       run: yarn
+      working-directory: client
 
     - name: Typecheck & Lint
       run: |
@@ -37,11 +46,14 @@ jobs:
         yarn ts:check
       env:
         CI: true
+      working-directory: client
 
     - name: Test
       run: yarn test
       env:
         CI: true
+      working-directory: client
 
     - name: Build
       run: yarn build
+      working-directory: client
