@@ -1,9 +1,11 @@
 name: 'Server: Publish Docker Image'
 
 on:
-  release:
-      types: [published]
   push:
+    tags:
+      - '*'
+    branches-ignore:
+      - '*'
     paths:
       - 'server/**'
       - '.github/workflows/server-*'

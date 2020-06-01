@@ -2,8 +2,10 @@ name: 'Server: Test & Build'
 
 on: 
   push:
-    branches-ignore:	
-      - 'master'
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'  
     paths:
       - 'server/**'
       - '.github/workflows/server-*'
