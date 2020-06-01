@@ -5,6 +5,7 @@ import { lighten } from 'polished'
 import { Palette } from '../constants'
 import { toast } from 'react-toastify'
 import api from '../utils/api'
+import { ShowToast } from '../hooks/useCopyClipboardToast'
 
 export const CONTAINER_HEIGHT = 50
 
@@ -19,20 +20,27 @@ const styles = {
       margin-top: 27px;
     }
   `,
-  input: css`
+  inputContainer: css`
+    position: relative;
     width: 80%;
     height: ${CONTAINER_HEIGHT}px;
-    background: ${Palette.shade1};
-    outline: none;
-    padding: 8px 15px;
     box-sizing: border-box;
-    border: none;
-    color: ${Palette.secondary};
-    font-size: 22px;
 
     @media (max-width: 550px) {
       width: 90%;
     }
+  `,
+  input: css`
+    width: 100%;
+    height: ${CONTAINER_HEIGHT}px;
+    background: ${Palette.shade1};
+    outline: none;
+    padding: 10px 20px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    border: none;
+    color: ${Palette.secondary};
+    font-size: 22px;
   `,
   button: css`
     height: ${CONTAINER_HEIGHT}px;
@@ -58,6 +66,19 @@ const styles = {
       background: ${lighten(0.05, Palette.primary)};
     }
   `,
+  underline: css`
+    text-decoration: underline;
+    margin-left: 5px;
+`,
+clearInput: css`
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: ${Palette.shade3}
+`
 }
 
 const typescriptBaseUrl = 'https://www.typescriptlang.org/play'
@@ -67,18 +88,24 @@ interface CreateResponse {
 }
 
 const createLink = async (
-  inputRef: HTMLInputElement | null,
+  setInputValue: React.Dispatch<React.SetStateAction<string>>,
   setShortened: React.Dispatch<React.SetStateAction<number | null>>,
-  setShortenedCreated: (link: string) => void
+  setShortenedCreated: (link: string) => void,
+  showToast: ShowToast,
+  inputValue: string
 ) => {
-  // TODO use controlled input instead
-  if (inputRef && inputRef.value.trim().startsWith(typescriptBaseUrl)) {
+  if (!inputValue) return
+  if (inputValue.trim().startsWith(typescriptBaseUrl)) {
     try {
-      const url = inputRef.value
-      const { shortened } = await api<CreateResponse>('short', { body: { url } })
+      const { shortened } = await api<CreateResponse>('short', { body: { url: inputValue } })
       setShortenedCreated(shortened)
       toast('🔗 Your link was created successfully')
-      inputRef.value = ''
+      showToast(
+        <span>
+          ✅ <strong css={styles.underline}>{shortened}</strong> copied to clipboard
+        </span>
+      )
+      setInputValue('')
       setShortened(prev => (prev ? prev + 1 : 1))
     } catch (e) {
       console.log('Error trying to shortener URL', e)
@@ -87,20 +114,25 @@ const createLink = async (
     return
   }
   toast('⚠️ The input text value is not a typescript playground URL')
+  setShortenedCreated('')
 }
 
 interface Props {
   setShortened: React.Dispatch<React.SetStateAction<number | null>>
   setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
+  showToast: ShowToast
 }
 
-const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated }) => {
-  const inputRef = React.useRef<HTMLInputElement>(null)
+const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showToast }) => {
+  const [inputValue, setInputValue] = React.useState('')
 
   return (
     <div css={styles.container}>
-      <input type="text" css={styles.input} ref={inputRef} />
-      <button css={styles.button} onClick={() => createLink(inputRef.current, setShortened, setShortenedCreated)}>
+      <div css={styles.inputContainer}>
+        <input type="text" css={styles.input} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+        {!!inputValue.length && (<span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>🅧</span>)}
+      </div>
+      <button css={styles.button} onClick={() => createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue)}>
         Shorten
       </button>
     </div>
