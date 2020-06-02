@@ -69,16 +69,16 @@ const styles = {
   underline: css`
     text-decoration: underline;
     margin-left: 5px;
-`,
-clearInput: css`
-  position: absolute;
-  right: 9px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  color: ${Palette.shade3}
-`
+  `,
+  clearInput: css`
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: ${Palette.shade3};
+  `,
 }
 
 const typescriptBaseUrl = 'https://www.typescriptlang.org/play'
@@ -102,12 +102,16 @@ const createLink = async (
       toast('🔗 Your link was created successfully')
       showToast(
         <span>
-          ✅ <strong css={styles.underline}>{shortened}</strong> copied to clipboard
+          <span role="img" aria-label="check mark">
+            ✅
+          </span>{' '}
+          <strong css={styles.underline}>{shortened}</strong> copied to clipboard
         </span>
       )
       setInputValue('')
       setShortened(prev => (prev ? prev + 1 : 1))
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('Error trying to shortener URL', e)
       toast('🛑️ There was an error, please try again')
     }
@@ -129,10 +133,17 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
   return (
     <div css={styles.container}>
       <div css={styles.inputContainer}>
-        <input type="text" css={styles.input} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-        {!!inputValue.length && (<span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>🅧</span>)}
+        <input type="text" css={styles.input} value={inputValue} onChange={e => setInputValue(e.target.value)} />
+        {!!inputValue.length && (
+          <span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>
+            🅧
+          </span>
+        )}
       </div>
-      <button css={styles.button} onClick={() => createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue)}>
+      <button
+        css={styles.button}
+        onClick={() => createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue)}
+      >
         Shorten
       </button>
     </div>
