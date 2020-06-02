@@ -1,6 +1,14 @@
 name: 'Server: Publish Docker Image'
 
 on:
+  pull_request:
+    branches-ignore:
+      - '*'
+    tags-ignore:
+      - '*'
+    paths:
+      - 'server/**'
+      - '.github/workflows/server-*'
   push:
     tags:
       - '*'

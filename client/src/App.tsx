@@ -55,7 +55,9 @@ const fetchStats = async () => {
   try {
     return await api<StatsResponse>('short/stats')
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log('Error fetching stats')
+    // eslint-disable-next-line no-console
     console.log(error)
   }
 }
@@ -85,7 +87,7 @@ const App: React.FC = () => {
       <div css={styles.content}>
         <TitleAndDescription />
         <Stats shortened={shortened} visits={visits} />
-        <LinkCreator setShortened={setShortened} setShortenedCreated={setShortenedCreated}  showToast={showToast} />
+        <LinkCreator setShortened={setShortened} setShortenedCreated={setShortenedCreated} showToast={showToast} />
         {shortenedCreated && <Links links={setShortenedCreatedArray} canDeleteItem={false} showToast={showToast} />}
         <Links links={links} canDeleteItem={true} showToast={showToast} />
       </div>
