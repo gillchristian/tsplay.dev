@@ -8,7 +8,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["react-hooks", "@typescript-eslint", "prettier"],
   "globals": {
-    "context": "readonly",
+    "context": "readonly"
   },
   "rules": {
     "prettier/prettier": [

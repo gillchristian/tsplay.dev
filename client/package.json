@@ -17,14 +17,15 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "ts:watch": "tsc -w",
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "fmt": "prettier --write '**/*.{md,js,ts,tsx,json}'",
+    "fmt:check": "prettier --check '**/*.{md,js,ts,tsx,json}'",
+    "lint": "eslint --ext js,ts,tsx src",
+    "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "ts:check": "tsc",
+    "ts:watch": "tsc -w"
   },
   "browserslist": {
     "production": [
