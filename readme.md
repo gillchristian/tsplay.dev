@@ -1,6 +1,6 @@
 # [tsplay.dev](https://tsplay.dev)
 
-> A link shortener for the [TypeScript Playground](https://www.typescriptlang.org/play)
+> A link shortener for [TypeScript Playground](https://www.typescriptlang.org/play)
 
 ## How to
 
