@@ -33,7 +33,7 @@ import Database.PostgreSQL.Simple (Only (..))
 import Prelude
 
 findAllUrls :: MonadIO m => AppT m [ShortenedUrl]
-findAllUrls = runDbN_ "select short,url,visits from shortened" -- TODO pagination
+findAllUrls = runDbN_ "select short,url,visits,expires from shortened" -- TODO pagination
 
 findUrlByLong :: MonadIO m => Text -> AppT m (Maybe ShortenedUrl)
 findUrlByLong url =
