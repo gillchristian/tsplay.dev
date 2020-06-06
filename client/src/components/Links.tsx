@@ -167,7 +167,7 @@ const Links: React.FC<Props> = ({ links, canDeleteItem, showToast, onLinkDelete 
               ${hasScroll ? styles.linkWithScroll : ''}
             `}
           >
-            {link}
+            {link.replace('https://', '')}
           </span>
           <button
             css={css`
