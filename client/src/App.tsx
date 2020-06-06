@@ -78,7 +78,7 @@ const App: React.FC = () => {
 
   const onLinkDelete = React.useCallback((url: string, links: string[]) => {
     const linksFiltered = links.filter(link => link !== url)
-    localStorage.set(linksLocalStorageKey, [...linksFiltered])
+    localStorage.set(linksLocalStorageKey, linksFiltered)
     setLinks(linksFiltered)
   }, [])
 
@@ -100,7 +100,7 @@ const App: React.FC = () => {
           setLinks={setLinks}
         />
         {shortenedCreated && <Links links={setShortenedCreatedArray} canDeleteItem={false} showToast={showToast} />}
-        {!!linksFilteringCreated.length && (
+        {linksFilteringCreated.length > 0 && (
           <Links links={linksFilteringCreated} canDeleteItem={true} showToast={showToast} onLinkDelete={onLinkDelete} />
         )}
       </div>
