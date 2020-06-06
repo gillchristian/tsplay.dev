@@ -1,16 +1,23 @@
 name: 'Server: Publish Docker Image'
 
 on:
-  release:
-      types: [published]
+  pull_request:
+    branches-ignore:
+      - '*'
+    tags-ignore:
+      - '*'
+    paths:
+      - 'server/**'
+      - '.github/workflows/server-*'
   push:
-    branches:
-      - 'master'
+    tags:
+      - '*'
+    branches-ignore:
+      - '*'
     paths:
       - 'server/**'
       - '.github/workflows/server-*'
 
-# TODO: user 'Server: Test & Build' output here
 jobs:
   release:
     strategy:
@@ -73,5 +80,4 @@ jobs:
         password: ${{ secrets.docker_password }}
         workdir: server
         tags: "latest,${{ env.RELEASE_VERSION }}"
-        context: .
         buildargs: BINARY_PATH

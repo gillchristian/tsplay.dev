@@ -1,9 +1,19 @@
 name: 'Server: Test & Build'
 
 on: 
+  pull_request:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+    paths:
+      - 'server/**'
+      - '.github/workflows/server-*'
   push:
-    branches-ignore:	
-      - 'master'
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
     paths:
       - 'server/**'
       - '.github/workflows/server-*'

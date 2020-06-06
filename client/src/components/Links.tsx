@@ -119,6 +119,7 @@ const styles = {
   `,
   underline: css`
     text-decoration: underline;
+    margin-left: 5px;
   `,
 }
 
@@ -133,7 +134,10 @@ const copyToClipboard: (text: string, showToast: ShowToast) => void = async (tex
     await navigator.clipboard.writeText(text)
     showToast(
       <span>
-        ✅ <strong css={styles.underline}>{text}</strong> copied to clipboard
+        <span role="img" aria-label="check mark">
+          ✅
+        </span>
+        <strong css={styles.underline}>{text}</strong> copied to clipboard
       </span>
     )
   } catch (e) {
