@@ -7,4 +7,4 @@ export enum Palette {
   white = '#fff',
 }
 export const linksLocalStorageKey = 'tsplay.dev-links'
-export const apiBaseUrl = process.env.NODE_ENV !== 'production' ? 'https://tsplay.dev/api' : 'https://tsplay.dev/api'
+export const apiBaseUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:9000/api' : 'https://tsplay.dev/api'
