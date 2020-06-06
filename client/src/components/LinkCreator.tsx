@@ -73,24 +73,24 @@ const styles = {
   underline: css`
     text-decoration: underline;
     margin-left: 5px;
-`,
-clearInput: css`
-  position: absolute;
-  right: 9px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  color: ${Palette.shade3}
-`,
-rollingSvg: css`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 33px;
-  height: 33px;
-`
+  `,
+  clearInput: css`
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: ${Palette.shade3};
+  `,
+  rollingSvg: css`
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 33px;
+    height: 33px;
+  `,
 }
 
 const typescriptBaseUrl = 'https://www.typescriptlang.org/play'
@@ -155,7 +155,7 @@ const createLink = async (
 interface Props {
   setShortened: React.Dispatch<React.SetStateAction<number | null>>
   setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
-  showToast: ShowToast,
+  showToast: ShowToast
   setLinks: (links: string[]) => void
 }
 
@@ -173,10 +173,13 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
           </span>
         )}
       </div>
-      <button css={styles.button} onClick={() => createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks)}>
-        { loading ? (
-          <img src={rollingSvgImg} css={styles.rollingSvg} />
-        ) : 'Shorten'}
+      <button
+        css={styles.button}
+        onClick={() =>
+          createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks)
+        }
+      >
+        {loading ? <img src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
       </button>
     </div>
   )

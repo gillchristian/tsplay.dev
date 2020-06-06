@@ -178,7 +178,12 @@ const Links: React.FC<Props> = ({ links, canDeleteItem, showToast, onLinkDelete 
           >
             <img alt="copy logo" src={copyLogoSVG} />
           </button>
-          <span role="button" css={styles.close} className="close-icon" onClick={() => onLinkDelete && onLinkDelete(link, links)}>
+          <span
+            role="button"
+            css={styles.close}
+            className="close-icon"
+            onClick={() => onLinkDelete && onLinkDelete(link, links)}
+          >
             ⅹ
           </span>
         </div>

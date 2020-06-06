@@ -82,10 +82,10 @@ const App: React.FC = () => {
     setLinks(linksFiltered)
   }, [])
 
-  const linksFilteringCreated = React.useMemo(
-    () => links.filter(link => link !== shortenedCreated),
-    [links, shortenedCreated]
-  )
+  const linksFilteringCreated = React.useMemo(() => links.filter(link => link !== shortenedCreated), [
+    links,
+    shortenedCreated,
+  ])
 
   return (
     <div css={styles.container}>
@@ -93,9 +93,16 @@ const App: React.FC = () => {
       <div css={styles.content}>
         <TitleAndDescription />
         <Stats shortened={shortened} visits={visits} />
-        <LinkCreator setShortened={setShortened} setShortenedCreated={setShortenedCreated}  showToast={showToast} setLinks={setLinks} />
+        <LinkCreator
+          setShortened={setShortened}
+          setShortenedCreated={setShortenedCreated}
+          showToast={showToast}
+          setLinks={setLinks}
+        />
         {shortenedCreated && <Links links={setShortenedCreatedArray} canDeleteItem={false} showToast={showToast} />}
-        {!!linksFilteringCreated.length && <Links links={linksFilteringCreated} canDeleteItem={true} showToast={showToast} onLinkDelete={onLinkDelete} />}
+        {!!linksFilteringCreated.length && (
+          <Links links={linksFilteringCreated} canDeleteItem={true} showToast={showToast} onLinkDelete={onLinkDelete} />
+        )}
       </div>
       <Footer />
     </div>
