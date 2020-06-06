@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const storageKey = 'tsplay.dev'
 interface LocalStorageInterface {
-  set: (key: string, data: unknown, duration: number | undefined) => void
+  set: (key: string, data: unknown, duration?: number | undefined) => boolean
   get: <Data = unknown>(key: string) => Data
   flush: () => void
 }
