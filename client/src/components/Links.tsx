@@ -127,6 +127,7 @@ interface Props {
   links: string[]
   canDeleteItem: boolean
   showToast: ShowToast
+  onLinkDelete?: (url: string, links: string[]) => void
 }
 
 const copyToClipboard: (text: string, showToast: ShowToast) => void = async (text, showToast) => {
@@ -136,7 +137,7 @@ const copyToClipboard: (text: string, showToast: ShowToast) => void = async (tex
       <span>
         <span role="img" aria-label="check mark">
           ✅
-        </span>{' '}
+        </span>
         <strong css={styles.underline}>{text}</strong> copied to clipboard
       </span>
     )
@@ -145,7 +146,7 @@ const copyToClipboard: (text: string, showToast: ShowToast) => void = async (tex
   }
 }
 
-const Links: React.FC<Props> = ({ links, canDeleteItem, showToast }) => {
+const Links: React.FC<Props> = ({ links, canDeleteItem, showToast, onLinkDelete }) => {
   const divRef = React.useRef<HTMLDivElement>(null)
   const [hasScroll, setHasScroll] = React.useState<boolean>(false)
 
@@ -166,7 +167,7 @@ const Links: React.FC<Props> = ({ links, canDeleteItem, showToast }) => {
               ${hasScroll ? styles.linkWithScroll : ''}
             `}
           >
-            {link}
+            {link.replace('https://', '')}
           </span>
           <button
             css={css`
@@ -177,7 +178,12 @@ const Links: React.FC<Props> = ({ links, canDeleteItem, showToast }) => {
           >
             <img alt="copy logo" src={copyLogoSVG} />
           </button>
-          <span role="button" css={styles.close} className="close-icon">
+          <span
+            role="button"
+            css={styles.close}
+            className="close-icon"
+            onClick={() => onLinkDelete && onLinkDelete(link, links)}
+          >
             ⅹ
           </span>
         </div>
