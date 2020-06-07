@@ -81,3 +81,12 @@ jobs:
         workdir: server
         tags: "latest,${{ env.RELEASE_VERSION }}"
         buildargs: BINARY_PATH
+
+    - name: Deploy (webhook)
+      shell: bash
+      run: |
+        curl -d '{ "ref": "refs/heads/master", "repository": { "full_name": "gillchristian/thresh-test" }, "sender": { "login": "gillchristian" } }' \
+          -H "Content-Type: application/json" \
+          -X POST "$WEBHOOK"
+      env:
+        WEBHOOK: ${{ secrets.deploy_webhook }}
