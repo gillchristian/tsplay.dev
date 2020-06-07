@@ -6,7 +6,7 @@ import { Palette } from '../constants'
 function GlobalToast() {
   return (
     <ToastContainerStyles>
-      <ToastContainer pauseOnHover closeButton={false} autoClose={5000} closeOnClick newestOnTop />
+      <ToastContainer pauseOnHover closeButton={false} autoClose={6000} closeOnClick newestOnTop />
     </ToastContainerStyles>
   )
 }
@@ -18,6 +18,10 @@ const ToastContainerStyles = styled.div`
       0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     background: ${Palette.secondary};
     color: ${Palette.white};
+
+    .Toastify__toast-body {
+      line-height: 19px;
+    }
 
     .Toastify__close-button--default {
       color: ${Palette.white};

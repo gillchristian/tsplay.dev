@@ -45,6 +45,7 @@ const styles = {
     color: ${Palette.secondary};
     font-size: 22px;
     border-radius: 0;
+    margin: 0;
   `,
   button: css`
     height: ${CONTAINER_HEIGHT}px;
@@ -61,6 +62,7 @@ const styles = {
     outline: none;
     cursor: pointer;
     position: relative;
+    margin: 0;
 
     @media (max-width: 550px) {
       padding: 0 12px;
