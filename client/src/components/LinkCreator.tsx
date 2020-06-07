@@ -6,6 +6,9 @@ import { Palette } from '../constants'
 import { toast } from 'react-toastify'
 import api from '../utils/api'
 import { ShowToast } from '../hooks/useCopyClipboardToast'
+import rollingSvgImg from '../assets/rolling.svg'
+import localStorage from '../utils/localStorage'
+import { linksLocalStorageKey } from '../constants'
 
 export const CONTAINER_HEIGHT = 50
 
@@ -56,6 +59,7 @@ const styles = {
     align-items: center;
     outline: none;
     cursor: pointer;
+    position: relative;
 
     @media (max-width: 550px) {
       padding: 0 12px;
@@ -79,9 +83,32 @@ const styles = {
     font-size: 18px;
     color: ${Palette.shade3};
   `,
+  rollingSvg: css`
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 33px;
+    height: 33px;
+  `,
 }
 
 const typescriptBaseUrl = 'https://www.typescriptlang.org/play'
+
+const handleLinksList = (url: string, setLinks: (links: string[]) => void): void => {
+  try {
+    const links: string[] = localStorage.get(linksLocalStorageKey) || []
+    // Note: filter repeated links
+    const filteredLinks = [url, ...links.filter(link => link !== url)]
+    localStorage.set(linksLocalStorageKey, filteredLinks)
+    setLinks(filteredLinks)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('error saving link in local storage')
+    // eslint-disable-next-line no-console
+    console.log(error)
+  }
+}
 
 interface CreateResponse {
   shortened: string
@@ -92,13 +119,17 @@ const createLink = async (
   setShortened: React.Dispatch<React.SetStateAction<number | null>>,
   setShortenedCreated: (link: string) => void,
   showToast: ShowToast,
-  inputValue: string
+  inputValue: string,
+  setLoading: (loading: boolean) => void,
+  setLinks: (links: string[]) => void
 ) => {
   if (!inputValue) return
   if (inputValue.trim().startsWith(typescriptBaseUrl)) {
     try {
+      setLoading(true)
       const { shortened } = await api<CreateResponse>('short', { body: { url: inputValue } })
       setShortenedCreated(shortened)
+      handleLinksList(shortened, setLinks)
       toast('🔗 Your link was created successfully')
       showToast(
         <span>
@@ -114,6 +145,8 @@ const createLink = async (
       // eslint-disable-next-line no-console
       console.log('Error trying to shortener URL', e)
       toast('🛑️ There was an error, please try again')
+    } finally {
+      setLoading(false)
     }
     return
   }
@@ -125,16 +158,18 @@ interface Props {
   setShortened: React.Dispatch<React.SetStateAction<number | null>>
   setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
   showToast: ShowToast
+  setLinks: (links: string[]) => void
 }
 
-const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showToast }) => {
+const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showToast, setLinks }) => {
   const [inputValue, setInputValue] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
 
   return (
     <div css={styles.container}>
       <div css={styles.inputContainer}>
         <input type="text" css={styles.input} value={inputValue} onChange={e => setInputValue(e.target.value)} />
-        {!!inputValue.length && (
+        {inputValue.length > 0 && (
           <span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>
             🅧
           </span>
@@ -142,9 +177,11 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
       </div>
       <button
         css={styles.button}
-        onClick={() => createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue)}
+        onClick={() =>
+          createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks)
+        }
       >
-        Shorten
+        {loading ? <img alt="" src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
       </button>
     </div>
   )
