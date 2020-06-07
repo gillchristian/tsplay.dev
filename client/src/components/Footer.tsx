@@ -7,20 +7,13 @@ const styles = {
   container: css`
     height: 50px;
     width: 100vw;
-    padding: 0 15px;
     font-size: 14px;
     margin: 30px auto 0;
     color: ${Palette.secondary};
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    @media (max-width: 1000px) {
-      margin-left: 20px;
-      margin-right: 20px;
-    }
   `,
   link: css`
     text-decoration: underline;

@@ -44,6 +44,7 @@ const styles = {
     border: none;
     color: ${Palette.secondary};
     font-size: 22px;
+    border-radius: 0;
   `,
   button: css`
     height: ${CONTAINER_HEIGHT}px;
