@@ -85,7 +85,7 @@ jobs:
     - name: Deploy (webhook)
       shell: bash
       run: |
-        curl -d '{ "ref": "refs/heads/master", "repository": { "full_name": "gillchristian/thresh-test" }, "sender": { "login": "gillchristian" } }' \
+        curl -d '{ "ref": "refs/heads/master", "repository": { "full_name": "gillchristian/tsplay.dev" }, "sender": { "login": "gillchristian" } }' \
           -H "Content-Type: application/json" \
           -X POST "$WEBHOOK"
       env:
