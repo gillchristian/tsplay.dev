@@ -103,7 +103,9 @@ const handleLinksList = (url: string, setLinks: (links: string[]) => void): void
     localStorage.set(linksLocalStorageKey, filteredLinks)
     setLinks(filteredLinks)
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log('error saving link in local storage')
+    // eslint-disable-next-line no-console
     console.log(error)
   }
 }
@@ -167,7 +169,7 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
     <div css={styles.container}>
       <div css={styles.inputContainer}>
         <input type="text" css={styles.input} value={inputValue} onChange={e => setInputValue(e.target.value)} />
-        {!!inputValue.length && (
+        {inputValue.length > 0 && (
           <span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>
             🅧
           </span>
@@ -179,7 +181,7 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
           createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks)
         }
       >
-        {loading ? <img src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
+        {loading ? <img alt="" src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
       </button>
     </div>
   )
