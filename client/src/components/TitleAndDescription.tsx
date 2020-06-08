@@ -82,7 +82,11 @@ const TitleAndDescription: React.FC = () => {
           </strong>
           .
         </div>
-        <div css={styles.description}>Easily share short-links to the TypeScript playground.</div>
+
+        <div css={styles.description}>
+          Easily share TypeScript snippets without having to send an URL that is longer than a <i>yarn.lock</i>.
+        </div>
+
         {showPluginDescription && (
           <React.Fragment>
             <div css={styles.description}>Create short-links directly in the playground with the plugin:</div>
@@ -100,9 +104,9 @@ const TitleAndDescription: React.FC = () => {
           </React.Fragment>
         )}
         <div css={styles.description}>
-          <strong className="strong">Why a dedicated link shortener?</strong>{' '}
-          <a href="https://tsplay.dev">tsplay.dev</a> links will always redirect to the TypeScript Playground. You never
-          know where bit.ly or tinyurl.com links could take you.
+          <strong className="strong">Why a dedicated link shortener?</strong> Did we mention short links? Ok, besides
+          that, security is also a concern. <a href="https://tsplay.dev">tsplay.dev</a> links will always redirect to
+          the TypeScript Playground. <i>You never know where bit.ly or tinyurl.com links could take you</i>
         </div>
       </div>
     </div>
