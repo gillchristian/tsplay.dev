@@ -18,7 +18,7 @@ const MAX_WIDTH = 800
 const styles = {
   container: css`
     min-height: 100vh;
-    background: ${Palette.white};
+    background: ${Palette.background};
     display: flex;
     flex-direction: column;
   `,

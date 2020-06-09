@@ -71,7 +71,7 @@ const showPluginDescription = false
 const TitleAndDescription: React.FC = () => {
   return (
     <div css={styles.container}>
-      <img src={home} alt="home img" css={styles.img} />
+      <img src={home} alt="home img" css={styles.img} className="prevent-hue-rotate" />
       <div css={styles.descriptionWrapper}>
         <div css={styles.title}>
           Short-links for the{' '}

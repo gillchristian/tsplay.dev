@@ -6,7 +6,7 @@ import { Palette } from '../constants'
 
 const styles = {
   container: css`
-    background: ${Palette.white};
+    background: transparent;
     height: 70px;
     display: flex;
     padding: 0 25px;
@@ -27,7 +27,7 @@ const styles = {
 const Header: React.FC = () => {
   return (
     <div css={styles.container}>
-      <img src={logoImg} alt="logo" css={styles.logo} />
+      <img src={logoImg} alt="logo" css={styles.logo} className="prevent-hue-rotate" />
       <span css={styles.title}>tsplay.dev</span>
     </div>
   )

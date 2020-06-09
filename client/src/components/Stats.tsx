@@ -47,7 +47,7 @@ const Stats: React.FC<Props> = ({ shortened, visits }) => {
       <div css={styles.content}>
         {shortened && (
           <React.Fragment>
-            <span role="img" aria-label="emoji">
+            <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               🔗
             </span>
             Created <strong> {shortened} </strong>
@@ -58,7 +58,7 @@ const Stats: React.FC<Props> = ({ shortened, visits }) => {
         )}
         {visits && (
           <React.Fragment>
-            <span role="img" aria-label="emoji">
+            <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               👩‍💻
             </span>
             Visited <strong> {visits} </strong>

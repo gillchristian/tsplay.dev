@@ -54,7 +54,7 @@ const styles = {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    color: ${Palette.white};
+    color: ${Palette.background};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -72,7 +72,7 @@ const styles = {
     width: 81.5%;
   `,
   close: css`
-    color: ${Palette.white};
+    color: ${Palette.background};
     font-size: 22px;
     position: absolute;
     left: 15px;
@@ -135,14 +135,14 @@ const copyToClipboard: (text: string, showToast: ShowToast) => void = async (tex
     await navigator.clipboard.writeText(text)
     showToast(
       <span>
-        <span role="img" aria-label="check mark">
+        <span role="img" aria-label="check mark" className="prevent-hue-rotate">
           ✅
         </span>
         <strong css={styles.underline}>{text}</strong> copied to clipboard
       </span>
     )
   } catch (e) {
-    showToast('⚠️ Sorry, there was an error trying to copy the link', undefined, true)
+    showToast('⚠️ Sorry, there was an error trying to copy the link')
   }
 }
 

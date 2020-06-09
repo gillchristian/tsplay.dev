@@ -17,14 +17,14 @@ const ToastContainerStyles = styled.div`
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
       0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     background: ${Palette.secondary};
-    color: ${Palette.white};
+    color: ${Palette.background};
 
     .Toastify__toast-body {
       line-height: 19px;
     }
 
     .Toastify__close-button--default {
-      color: ${Palette.white};
+      color: ${Palette.background};
       opacity: 0.8;
     }
 
