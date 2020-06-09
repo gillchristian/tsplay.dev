@@ -155,7 +155,9 @@ const createLink = async (
   }
   toast(
     <div>
-      <span role="img" aria-label="warning" className="prevent-hue-rotate">⚠️ </span>
+      <span role="img" aria-label="warning" className="prevent-hue-rotate">
+        ⚠️{' '}
+      </span>
       The input text value is not a typescript playground URL
     </div>
   )

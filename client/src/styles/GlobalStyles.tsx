@@ -149,7 +149,17 @@ const GlobalStyles: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = React.useState(false)
   return (
     <React.Fragment>
-      <div css={css`position: absolute; right: 25px; top: 25px; font-size: 25px; cursor: pointer; outline: none; user-select: none`}>
+      <div
+        css={css`
+          position: absolute;
+          right: 25px;
+          top: 25px;
+          font-size: 25px;
+          cursor: pointer;
+          outline: none;
+          user-select: none;
+        `}
+      >
         <span onClick={() => setIsDarkMode(!isDarkMode)} role="button" className="prevent-hue-rotate">
           {isDarkMode ? '☀️' : '🌙'}
         </span>
