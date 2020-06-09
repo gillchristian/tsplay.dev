@@ -5,6 +5,7 @@ export enum Palette {
   shade2 = '#888',
   shade3 = '#494949',
   white = '#fff',
+  background = '#fffefe'
 }
 export const linksLocalStorageKey = 'tsplay.dev-links'
 export const apiBaseUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:9000/api' : 'https://tsplay.dev/api'

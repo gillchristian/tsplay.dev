@@ -136,9 +136,9 @@ const createLink = async (
       toast('🔗 Your link was created successfully')
       showToast(
         <span>
-          <span role="img" aria-label="check mark">
+          <span role="img" aria-label="check mark" className="prevent-hue-rotate">
             ✅
-          </span>{' '}
+          </span>
           <strong css={styles.underline}>{shortened}</strong> copied to clipboard
         </span>
       )
@@ -153,7 +153,12 @@ const createLink = async (
     }
     return
   }
-  toast('⚠️ The input text value is not a typescript playground URL')
+  toast(
+    <div>
+      <span role="img" aria-label="warning" className="prevent-hue-rotate">⚠️ </span>
+      The input text value is not a typescript playground URL
+    </div>
+  )
   setShortenedCreated('')
 }
 
@@ -180,6 +185,7 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
       </div>
       <button
         css={styles.button}
+        className="prevent-hue-rotate"
         onClick={() =>
           createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks)
         }
