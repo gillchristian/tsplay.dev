@@ -149,6 +149,11 @@ const darkMode: SerializedStyles = css`
 `
 
 const GlobalStyles: React.FC = () => {
+  //Preload img
+  React.useMemo(() => {
+    new Image().src = moonSvg
+    new Image().src = sunSvg
+  }, [])
   const sistemDarkMode = window?.matchMedia(PREFERS_COLOR_SCHEMA)?.matches
   const [isDarkMode, setIsDarkMode] = React.useState(sistemDarkMode)
   return (
