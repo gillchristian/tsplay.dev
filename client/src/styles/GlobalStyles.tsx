@@ -158,7 +158,7 @@ const GlobalStyles: React.FC = () => {
     // Calc dark mode
     const systemDarkMode = window?.matchMedia(PREFERS_COLOR_SCHEMA)?.matches
     const localStorageIsDarkMode = localStorage.get(LOCAL_STORAGE_IS_DARK_MODE)
-    return localStorageIsDarkMode === null ? systemDarkMode : localStorageIsDarkMode
+    return localStorageIsDarkMode ?? systemDarkMode
   }, [])
   const [isDarkMode, setIsDarkMode] = React.useState(darkMode)
 
