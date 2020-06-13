@@ -6,7 +6,6 @@ import { Palette } from '../constants'
 import moonSvg from '../assets/moon.svg'
 import sunSvg from '../assets/sun.svg'
 
-
 export const SCROLL_BAR_WIDTH = 15
 const PREFERS_COLOR_SCHEMA = '(prefers-color-scheme: dark)'
 
@@ -166,7 +165,12 @@ const GlobalStyles: React.FC = () => {
         `}
       >
         <span onClick={() => setIsDarkMode(!isDarkMode)} role="button" className="prevent-hue-rotate">
-          <img src={isDarkMode ? moonSvg : sunSvg} css={css`width: ${isDarkMode ? '23px' : '30px'};`} />
+          <img
+            src={isDarkMode ? moonSvg : sunSvg}
+            css={css`
+              width: ${isDarkMode ? '23px' : '30px'};
+            `}
+          />
         </span>
       </div>
       <Fonts />
