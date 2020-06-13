@@ -3,8 +3,12 @@ import * as React from 'react'
 import { css, jsx, Global, SerializedStyles } from '@emotion/core'
 import Fonts from './Fonts'
 import { Palette } from '../constants'
+import moonSvg from '../assets/moon.svg'
+import sunSvg from '../assets/sun.svg'
+
 
 export const SCROLL_BAR_WIDTH = 15
+const PREFERS_COLOR_SCHEMA = '(prefers-color-scheme: dark)'
 
 const globalStyles: SerializedStyles = css`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,500');
@@ -146,7 +150,8 @@ const darkMode: SerializedStyles = css`
 `
 
 const GlobalStyles: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = React.useState(false)
+  const sistemDarkMode = window?.matchMedia(PREFERS_COLOR_SCHEMA)?.matches
+  const [isDarkMode, setIsDarkMode] = React.useState(sistemDarkMode)
   return (
     <React.Fragment>
       <div
@@ -161,7 +166,7 @@ const GlobalStyles: React.FC = () => {
         `}
       >
         <span onClick={() => setIsDarkMode(!isDarkMode)} role="button" className="prevent-hue-rotate">
-          {isDarkMode ? '☀️' : '🌙'}
+          <img src={isDarkMode ? moonSvg : sunSvg} css={css`width: ${isDarkMode ? '23px' : '30px'};`} />
         </span>
       </div>
       <Fonts />

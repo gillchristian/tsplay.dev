@@ -133,7 +133,14 @@ const createLink = async (
       const { shortened } = await api<CreateResponse>('short', { body: { url: inputValue } })
       setShortenedCreated(shortened)
       handleLinksList(shortened, setLinks)
-      toast('🔗 Your link was created successfully')
+      toast(
+        <div>
+          <span role="img" aria-label="warning" className="prevent-hue-rotate">
+            🔗{' '}
+          </span>
+          Your link was created successfully
+        </div>
+      )
       showToast(
         <span>
           <span role="img" aria-label="check mark" className="prevent-hue-rotate">
@@ -147,7 +154,14 @@ const createLink = async (
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log('Error trying to shortener URL', e)
-      toast('🛑️ There was an error, please try again')
+      toast(
+        <div>
+          <span role="img" aria-label="warning" className="prevent-hue-rotate">
+            🛑️{' '}
+          </span>
+          There was an error, please try again
+        </div>
+      )
     } finally {
       setLoading(false)
     }
