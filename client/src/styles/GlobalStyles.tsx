@@ -151,16 +151,16 @@ const darkModeStyles: SerializedStyles = css`
 `
 
 const GlobalStyles: React.FC = () => {
-  const darkMode = React.useMemo(() => {
+  React.useMemo(() => {
     // Preload img
     new Image().src = moonSvg
     new Image().src = sunSvg
-    // Calc dark mode
+  }, [])
+  const [isDarkMode, setIsDarkMode] = React.useState(() => {
     const systemDarkMode = window?.matchMedia(PREFERS_COLOR_SCHEMA)?.matches
     const localStorageIsDarkMode = localStorage.get(LOCAL_STORAGE_IS_DARK_MODE)
     return localStorageIsDarkMode ?? systemDarkMode
-  }, [])
-  const [isDarkMode, setIsDarkMode] = React.useState(darkMode)
+  })
 
   return (
     <React.Fragment>
