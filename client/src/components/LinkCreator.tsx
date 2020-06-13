@@ -46,6 +46,7 @@ const styles = {
     font-size: 22px;
     border-radius: 0;
     margin: 0;
+    padding-right: 40px;
   `,
   button: css`
     height: ${CONTAINER_HEIGHT}px;
@@ -79,7 +80,7 @@ const styles = {
   `,
   clearInput: css`
     position: absolute;
-    right: 9px;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;

@@ -5,9 +5,11 @@ import Fonts from './Fonts'
 import { Palette } from '../constants'
 import moonSvg from '../assets/moon.svg'
 import sunSvg from '../assets/sun.svg'
+import localStorage from '../utils/localStorage'
 
 export const SCROLL_BAR_WIDTH = 15
 const PREFERS_COLOR_SCHEMA = '(prefers-color-scheme: dark)'
+const LOCAL_STORAGE_IS_DARK_MODE = 'tsplay.dev-dark-mode'
 
 const globalStyles: SerializedStyles = css`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,500');
@@ -138,7 +140,7 @@ const globalStyles: SerializedStyles = css`
   }
 `
 
-const darkMode: SerializedStyles = css`
+const darkModeStyles: SerializedStyles = css`
   body {
     filter: invert(100%) hue-rotate(180deg);
   }
@@ -149,13 +151,17 @@ const darkMode: SerializedStyles = css`
 `
 
 const GlobalStyles: React.FC = () => {
-  //Preload img
-  React.useMemo(() => {
+  const darkMode = React.useMemo(() => {
+    // Preload img
     new Image().src = moonSvg
     new Image().src = sunSvg
+    // Calc dark mode
+    const systemDarkMode = window?.matchMedia(PREFERS_COLOR_SCHEMA)?.matches
+    const localStorageIsDarkMode = localStorage.get(LOCAL_STORAGE_IS_DARK_MODE)
+    return localStorageIsDarkMode === null ? systemDarkMode : localStorageIsDarkMode
   }, [])
-  const sistemDarkMode = window?.matchMedia(PREFERS_COLOR_SCHEMA)?.matches
-  const [isDarkMode, setIsDarkMode] = React.useState(sistemDarkMode)
+  const [isDarkMode, setIsDarkMode] = React.useState(darkMode)
+
   return (
     <React.Fragment>
       <div
@@ -169,7 +175,15 @@ const GlobalStyles: React.FC = () => {
           user-select: none;
         `}
       >
-        <span onClick={() => setIsDarkMode(!isDarkMode)} role="button" className="prevent-hue-rotate">
+        <span
+          onClick={() => {
+            const mode = !isDarkMode
+            setIsDarkMode(mode)
+            localStorage.set(LOCAL_STORAGE_IS_DARK_MODE, mode)
+          }}
+          role="button"
+          className="prevent-hue-rotate"
+        >
           <img
             alt="dark mode img"
             src={isDarkMode ? moonSvg : sunSvg}
@@ -181,7 +195,7 @@ const GlobalStyles: React.FC = () => {
       </div>
       <Fonts />
       <Global styles={globalStyles} />
-      {isDarkMode && <Global styles={darkMode} />}
+      {isDarkMode && <Global styles={darkModeStyles} />}
     </React.Fragment>
   )
 }
