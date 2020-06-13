@@ -166,6 +166,7 @@ const GlobalStyles: React.FC = () => {
       >
         <span onClick={() => setIsDarkMode(!isDarkMode)} role="button" className="prevent-hue-rotate">
           <img
+            alt="dark mode img"
             src={isDarkMode ? moonSvg : sunSvg}
             css={css`
               width: ${isDarkMode ? '23px' : '30px'};
