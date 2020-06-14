@@ -13,6 +13,7 @@
 module Api.Short.Persistence
   ( findAllUrls,
     findUrlByLong,
+    findUrlByShort,
     findUrlByShortToVisit,
     nextShortRefCounter,
     insertUrl,
@@ -39,6 +40,10 @@ findUrlByLong :: MonadIO m => Text -> AppT m (Maybe ShortenedUrl)
 findUrlByLong url =
   runDb1 "select short,url,visits,expires from shortened where url = ?" (Only url)
 
+findUrlByShort :: MonadIO m => Text -> AppT m (Maybe ShortenedUrl)
+findUrlByShort short =
+  runDb1 "select short,url,visits,expires from shortened where short = ?" (Only short)
+
 findUrlByShortToVisit :: MonadIO m => Text -> AppT m (Maybe ShortenedUrl)
 findUrlByShortToVisit short =
   runDb1
@@ -59,7 +64,7 @@ nextShortRefCounter =
 
 urlsStats :: MonadIO m => AppT m Stats
 urlsStats =
-  fromMaybe (Stats 0 0)
+  fromMaybe (Stats (Just 0) (Just 0))
     <$> runDb1_ "select links_created,links_visited from stats where id = 1"
 
 incLinksCreated :: MonadIO m => CreatedOn -> AppT m ()
