@@ -24,7 +24,7 @@ const styles = {
   `,
   content: css`
     width: 100%;
-    transition: width .3s ease;
+    transition: width 0.3s ease;
     display: flex;
     align-items: center;
     border-bottom: 2px solid ${Palette.secondary};
@@ -35,7 +35,7 @@ const styles = {
   `,
   inputContainer: css`
     overflow: hidden;
-    transition: width .3s ease;
+    transition: width 0.3s ease;
     position: relative;
     top: 1px;
   `,
@@ -46,7 +46,7 @@ const styles = {
     padding: 0 0 0 1px;
     font-size: 19px;
     line-height: 19px;
-  `
+  `,
 }
 
 interface Props {
@@ -59,12 +59,24 @@ const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
 
   return (
     <div css={styles.container}>
-      {!customLinkMode && (<div css={styles.trigger} role="button" onClick={() => setCustomLinkMode(!customLinkMode)}>Add a custom link</div>)}
-      <div css={css`${styles.content}; width: ${customLinkMode ? '100%' : '0px'}`}>
-        <div css={styles.label}>
-          tsplay.dev/
+      {!customLinkMode && (
+        <div css={styles.trigger} role="button" onClick={() => setCustomLinkMode(!customLinkMode)}>
+          Add a custom link
         </div>
-        <input css={styles.input} placeholder="custom link here" value={customLink} onChange={(e) => setCustomLink(e.target.value)} />
+      )}
+      <div
+        css={css`
+          ${styles.content};
+          width: ${customLinkMode ? '100%' : '0px'};
+        `}
+      >
+        <div css={styles.label}>tsplay.dev/</div>
+        <input
+          css={styles.input}
+          placeholder="custom link here"
+          value={customLink}
+          onChange={e => setCustomLink(e.target.value)}
+        />
       </div>
     </div>
   )

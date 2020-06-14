@@ -156,7 +156,7 @@ const createLink = async (
     )
     return
   }
-  if(customLink) {
+  if (customLink) {
     const startWithChar = /^[a-zA-Z]$/.test(customLink.charAt(0))
     const endWithCharOrNumber = /^[a-zA-Z0-9]$/.test(customLink.substr(-1))
     const bodyValidation = /^[a-zA-Z][a-zA-Z0-9_-]{2,28}[a-zA-Z0-9]$/.test(customLink)
@@ -175,7 +175,12 @@ const createLink = async (
   }
   try {
     setLoading(true)
-    const body: CreatePayload = { url: inputValue, createdOn: 'client', expires: false, ...customLink && { short: customLink }, }
+    const body: CreatePayload = {
+      url: inputValue,
+      createdOn: 'client',
+      expires: false,
+      ...(customLink && { short: customLink }),
+    }
     const { shortened } = await api<CreateResponse>('short', { body })
     setShortenedCreated(shortened)
     handleLinksList(shortened, setLinks)
@@ -241,7 +246,17 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
           css={styles.button}
           className="prevent-hue-rotate"
           onClick={() =>
-            createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks, customLink, setCustomLink)
+            createLink(
+              setInputValue,
+              setShortened,
+              setShortenedCreated,
+              showToast,
+              inputValue,
+              setLoading,
+              setLinks,
+              customLink,
+              setCustomLink
+            )
           }
         >
           {loading ? <img alt="" src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
