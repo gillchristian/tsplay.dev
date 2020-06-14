@@ -118,6 +118,20 @@ interface CreateResponse {
   shortened: string
 }
 
+interface CreatePayload {
+  url: string
+  // optional custom short link: tsplay.dev/<short>
+  // validation rules:
+  //     - 5 <= short.length <= 30
+  //     - starts with letters
+  //     - ends with letters or numbers
+  //     - contains letters, numbers, '-' & '_'
+  short?: string
+  // for alanytics
+  createdOn?: 'client' | 'plugin' | 'api' | 'other'
+  expires?: boolean
+}
+
 const createLink = async (
   setInputValue: React.Dispatch<React.SetStateAction<string>>,
   setShortened: React.Dispatch<React.SetStateAction<number | null>>,
@@ -131,7 +145,8 @@ const createLink = async (
   if (inputValue.trim().startsWith(typescriptBaseUrl)) {
     try {
       setLoading(true)
-      const { shortened } = await api<CreateResponse>('short', { body: { url: inputValue } })
+      const body: CreatePayload = { url: inputValue, createdOn: 'client', expires: false }
+      const { shortened } = await api<CreateResponse>('short', { body })
       setShortenedCreated(shortened)
       handleLinksList(shortened, setLinks)
       toast(

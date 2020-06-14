@@ -45,18 +45,16 @@ const Stats: React.FC<Props> = ({ shortened, visits }) => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
-        {shortened && (
+        {Boolean(shortened) && (
           <React.Fragment>
             <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               🔗
             </span>
             Created <strong> {shortened} </strong>
-            <span role="img" aria-label="emoji">
-              │
-            </span>
           </React.Fragment>
         )}
-        {visits && (
+        {Boolean(shortened) && Boolean(visits) && <span>│</span>}
+        {Boolean(visits) && (
           <React.Fragment>
             <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               👩‍💻
