@@ -9,6 +9,7 @@ import { ShowToast } from '../hooks/useCopyClipboardToast'
 import rollingSvgImg from '../assets/rolling.svg'
 import localStorage from '../utils/localStorage'
 import { linksLocalStorageKey } from '../constants'
+import CustomLinkString from './CustomLinkString'
 
 export const CONTAINER_HEIGHT = 50
 
@@ -139,59 +140,78 @@ const createLink = async (
   showToast: ShowToast,
   inputValue: string,
   setLoading: (loading: boolean) => void,
-  setLinks: (links: string[]) => void
+  setLinks: (links: string[]) => void,
+  customLink: string,
+  setCustomLink: (customLink: string) => void
 ) => {
   if (!inputValue) return
-  if (inputValue.trim().startsWith(typescriptBaseUrl)) {
-    try {
-      setLoading(true)
-      const body: CreatePayload = { url: inputValue, createdOn: 'client', expires: false }
-      const { shortened } = await api<CreateResponse>('short', { body })
-      setShortenedCreated(shortened)
-      handleLinksList(shortened, setLinks)
-      toast(
-        <div>
-          <span role="img" aria-label="warning" className="prevent-hue-rotate">
-            🔗{' '}
-          </span>
-          Your link was created successfully
-        </div>
-      )
-      showToast(
-        <span>
-          <span role="img" aria-label="check mark" className="prevent-hue-rotate">
-            ✅
-          </span>
-          <strong css={styles.underline}>{shortened}</strong> copied to clipboard
+  if (!inputValue.trim().startsWith(typescriptBaseUrl)) {
+    toast(
+      <div>
+        <span role="img" aria-label="warning" className="prevent-hue-rotate">
+          ⚠️{' '}
         </span>
-      )
-      setInputValue('')
-      setShortened(prev => (prev ? prev + 1 : 1))
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('Error trying to shortener URL', e)
-      toast(
-        <div>
-          <span role="img" aria-label="warning" className="prevent-hue-rotate">
-            🛑️{' '}
-          </span>
-          There was an error, please try again
-        </div>
-      )
-    } finally {
-      setLoading(false)
-    }
+        The input text value is not a typescript playground URL
+      </div>
+    )
     return
   }
-  toast(
-    <div>
-      <span role="img" aria-label="warning" className="prevent-hue-rotate">
-        ⚠️{' '}
+  if(customLink) {
+    const startWithChar = /^[a-zA-Z]$/.test(customLink.charAt(0))
+    const endWithCharOrNumber = /^[a-zA-Z0-9]$/.test(customLink.substr(-1))
+    const bodyValidation = /^[a-zA-Z][a-zA-Z0-9_-]{2,28}[a-zA-Z0-9]$/.test(customLink)
+    if (!startWithChar) {
+      toast('The custom link should start with a character')
+      return
+    }
+    if (!endWithCharOrNumber) {
+      toast('The custom link should end with a number or character')
+      return
+    }
+    if (!bodyValidation) {
+      toast('The custom link should have between 3 and 30 characters and contain only strings numbers "-" and "_"')
+      return
+    }
+  }
+  try {
+    setLoading(true)
+    const body: CreatePayload = { url: inputValue, createdOn: 'client', expires: false, ...customLink && { short: customLink }, }
+    const { shortened } = await api<CreateResponse>('short', { body })
+    setShortenedCreated(shortened)
+    handleLinksList(shortened, setLinks)
+    setCustomLink('')
+    toast(
+      <div>
+        <span role="img" aria-label="warning" className="prevent-hue-rotate">
+          🔗{' '}
+        </span>
+        Your link was created successfully
+      </div>
+    )
+    showToast(
+      <span>
+        <span role="img" aria-label="check mark" className="prevent-hue-rotate">
+          ✅
+        </span>
+        <strong css={styles.underline}>{shortened}</strong> copied to clipboard
       </span>
-      The input text value is not a typescript playground URL
-    </div>
-  )
-  setShortenedCreated('')
+    )
+    setInputValue('')
+    setShortened(prev => (prev ? prev + 1 : 1))
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Error trying to shortener URL', e)
+    toast(
+      <div>
+        <span role="img" aria-label="warning" className="prevent-hue-rotate">
+          🛑️{' '}
+        </span>
+        There was an error, please try again
+      </div>
+    )
+  } finally {
+    setLoading(false)
+  }
 }
 
 interface Props {
@@ -204,27 +224,31 @@ interface Props {
 const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showToast, setLinks }) => {
   const [inputValue, setInputValue] = React.useState('')
   const [loading, setLoading] = React.useState(false)
+  const [customLink, setCustomLink] = React.useState('')
 
   return (
-    <div css={styles.container}>
-      <div css={styles.inputContainer}>
-        <input type="text" css={styles.input} value={inputValue} onChange={e => setInputValue(e.target.value)} />
-        {inputValue.length > 0 && (
-          <span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>
-            🅧
-          </span>
-        )}
+    <React.Fragment>
+      <div css={styles.container}>
+        <div css={styles.inputContainer}>
+          <input type="text" css={styles.input} value={inputValue} onChange={e => setInputValue(e.target.value)} />
+          {inputValue.length > 0 && (
+            <span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>
+              🅧
+            </span>
+          )}
+        </div>
+        <button
+          css={styles.button}
+          className="prevent-hue-rotate"
+          onClick={() =>
+            createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks, customLink, setCustomLink)
+          }
+        >
+          {loading ? <img alt="" src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
+        </button>
       </div>
-      <button
-        css={styles.button}
-        className="prevent-hue-rotate"
-        onClick={() =>
-          createLink(setInputValue, setShortened, setShortenedCreated, showToast, inputValue, setLoading, setLinks)
-        }
-      >
-        {loading ? <img alt="" src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
-      </button>
-    </div>
+      <CustomLinkString customLink={customLink} setCustomLink={setCustomLink} />
+    </React.Fragment>
   )
 }
 
