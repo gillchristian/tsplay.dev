@@ -86,7 +86,9 @@ jobs:
       shell: bash
       run: |
         curl -d '{ "ref": "refs/heads/master", "repository": { "full_name": "gillchristian/tsplay.dev" }, "sender": { "login": "gillchristian" } }' \
+          -H "Authorization: $TOKEN" \
           -H "Content-Type: application/json" \
           -X POST "$WEBHOOK"
       env:
         WEBHOOK: ${{ secrets.deploy_webhook }}
+        TOKEN: ${{ secrets.deploy_token }}
