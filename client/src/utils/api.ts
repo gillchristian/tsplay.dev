@@ -23,7 +23,14 @@ const api = <Data = unknown>(endpointUrl: string, { body, ...customConfig }: Opt
 
   return window
     .fetch(`${apiBaseUrl}/${endpointUrl}`, { ...config, body: stringifiedBody })
-    .then(response => (response.ok ? response.json() : Promise.reject(response.json())))
+    .then(async response => {
+      if (response.ok) {
+        const data = await response.json()
+        return data
+      } else {
+        return Promise.reject(response)
+      }
+    })
 }
 
 export default api
