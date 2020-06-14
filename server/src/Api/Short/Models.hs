@@ -42,13 +42,12 @@ instance Json.ToJSON CreatedOn where
 instance Json.FromJSON CreatedOn where
   parseJSON = Json.genericParseJSON camelTags
 
-data CreateBody
-  = CreateBody
-      { createUrl :: Text,
-        createShort :: Maybe Text,
-        createExpires :: Maybe Bool,
-        createCreatedOn :: Maybe CreatedOn
-      }
+data CreateBody = CreateBody
+  { createUrl :: Text,
+    createShort :: Maybe Text,
+    createExpires :: Maybe Bool,
+    createCreatedOn :: Maybe CreatedOn
+  }
   deriving stock (Generic, Show)
 
 instance Json.ToJSON CreateBody where
@@ -57,10 +56,9 @@ instance Json.ToJSON CreateBody where
 instance Json.FromJSON CreateBody where
   parseJSON = Json.genericParseJSON $ dropLabelPrefix "create"
 
-newtype CreateResponse
-  = CreateResponse
-      { createShortened :: Text
-      }
+newtype CreateResponse = CreateResponse
+  { createShortened :: Text
+  }
   deriving stock (Generic, Show)
 
 instance Json.ToJSON CreateResponse where
@@ -69,13 +67,12 @@ instance Json.ToJSON CreateResponse where
 instance Json.FromJSON CreateResponse where
   parseJSON = Json.genericParseJSON $ dropLabelPrefix "create"
 
-data ShortenedUrl
-  = ShortenedUrl
-      { shortenedShort :: Text,
-        shortenedUrl :: Text,
-        shortenedVisits :: Int,
-        shortenedExpires :: Bool
-      }
+data ShortenedUrl = ShortenedUrl
+  { shortenedShort :: Text,
+    shortenedUrl :: Text,
+    shortenedVisits :: Int,
+    shortenedExpires :: Bool
+  }
   deriving stock (Generic, Show)
   deriving (FromRow)
 
@@ -85,11 +82,10 @@ instance Json.ToJSON ShortenedUrl where
 instance Json.FromJSON ShortenedUrl where
   parseJSON = Json.genericParseJSON $ dropLabelPrefix "shortened"
 
-data Stats
-  = Stats
-      { statsTotalShortened :: Int,
-        statsTotalVisits :: Int
-      }
+data Stats = Stats
+  { statsTotalShortened :: Maybe Int,
+    statsTotalVisits :: Maybe Int
+  }
   deriving stock (Generic, Show)
   deriving (FromRow)
 
