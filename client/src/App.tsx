@@ -77,7 +77,7 @@ const App: React.FC = () => {
   }, [])
 
   const onLinkDelete = React.useCallback((url: string, links: string[]) => {
-    const linksFiltered = links.filter(link => link !== url)
+    const linksFiltered = links.filter(link => !link.includes(url))
     localStorage.set(linksLocalStorageKey, linksFiltered)
     setLinks(linksFiltered)
   }, [])
