@@ -150,8 +150,8 @@ createHandler CreateBody {..} = do
 createWithCustomShort :: MonadIO m => Text -> Text -> Maybe CreatedOn -> Maybe Bool -> AppT m CreateResponse
 createWithCustomShort createUrl short createCreatedOn createExpires = do
   mbByShort <- findUrlByShort short
-  mbByLog <- findUrlByLong createUrl
-  case (mbByShort, mbByLog) of
+  mbByLong <- findUrlByLong createUrl
+  case (mbByShort, mbByLong) of
     (Nothing, Nothing) -> do
       Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 (fromMaybe False createExpires)
       incLinksCreated $ fromMaybe Other createCreatedOn
