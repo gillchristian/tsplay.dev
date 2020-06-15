@@ -151,7 +151,7 @@ const createLink = async (
         <span role="img" aria-label="warning" className="prevent-hue-rotate">
           ⚠️{' '}
         </span>
-        The input text value is not a typescript playground URL
+        Not a TypeScript Playground URL
       </div>
     )
     return
@@ -159,17 +159,17 @@ const createLink = async (
   if (customLink) {
     const startWithChar = /^[a-zA-Z]$/.test(customLink.charAt(0))
     const endWithCharOrNumber = /^[a-zA-Z0-9]$/.test(customLink.substr(-1))
-    const bodyValidation = /^[a-zA-Z][a-zA-Z0-9_-]{2,28}[a-zA-Z0-9]$/.test(customLink)
+    const bodyValidation = /^[a-zA-Z][a-zA-Z0-9_-]{3,28}[a-zA-Z0-9]$/.test(customLink)
     if (!startWithChar) {
-      toast('The custom link should start with a character')
+      toast('Custom link back-half should start with a letter')
       return
     }
     if (!endWithCharOrNumber) {
-      toast('The custom link should end with a number or character')
+      toast('Custom link back-half should end with a number or a letter')
       return
     }
     if (!bodyValidation) {
-      toast('The custom link should have between 3 and 30 characters and contain only strings numbers "-" and "_"')
+      toast('Custom link back-half should have between 5 and 30 characters and contain only letters, numbers, "-" and "_"')
       return
     }
   }
@@ -190,7 +190,7 @@ const createLink = async (
         <span role="img" aria-label="warning" className="prevent-hue-rotate">
           🔗{' '}
         </span>
-        Your link was created successfully
+        Short link created successfully!
       </div>
     )
     showToast(
@@ -211,7 +211,7 @@ const createLink = async (
         <span role="img" aria-label="warning" className="prevent-hue-rotate">
           🛑️{' '}
         </span>
-        There was an error, please try again
+        Opps, something went wrong.
       </div>
     )
   } finally {
