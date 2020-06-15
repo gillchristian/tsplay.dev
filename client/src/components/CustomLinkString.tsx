@@ -2,6 +2,7 @@
 import * as React from 'react'
 import { css, jsx } from '@emotion/core'
 import { Palette } from '../constants'
+import ClearInput from './ClearInput'
 
 const styles = {
   container: css`
@@ -24,7 +25,6 @@ const styles = {
   `,
   content: css`
     width: 100%;
-    transition: width 0.3s ease;
     display: flex;
     align-items: center;
     border-bottom: 2px solid ${Palette.secondary};
@@ -32,12 +32,6 @@ const styles = {
   `,
   label: css`
     font-size: 20px;
-  `,
-  inputContainer: css`
-    overflow: hidden;
-    transition: width 0.3s ease;
-    position: relative;
-    top: 1px;
   `,
   input: css`
     border: none;
@@ -59,25 +53,29 @@ const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
 
   return (
     <div css={styles.container}>
-      {!customLinkMode && (
+      {customLinkMode ? (
+        <React.Fragment>
+          <div css={styles.content}>
+            <div css={styles.label}>tsplay.dev/</div>
+            <input
+              css={styles.input}
+              placeholder="my-ts-example"
+              value={customLink}
+              onChange={e => setCustomLink(e.target.value)}
+            />
+          </div>
+          <ClearInput
+            onClear={() => {
+              setCustomLinkMode(false)
+              setCustomLink('')
+            }}
+          />
+        </React.Fragment>
+      ) : (
         <div css={styles.trigger} role="button" onClick={() => setCustomLinkMode(!customLinkMode)}>
           Customize link back-half
         </div>
       )}
-      <div
-        css={css`
-          ${styles.content};
-          width: ${customLinkMode ? '100%' : '0px'};
-        `}
-      >
-        <div css={styles.label}>tsplay.dev/</div>
-        <input
-          css={styles.input}
-          placeholder="my-ts-example"
-          value={customLink}
-          onChange={e => setCustomLink(e.target.value)}
-        />
-      </div>
     </div>
   )
 }

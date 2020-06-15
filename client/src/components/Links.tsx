@@ -8,6 +8,7 @@ import copyLogoSVG from '../assets/copy.svg'
 import { Palette } from '../constants'
 import { ShowToast } from '../hooks/useCopyClipboardToast'
 import { SCROLL_BAR_WIDTH } from '../styles/GlobalStyles'
+import { copyToClipboard } from '../utils/copyToClipboard'
 
 const styles = {
   wrapper: css`
@@ -98,7 +99,6 @@ const styles = {
     text-transform: uppercase;
     font-size: 15px;
     border: none;
-    outline: 0;
     padding: 7px 13px 5px 13px;
     height: ${CONTAINER_HEIGHT}px;
     background: ${Palette.secondary};
@@ -130,22 +130,6 @@ interface Props {
   onLinkDelete?: (url: string, links: string[]) => void
 }
 
-const copyToClipboard: (text: string, showToast: ShowToast) => void = async (text, showToast) => {
-  try {
-    await navigator.clipboard.writeText(text)
-    showToast(
-      <span>
-        <span role="img" aria-label="check mark" className="prevent-hue-rotate">
-          ✅
-        </span>
-        <strong css={styles.underline}>{text}</strong> copied to clipboard
-      </span>
-    )
-  } catch (e) {
-    showToast('⚠️ Sorry, there was an error trying to copy the link')
-  }
-}
-
 const Links: React.FC<Props> = ({ links, canDeleteItem, showToast, onLinkDelete }) => {
   const divRef = React.useRef<HTMLDivElement>(null)
   const [hasScroll, setHasScroll] = React.useState<boolean>(false)
@@ -159,35 +143,37 @@ const Links: React.FC<Props> = ({ links, canDeleteItem, showToast, onLinkDelete 
 
   return (
     <div css={styles.wrapper} className={canDeleteItem && hasScroll ? 'custom-scroll' : ''} ref={divRef}>
-      {links.map((link: string) => (
-        <div key={link} css={styles.container} className={canDeleteItem ? 'can-delete' : ''}>
-          <span
-            css={css`
-              ${styles.link};
-              ${hasScroll ? styles.linkWithScroll : ''}
-            `}
-          >
-            {link.replace('https://', '')}
-          </span>
-          <button
-            css={css`
-              ${styles.button};
-              ${hasScroll ? styles.buttonWithScroll : ''}
-            `}
-            onClick={() => copyToClipboard(link, showToast)}
-          >
-            <img alt="copy logo" src={copyLogoSVG} />
-          </button>
-          <span
-            role="button"
-            css={styles.close}
-            className="close-icon"
-            onClick={() => onLinkDelete && onLinkDelete(link, links)}
-          >
-            ⅹ
-          </span>
-        </div>
-      ))}
+      {links
+        .map(link => link.replace(/^https?:\/\//, ''))
+        .map((link: string) => (
+          <div key={link} css={styles.container} className={canDeleteItem ? 'can-delete' : ''}>
+            <span
+              css={css`
+                ${styles.link};
+                ${hasScroll ? styles.linkWithScroll : ''}
+              `}
+            >
+              {link}
+            </span>
+            <button
+              css={css`
+                ${styles.button};
+                ${hasScroll ? styles.buttonWithScroll : ''}
+              `}
+              onClick={() => copyToClipboard(link, showToast)}
+            >
+              <img alt="copy logo" src={copyLogoSVG} />
+            </button>
+            <span
+              role="button"
+              css={styles.close}
+              className="close-icon"
+              onClick={() => onLinkDelete && onLinkDelete(link, links)}
+            >
+              ⅹ
+            </span>
+          </div>
+        ))}
     </div>
   )
 }

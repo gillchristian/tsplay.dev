@@ -10,6 +10,8 @@ import rollingSvgImg from '../assets/rolling.svg'
 import localStorage from '../utils/localStorage'
 import { linksLocalStorageKey } from '../constants'
 import CustomLinkString from './CustomLinkString'
+import ClearInput from './ClearInput'
+import { copyToClipboard } from '../utils/copyToClipboard'
 
 export const CONTAINER_HEIGHT = 50
 
@@ -38,7 +40,6 @@ const styles = {
     width: 100%;
     height: ${CONTAINER_HEIGHT}px;
     background: ${Palette.shade1};
-    outline: none;
     padding: 10px 20px;
     padding-right: 30px;
     box-sizing: border-box;
@@ -61,7 +62,6 @@ const styles = {
     display: flex;
     justify-content: center;
     align-items: center;
-    outline: none;
     cursor: pointer;
     position: relative;
     margin: 0;
@@ -84,9 +84,6 @@ const styles = {
     right: 14px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-    color: ${Palette.shade3};
   `,
   rollingSvg: css`
     position: absolute;
@@ -133,92 +130,94 @@ interface CreatePayload {
   expires?: boolean
 }
 
-const createLink = async (
-  setInputValue: React.Dispatch<React.SetStateAction<string>>,
-  setShortened: React.Dispatch<React.SetStateAction<number | null>>,
-  setShortenedCreated: (link: string) => void,
-  showToast: ShowToast,
-  inputValue: string,
-  setLoading: (loading: boolean) => void,
-  setLinks: (links: string[]) => void,
-  customLink: string,
-  setCustomLink: (customLink: string) => void
-) => {
-  if (!inputValue) return
-  if (!inputValue.trim().startsWith(typescriptBaseUrl)) {
-    toast(
-      <div>
-        <span role="img" aria-label="warning" className="prevent-hue-rotate">
-          ⚠️{' '}
-        </span>
-        Not a TypeScript Playground URL
-      </div>
-    )
-    return
+type Validation = [true] | [false, string]
+
+const validateCustomLink = (customLink: string): Validation => {
+  const startWithChar = /^[a-zA-Z]$/.test(customLink.charAt(0))
+  const endWithCharOrNumber = /^[a-zA-Z0-9]$/.test(customLink.substr(-1))
+  const bodyValidation = /^[a-zA-Z][a-zA-Z0-9_-]{3,28}[a-zA-Z0-9]$/.test(customLink)
+
+  if (!startWithChar) {
+    return [false, 'Custom link back-half should start with a letter']
   }
-  if (customLink) {
-    const startWithChar = /^[a-zA-Z]$/.test(customLink.charAt(0))
-    const endWithCharOrNumber = /^[a-zA-Z0-9]$/.test(customLink.substr(-1))
-    const bodyValidation = /^[a-zA-Z][a-zA-Z0-9_-]{3,28}[a-zA-Z0-9]$/.test(customLink)
-    if (!startWithChar) {
-      toast('Custom link back-half should start with a letter')
-      return
-    }
-    if (!endWithCharOrNumber) {
-      toast('Custom link back-half should end with a number or a letter')
-      return
-    }
-    if (!bodyValidation) {
+  if (!endWithCharOrNumber) {
+    return [false, 'Custom link back-half should end with a number or a letter']
+  }
+  if (!bodyValidation) {
+    return [
+      false,
+      'Custom link back-half should have between 5 and 30 characters and contain only letters, numbers, "-" and "_"',
+    ]
+  }
+
+  return [true]
+}
+
+const useLinkInput = ({ setShortened, setShortenedCreated, showToast, setLinks }: Props) => {
+  const [inputValue, setInputValue] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+  const [customLink, setCustomLink] = React.useState('')
+
+  const createLink = async () => {
+    if (!inputValue) return
+    if (!inputValue.trim().startsWith(typescriptBaseUrl)) {
       toast(
-        'Custom link back-half should have between 5 and 30 characters and contain only letters, numbers, "-" and "_"'
+        <div>
+          <span role="img" aria-label="warning" className="prevent-hue-rotate">
+            ⚠️{' '}
+          </span>
+          Not a TypeScript Playground URL
+        </div>
       )
       return
     }
-  }
-  try {
-    setLoading(true)
-    const body: CreatePayload = {
-      url: inputValue,
-      createdOn: 'client',
-      expires: false,
-      ...(customLink && { short: customLink }),
+    if (customLink) {
+      const [isValid, msg] = validateCustomLink(customLink)
+      if (!isValid) {
+        toast(msg)
+        return
+      }
     }
-    const { shortened } = await api<CreateResponse>('short', { body })
-    setShortenedCreated(shortened)
-    handleLinksList(shortened, setLinks)
-    setCustomLink('')
-    toast(
-      <div>
-        <span role="img" aria-label="warning" className="prevent-hue-rotate">
-          🔗{' '}
-        </span>
-        Short link created successfully!
-      </div>
-    )
-    showToast(
-      <span>
-        <span role="img" aria-label="check mark" className="prevent-hue-rotate">
-          ✅
-        </span>
-        <strong css={styles.underline}>{shortened}</strong> copied to clipboard
-      </span>
-    )
-    setInputValue('')
-    setShortened(prev => (prev ? prev + 1 : 1))
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log('Error trying to shortener URL', e)
-    toast(
-      <div>
-        <span role="img" aria-label="warning" className="prevent-hue-rotate">
-          🛑️{' '}
-        </span>
-        Opps, something went wrong.
-      </div>
-    )
-  } finally {
-    setLoading(false)
+    try {
+      setLoading(true)
+      const body: CreatePayload = {
+        url: inputValue,
+        createdOn: 'client',
+        expires: false,
+        ...(customLink && { short: customLink }),
+      }
+      const { shortened } = await api<CreateResponse>('short', { body })
+      setShortenedCreated(shortened)
+      handleLinksList(shortened, setLinks)
+      setCustomLink('')
+      toast(
+        <div>
+          <span role="img" aria-label="warning" className="prevent-hue-rotate">
+            🔗{' '}
+          </span>
+          Short link created successfully!
+        </div>
+      )
+      copyToClipboard(shortened.replace(/^https?:\/\//, ''), showToast)
+      setInputValue('')
+      setShortened(prev => (prev ? prev + 1 : 1))
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error trying to shorten URL', e)
+      toast(
+        <div>
+          <span role="img" aria-label="warning" className="prevent-hue-rotate">
+            🛑️{' '}
+          </span>
+          Opps, something went wrong.
+        </div>
+      )
+    } finally {
+      setLoading(false)
+    }
   }
+
+  return { inputValue, loading, setInputValue, createLink, customLink, setCustomLink }
 }
 
 interface Props {
@@ -228,10 +227,8 @@ interface Props {
   setLinks: (links: string[]) => void
 }
 
-const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showToast, setLinks }) => {
-  const [inputValue, setInputValue] = React.useState('')
-  const [loading, setLoading] = React.useState(false)
-  const [customLink, setCustomLink] = React.useState('')
+const LinkCreator: React.FC<Props> = props => {
+  const { inputValue, loading, setInputValue, createLink, customLink, setCustomLink } = useLinkInput(props)
 
   return (
     <React.Fragment>
@@ -239,28 +236,12 @@ const LinkCreator: React.FC<Props> = ({ setShortened, setShortenedCreated, showT
         <div css={styles.inputContainer}>
           <input type="text" css={styles.input} value={inputValue} onChange={e => setInputValue(e.target.value)} />
           {inputValue.length > 0 && (
-            <span css={styles.clearInput} role="button" onClick={() => setInputValue('')}>
-              🅧
-            </span>
+            <div css={styles.clearInput}>
+              <ClearInput onClear={() => setInputValue('')} />
+            </div>
           )}
         </div>
-        <button
-          css={styles.button}
-          className="prevent-hue-rotate"
-          onClick={() =>
-            createLink(
-              setInputValue,
-              setShortened,
-              setShortenedCreated,
-              showToast,
-              inputValue,
-              setLoading,
-              setLinks,
-              customLink,
-              setCustomLink
-            )
-          }
-        >
+        <button css={styles.button} className="prevent-hue-rotate" onClick={createLink}>
           {loading ? <img alt="" src={rollingSvgImg} css={styles.rollingSvg} /> : 'Shorten'}
         </button>
       </div>

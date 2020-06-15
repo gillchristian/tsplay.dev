@@ -171,7 +171,6 @@ const GlobalStyles: React.FC = () => {
           top: 25px;
           font-size: 25px;
           cursor: pointer;
-          outline: none;
           user-select: none;
         `}
       >
