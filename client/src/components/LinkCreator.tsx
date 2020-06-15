@@ -169,7 +169,9 @@ const createLink = async (
       return
     }
     if (!bodyValidation) {
-      toast('Custom link back-half should have between 5 and 30 characters and contain only letters, numbers, "-" and "_"')
+      toast(
+        'Custom link back-half should have between 5 and 30 characters and contain only letters, numbers, "-" and "_"'
+      )
       return
     }
   }
