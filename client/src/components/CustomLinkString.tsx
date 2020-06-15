@@ -2,7 +2,9 @@
 import * as React from 'react'
 import { css, jsx } from '@emotion/core'
 import { Palette } from '../constants'
-import ClearInput from './ClearInput'
+import wait from '../utils/wait'
+
+const ANIMATION_TIME = 350 // ms
 
 const styles = {
   container: css`
@@ -11,6 +13,8 @@ const styles = {
     font-size: 14px;
     display: flex;
     align-items: flex-end;
+    width: 96%;
+    position: relative;
   `,
   trigger: css`
     text-decoration: underline;
@@ -29,6 +33,8 @@ const styles = {
     align-items: center;
     border-bottom: 2px solid ${Palette.secondary};
     overflow: hidden;
+    transition: width ${ANIMATION_TIME}ms ease;
+    position: relative;
   `,
   label: css`
     font-size: 20px;
@@ -41,6 +47,14 @@ const styles = {
     font-size: 19px;
     line-height: 19px;
   `,
+  close: css`
+    cursor: pointer;
+    font-size: 22px;
+    color: ${Palette.shade3};
+    position: absolute;
+    right: -25px;
+    bottom: -2px;
+  `
 }
 
 interface Props {
@@ -50,31 +64,53 @@ interface Props {
 
 const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
   const [customLinkMode, setCustomLinkMode] = React.useState(false)
+  const [showCloseLinkMode, setShowCloseLinkMode] = React.useState(false)
+  const [showToggleLinkMode, setShowToggleLinkMode] = React.useState(true)
 
   return (
     <div css={styles.container}>
-      {customLinkMode ? (
-        <React.Fragment>
-          <div css={styles.content}>
-            <div css={styles.label}>tsplay.dev/</div>
-            <input
-              css={styles.input}
-              placeholder="my-ts-example"
-              value={customLink}
-              onChange={e => setCustomLink(e.target.value)}
-            />
-          </div>
-          <ClearInput
-            onClear={() => {
-              setCustomLinkMode(false)
-              setCustomLink('')
-            }}
-          />
-        </React.Fragment>
-      ) : (
-        <div css={styles.trigger} role="button" onClick={() => setCustomLinkMode(!customLinkMode)}>
+      {showToggleLinkMode && (
+        <div
+          css={styles.trigger}
+          role="button"
+          onClick={async() => {
+            setShowToggleLinkMode(false)
+            setCustomLinkMode(!customLinkMode)
+            await wait(ANIMATION_TIME)
+            setShowCloseLinkMode(true)
+          }}
+        >
           Customize link back-half
         </div>
+      )}
+      <div
+        css={css`	
+          ${styles.content};	
+          width: ${customLinkMode ? '100%' : '0px'};
+        `}
+      >
+        <div css={styles.label}>tsplay.dev/</div>
+        <input
+          css={styles.input}
+          placeholder="my-ts-example"
+          value={customLink}
+          onChange={e => setCustomLink(e.target.value)}
+        />
+      </div>
+      {showCloseLinkMode && (
+        <span
+          css={styles.close}
+          role="button"
+          onClick={async () => {
+            setCustomLinkMode(false)
+            setCustomLink('')
+            setShowCloseLinkMode(false)
+            await wait(ANIMATION_TIME + 150)
+            setShowToggleLinkMode(true)
+          }}
+        >
+        X
+      </span>
       )}
     </div>
   )

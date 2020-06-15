@@ -49,6 +49,8 @@ const styles = {
     border-radius: 0;
     margin: 0;
     padding-right: 40px;
+    position: relative;
+    right: 1px;
   `,
   button: css`
     height: ${CONTAINER_HEIGHT}px;
