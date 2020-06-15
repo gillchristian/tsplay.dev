@@ -61,7 +61,7 @@ const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
     <div css={styles.container}>
       {!customLinkMode && (
         <div css={styles.trigger} role="button" onClick={() => setCustomLinkMode(!customLinkMode)}>
-          Add a custom link
+          Customize link back-half
         </div>
       )}
       <div
@@ -73,7 +73,7 @@ const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
         <div css={styles.label}>tsplay.dev/</div>
         <input
           css={styles.input}
-          placeholder="custom link here"
+          placeholder="my-ts-example"
           value={customLink}
           onChange={e => setCustomLink(e.target.value)}
         />
