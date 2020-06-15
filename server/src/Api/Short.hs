@@ -94,10 +94,10 @@ isValidURL =
   (&&) <$> (URI.isURI . Text.unpack) <*> Text.isInfixOf "typescriptlang.org"
 
 shorterThan :: Int -> Text -> Bool
-shorterThan n = (<= n) . Text.length
+shorterThan n = (< n) . Text.length
 
 longerThan :: Int -> Text -> Bool
-longerThan n = (>= n) . Text.length
+longerThan n = (> n) . Text.length
 
 isValidChar :: Char -> Bool
 isValidChar =
