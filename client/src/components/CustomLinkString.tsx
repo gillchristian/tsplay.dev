@@ -62,7 +62,7 @@ const styles = {
     padding: 0 0 0 1px;
     font-size: 19px;
     line-height: 19px;
- 
+
     @media (max-width: 500px) {
       position: relative;
       top: 2px;
@@ -75,7 +75,7 @@ const styles = {
     position: absolute;
     right: -25px;
     bottom: -2px;
-  `
+  `,
 }
 
 interface Props {
@@ -94,7 +94,7 @@ const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
         <div
           css={styles.trigger}
           role="button"
-          onClick={async() => {
+          onClick={async () => {
             setShowToggleLinkMode(false)
             setCustomLinkMode(!customLinkMode)
             await wait(ANIMATION_TIME)
@@ -105,8 +105,8 @@ const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
         </div>
       )}
       <div
-        css={css`	
-          ${styles.content};	
+        css={css`
+          ${styles.content};
           width: ${customLinkMode ? '100%' : '0px'};
         `}
       >
@@ -130,8 +130,8 @@ const CustomLinkString: React.FC<Props> = ({ customLink, setCustomLink }) => {
             setShowToggleLinkMode(true)
           }}
         >
-        X
-      </span>
+          X
+        </span>
       )}
     </div>
   )

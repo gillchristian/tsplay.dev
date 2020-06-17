@@ -104,7 +104,7 @@ const styles = {
     background: ${Palette.secondary};
     cursor: pointer;
     flex: 1;
-    transform: scale(.95);
+    transform: scale(0.95);
     position: relative;
     left: 1px;
 
