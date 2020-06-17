@@ -15,6 +15,22 @@ const styles = {
     align-items: flex-end;
     width: 96%;
     position: relative;
+
+    @media (max-width: 650px) {
+      width: 95%;
+    }
+    @media (max-width: 500px) {
+      width: 94%;
+    }
+    @media (max-width: 425px) {
+      width: 93%;
+    }
+    @media (max-width: 375px) {
+      width: 92%;
+    }
+    @media (max-width: 320px) {
+      width: 90%;
+    }
   `,
   trigger: css`
     text-decoration: underline;
@@ -46,6 +62,11 @@ const styles = {
     padding: 0 0 0 1px;
     font-size: 19px;
     line-height: 19px;
+ 
+    @media (max-width: 500px) {
+      position: relative;
+      top: 2px;
+    }
   `,
   close: css`
     cursor: pointer;
