@@ -15,24 +15,20 @@ import Config
 import Control.Concurrent (killThread)
 import Control.Exception (bracket)
 import Control.Monad (void)
-import qualified Control.Monad.Metrics as Metrics
 import qualified Data.ByteString.Char8 as BS
 import qualified Data.Pool as Pool
 import Data.Text.Encoding (encodeUtf8)
 import Database (initializeDatabase)
 import qualified Katip
-import Lens.Micro ((^.))
 import Logger (defaultLogEnv)
 import Network.HTTP.Types.Status (status302)
 import qualified Network.Wai as Wai
 import Network.Wai.Handler.Warp (run)
-import Network.Wai.Metrics (metrics, registerWaiMetrics)
 import Network.Wai.Middleware.Cors (CorsResourcePolicy (..), cors)
 import Safe (readMay)
 import System.Environment (lookupEnv)
 import System.Remote.Monitoring
   ( forkServer,
-    serverMetricStore,
     serverThreadId,
   )
 import qualified Web.Hashids as Hashids
@@ -49,12 +45,10 @@ runApp = bracket acquireConfig shutdownApp runApp'
 -- initializes the WAI 'Application' and returns it
 initialize :: Config -> IO Wai.Application
 initialize cfg = do
-  waiMetrics <- registerWaiMetrics (configMetrics cfg ^. Metrics.metricsStore)
   let logger = setLogger (configEnv cfg)
   Pool.withResource (configPool cfg) $ initializeDatabase "./database/migrations"
   pure
     . logger
-    . metrics waiMetrics
     . corsified
     . rootRedirectTo (encodeUtf8 $ configClientUrl cfg)
     . app
@@ -70,20 +64,17 @@ acquireConfig = do
   logEnv <- defaultLogEnv
   pool <- makePool env logEnv
   ekgServer <- forkServer "localhost" =<< lookupSetting "PORT_EKG" 8000
-  let store = serverMetricStore ekgServer
-  _ <- registerWaiMetrics store
-  metr <- Metrics.initializeWith store
-  pure Config
-    { configPool = pool,
-      configEnv = env,
-      configMetrics = metr,
-      configLogEnv = logEnv,
-      configPort = port,
-      configEkgServer = serverThreadId ekgServer,
-      configHashidsCtx = Hashids.hashidsMinimum salt 6,
-      configBaseUrl = baseUrl,
-      configClientUrl = clientUrl
-    }
+  pure
+    Config
+      { configPool = pool,
+        configEnv = env,
+        configLogEnv = logEnv,
+        configPort = port,
+        configEkgServer = serverThreadId ekgServer,
+        configHashidsCtx = Hashids.hashidsMinimum salt 6,
+        configBaseUrl = baseUrl,
+        configClientUrl = clientUrl
+      }
 
 -- This is no secret, only used to generate short URLs
 salt :: BS.ByteString
@@ -94,9 +85,6 @@ shutdownApp :: Config -> IO ()
 shutdownApp cfg = do
   void $ Katip.closeScribes (configLogEnv cfg)
   Pool.destroyAllResources (configPool cfg)
-  -- Monad.Metrics does not provide a function to destroy metrics store
-  -- so, it'll hopefully get torn down when async exception gets thrown
-  -- at metrics server process
   killThread (configEkgServer cfg)
   pure ()
 
@@ -132,13 +120,14 @@ corsified = cors (const $ Just corsResourcePolicy)
 
 -- TODO: allow only from client's url
 corsResourcePolicy :: CorsResourcePolicy
-corsResourcePolicy = CorsResourcePolicy
-  { corsOrigins = Nothing,
-    corsMethods = ["OPTIONS", "GET", "PUT", "POST"],
-    corsRequestHeaders = ["Authorization", "Content-Type"],
-    corsExposedHeaders = Nothing,
-    corsMaxAge = Nothing,
-    corsVaryOrigin = False,
-    corsRequireOrigin = False,
-    corsIgnoreFailures = False
-  }
+corsResourcePolicy =
+  CorsResourcePolicy
+    { corsOrigins = Nothing,
+      corsMethods = ["OPTIONS", "GET", "PUT", "POST"],
+      corsRequestHeaders = ["Authorization", "Content-Type"],
+      corsExposedHeaders = Nothing,
+      corsMaxAge = Nothing,
+      corsVaryOrigin = False,
+      corsRequireOrigin = False,
+      corsIgnoreFailures = False
+    }

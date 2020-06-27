@@ -1,6 +1,3 @@
 resolver: lts-14.27
 packages:
 - .
-
-extra-deps:
-- wai-middleware-metrics-0.2.4@sha256:d6b6916acd41aaef4ca59a839d40a3a377f9df784ae49fd4c64926ae916b6ba2,2890
