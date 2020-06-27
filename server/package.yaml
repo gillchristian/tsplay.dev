@@ -33,7 +33,6 @@ dependencies:
 - microlens
 - monad-control
 - monad-logger
-- monad-metrics
 - mtl
 - network-uri
 - parsec
@@ -51,7 +50,6 @@ dependencies:
 - wai
 - wai-cors
 - wai-extra
-- wai-middleware-metrics
 - warp
 - wreq
 

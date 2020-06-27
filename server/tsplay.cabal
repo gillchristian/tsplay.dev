@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a77259c486a4bc7174b48de1917d6dc7d360c83fbfb2587df8aa262fe5602d93
+-- hash: 21ef24e0bde2691813807f84c5f6fb1074768f2d05f1afc51a96db4f40c5f905
 
 name:           tsplay
 version:        0.0.2.0
@@ -60,7 +60,6 @@ library
     , microlens
     , monad-control
     , monad-logger
-    , monad-metrics
     , mtl
     , network-uri
     , parsec
@@ -78,7 +77,6 @@ library
     , wai
     , wai-cors
     , wai-extra
-    , wai-middleware-metrics
     , warp
     , wreq
   default-language: Haskell2010
@@ -108,7 +106,6 @@ executable tsplay-exe
     , microlens
     , monad-control
     , monad-logger
-    , monad-metrics
     , mtl
     , network-uri
     , parsec
@@ -127,7 +124,6 @@ executable tsplay-exe
     , wai
     , wai-cors
     , wai-extra
-    , wai-middleware-metrics
     , warp
     , wreq
   default-language: Haskell2010
@@ -158,7 +154,6 @@ test-suite tsplay-test
     , microlens
     , monad-control
     , monad-logger
-    , monad-metrics
     , mtl
     , network-uri
     , parsec
@@ -177,7 +172,6 @@ test-suite tsplay-test
     , wai
     , wai-cors
     , wai-extra
-    , wai-middleware-metrics
     , warp
     , wreq
   default-language: Haskell2010

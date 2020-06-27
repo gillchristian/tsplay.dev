@@ -20,11 +20,6 @@ import Control.Exception (throwIO)
 import Control.Monad.Except (ExceptT, MonadError)
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import Control.Monad.Logger (MonadLogger (..))
-import Control.Monad.Metrics
-  ( Metrics,
-    MonadMetrics,
-    getMetrics,
-  )
 import Control.Monad.Reader
   ( MonadReader,
     ReaderT,
@@ -53,8 +48,7 @@ import Prelude
 --
 -- By encapsulating the effects in our newtype, we can add layers to the
 -- monad stack without having to modify code that uses the current layout.
-newtype AppT m a
-  = AppT {runApp :: ReaderT Config (ExceptT ServerError m) a}
+newtype AppT m a = AppT {runApp :: ReaderT Config (ExceptT ServerError m) a}
   deriving
     ( Functor,
       Applicative,
@@ -68,26 +62,20 @@ type App = AppT IO
 
 -- | The Config for our application is (for now) the 'Environment' we're
 -- running in and a Persistent 'ConnectionPool'.
-data Config
-  = Config
-      -- TODO config object from JSON ???
-      { configPool :: ConnectionPool,
-        configEnv :: Environment,
-        configMetrics :: Metrics,
-        configEkgServer :: ThreadId,
-        configLogEnv :: LogEnv,
-        configPort :: Port,
-        configHashidsCtx :: Hashids.HashidsContext,
-        configBaseUrl :: Text,
-        configClientUrl :: Text
-      }
-
-instance Monad m => MonadMetrics (AppT m) where
-  getMetrics = asks Config.configMetrics
+data Config = Config
+  -- TODO config object from JSON ???
+  { configPool :: ConnectionPool,
+    configEnv :: Environment,
+    configEkgServer :: ThreadId,
+    configLogEnv :: LogEnv,
+    configPort :: Port,
+    configHashidsCtx :: Hashids.HashidsContext,
+    configBaseUrl :: Text,
+    configClientUrl :: Text
+  }
 
 -- | Katip instance for @AppT m@
 instance MonadIO m => Katip (AppT m) where
-
   getLogEnv = asks configLogEnv
 
   localLogEnv = error "not implemented"
