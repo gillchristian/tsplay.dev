@@ -58,6 +58,7 @@ jobs:
       run: |
         set -ex
         stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
+        cp $(stack exec -- which tsplay-exe) tsplay-exe
         set +ex
       env:
         ARGS: ${{ matrix.plan.resolver }}
