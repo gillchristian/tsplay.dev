@@ -16,7 +16,12 @@ export const Header = () => {
   return (
     <header className={header}>
       <h2 className={h2}>Playground Link Shortener</h2>
-      <a href="https://tsplay.dev" target="_blank" rel="noopener noreferrer" className={tsLink}>
+      <a
+        href="https://tsplay.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={tsLink}
+      >
         tsplay.dev
       </a>
       {showMsg && (

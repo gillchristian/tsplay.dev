@@ -122,28 +122,38 @@ const App: React.FC = () => {
         {hasErrors && (
           <div className={failureClass + ' ' + textCenter}>
             <div>
-              <small className="not-revert">There are erros in the editor</small>
+              <small className="not-revert">
+                There are erros in the editor
+              </small>
             </div>
             <div>
-              <small className="not-revert">Are you sure you want to crete a short link? <span>🤔</span></small>
+              <small className="not-revert">
+                Are you sure you want to crete a short link? <span>🤔</span>
+              </small>
             </div>
           </div>
         )}
 
         {!hasEncodedCode(currentUrl) && (
           <div className={warningClass + ' ' + textCenter}>
-            <small className="not-revert">⚠️ No encoded code in the URL ⚠️</small>
+            <small className="not-revert">
+              ⚠️ No encoded code in the URL ⚠️
+            </small>
           </div>
         )}
 
         {matchesOtherLinks(code, links) && (
           <div className={warningClass + ' ' + textCenter}>
-            <small className="not-revert">⚠️ Already creted a short link for the current code ⚠️</small>
+            <small className="not-revert">
+              ⚠️ Already creted a short link for the current code ⚠️
+            </small>
           </div>
         )}
 
         {copyStatus === 'did_copy' ? (
-          <div className={successClass}>Copied <span className="not-revert">✅</span></div>
+          <div className={successClass}>
+            Copied <span className="not-revert">✅</span>
+          </div>
         ) : copyStatus === 'failure' ? (
           <div className={failureClass}>Cannot copy</div>
         ) : null}
@@ -196,10 +206,10 @@ const wrapperClass = css`
     text-transform: uppercase;
     align-items: center;
     cursor: pointer;
-    padding: .3rem 1rem;
+    padding: 0.3rem 1rem;
     color: #fff;
     text-decoration: none;
-    font-size: .8rem;
+    font-size: 0.8rem;
     line-height: 1.15rem;
     border: none;
     outline: none;
@@ -209,9 +219,9 @@ const wrapperClass = css`
     }
 
     &:disabled {
-    cursor: not-allowed;
-    opacity: .6;
-    background: #007acc !important;
+      cursor: not-allowed;
+      opacity: 0.6;
+      background: #007acc !important;
     }
   }
 
@@ -236,8 +246,8 @@ const linksMsgClass = css`
 
 const createBtnClass = css`
   margin-bottom: 0.8rem;
-  font-size: .9rem !important;
-  padding-bottom: .4rem !important;
+  font-size: 0.9rem !important;
+  padding-bottom: 0.4rem !important;
 `
 
 const failureClass = css`
