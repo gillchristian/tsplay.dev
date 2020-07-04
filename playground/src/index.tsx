@@ -8,7 +8,7 @@ const ReactDOM = window.reactDOM
 
 const ID = 'tsplay_short'
 
-const DISPLAY_NAME = 'TS Short'
+const DISPLAY_NAME = 'Link Shortener'
 
 function makePlugin(utils: PluginUtils) {
   const customPlugin: PlaygroundPlugin = {
