@@ -16,13 +16,13 @@ export const Header = () => {
   return (
     <header className={header}>
       <h2 className={h2}>Playground Link Shortener</h2>
-      <a href="https://tsplay.dev" target="_blank" rel="noopener noreferrer">
+      <a href="https://tsplay.dev" target="_blank" rel="noopener noreferrer" className={tsLink}>
         tsplay.dev
       </a>
       {showMsg && (
         <div className={warningClass}>
-          <p className={p}>
-            <b>This plugin is still a PoC (proof of concept)</b>
+          <p className="warning-title">
+            <b>⚠️ This plugin is still a PoC (proof of concept) ⚠️</b>
           </p>
           <p className={p}>
             <a
@@ -42,7 +42,7 @@ export const Header = () => {
               Discord #playground-plugins
             </a>
           </p>
-          <button className={dismissClass} onClick={dismissMsg}>
+          <button className={`${dismissClass} button`} onClick={dismissMsg}>
             Dismiss
           </button>
         </div>
@@ -63,6 +63,7 @@ const h2 = css`
   margin: 0 0 0.5rem 0 !important;
   line-height: 1;
   text-align: center;
+  color: #007acc;
 `
 
 const p = css`
@@ -71,28 +72,33 @@ const p = css`
   margin-top: 0.25rem;
 `
 
+const tsLink = css`
+  color: #262626 !important;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+`
+
 const warningClass = css`
-  color: #856404;
-  background-color: #fff3cd;
-  border: 1px solid #ffeeba;
+  color: #262626;
+  background-color: #fff;
+  border: 1px solid #262626;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   font-size: small;
+
+  .warning-title {
+    color: #007acc;
+    margin: 0;
+  }
+
+  a {
+    color: #262626;
+    cursor: pointer;
+  }
 `
 
 const dismissClass = css`
-  text-decoration: underline;
-  color: inherit;
-  padding: 0;
-
-  border: none;
-  background: transparent;
-
-  cursor: pointer;
-
-  &:focus {
-    border: none;
-    outline: none;
-  }
+  float: right;
+  margin-bottom: 0.4rem;
 `

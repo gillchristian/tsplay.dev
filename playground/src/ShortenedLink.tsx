@@ -38,13 +38,13 @@ export const ShortenedLink: FC<Props> = ({
           active,
           O.fold(
             () => (
-              <button className={buttonClass} onClick={() => onView(link)}>
+              <button className={`${buttonClass} button`} onClick={() => onView(link)}>
                 View code
               </button>
             ),
             (activeLink) =>
               activeLink.link === link.url && (
-                <button className={buttonClass} onClick={onRestoreWip}>
+                <button className={`${buttonClass} button`} onClick={onRestoreWip}>
                   Restore WIP
                 </button>
               ),
@@ -54,11 +54,11 @@ export const ShortenedLink: FC<Props> = ({
 
       <div className={colClass}>
         {copyStatus === 'idle' ? (
-          <button className={buttonClass} onClick={() => onCopy(link.url)}>
+          <button className={`${buttonClass} button`} onClick={() => onCopy(link.url)}>
             Copy
           </button>
         ) : copyStatus === 'did_copy' ? (
-          <span className={successClass}>Copied!</span>
+          <span className={successClass}>Copied <span className="not-revert">✅</span></span>
         ) : (
           <span className={failureClass}>Cannot not copy</span>
         )}
@@ -92,8 +92,12 @@ const wrapperClass = css`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  background-color: #D8D8D8;
+  padding: .5rem;
+  margin-right: -10px;
+  margin-left: -10px;
 
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   font-size: small;
 `
 
@@ -101,4 +105,9 @@ const linkClass = css`
   padding-right: 0.5rem;
   width: 40%;
   min-width: 140px;
+  padding-left: 0.5rem;
+
+  a {
+    color: #007acc !important;
+  }
 `
