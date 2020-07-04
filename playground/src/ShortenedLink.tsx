@@ -68,7 +68,10 @@ export const ShortenedLink: FC<Props> = ({
           </button>
         ) : copyStatus === 'did_copy' ? (
           <span className={successClass}>
-            Copied <span className="not-revert">✅</span>
+            Copied{' '}
+            <span className="not-revert" role="img" aria-label="yes">
+              ✅
+            </span>
           </span>
         ) : (
           <span className={failureClass}>Cannot not copy</span>

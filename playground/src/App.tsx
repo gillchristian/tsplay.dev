@@ -128,7 +128,10 @@ const App: React.FC = () => {
             </div>
             <div>
               <small className="not-revert">
-                Are you sure you want to crete a short link? <span>🤔</span>
+                Are you sure you want to crete a short link?{' '}
+                <span role="img" aria-label="thinking">
+                  🤔
+                </span>
               </small>
             </div>
           </div>
@@ -137,7 +140,13 @@ const App: React.FC = () => {
         {!hasEncodedCode(currentUrl) && (
           <div className={warningClass + ' ' + textCenter}>
             <small className="not-revert">
-              ⚠️ No encoded code in the URL ⚠️
+              <span role="img" aria-label="warning">
+                ⚠️
+              </span>{' '}
+              No encoded code in the URL{' '}
+              <span role="img" aria-label="warning">
+                ⚠️
+              </span>
             </small>
           </div>
         )}
@@ -145,14 +154,23 @@ const App: React.FC = () => {
         {matchesOtherLinks(code, links) && (
           <div className={warningClass + ' ' + textCenter}>
             <small className="not-revert">
-              ⚠️ Already creted a short link for the current code ⚠️
+              <span role="img" aria-label="warning">
+                ⚠️
+              </span>{' '}
+              Already creted a short link for the current code{' '}
+              <span role="img" aria-label="warning">
+                ⚠️
+              </span>
             </small>
           </div>
         )}
 
         {copyStatus === 'did_copy' ? (
           <div className={successClass}>
-            Copied <span className="not-revert">✅</span>
+            Copied{' '}
+            <span className="not-revert" role="img" aria-label="yes">
+              ✅
+            </span>
           </div>
         ) : copyStatus === 'failure' ? (
           <div className={failureClass}>Cannot copy</div>
