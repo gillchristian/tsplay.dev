@@ -112,7 +112,7 @@ const App: React.FC = () => {
 
       <div className={createClass}>
         <button
-          className={createBtnClass}
+          className={`${createBtnClass} button`}
           onClick={createShortLink}
           disabled={shouldDisable(code, currentUrl, status, links)}
         >
@@ -122,28 +122,28 @@ const App: React.FC = () => {
         {hasErrors && (
           <div className={failureClass + ' ' + textCenter}>
             <div>
-              <small>There are erros in the editor</small>
+              <small className="not-revert">There are erros in the editor</small>
             </div>
             <div>
-              <small>Are you sure you want to crete a short link?</small>
+              <small className="not-revert">Are you sure you want to crete a short link? <span>🤔</span></small>
             </div>
           </div>
         )}
 
         {!hasEncodedCode(currentUrl) && (
           <div className={warningClass + ' ' + textCenter}>
-            <small>No encoded code in the URL</small>
+            <small className="not-revert">⚠️ No encoded code in the URL ⚠️</small>
           </div>
         )}
 
         {matchesOtherLinks(code, links) && (
           <div className={warningClass + ' ' + textCenter}>
-            <small>Already creted a short link for the current code</small>
+            <small className="not-revert">⚠️ Already creted a short link for the current code ⚠️</small>
           </div>
         )}
 
         {copyStatus === 'did_copy' ? (
-          <div className={successClass}>Copied!</div>
+          <div className={successClass}>Copied <span className="not-revert">✅</span></div>
         ) : copyStatus === 'failure' ? (
           <div className={failureClass}>Cannot copy</div>
         ) : null}
@@ -153,7 +153,7 @@ const App: React.FC = () => {
 
       {links.length > 0 && (
         <>
-          <h3>Created links</h3>
+          <h3 className={createdLinks}>Created links</h3>
 
           <div className={linksMsgClass}>
             <b>NOTE</b>: <i>Links are not persisted when reloading the page.</i>
@@ -163,7 +163,7 @@ const App: React.FC = () => {
             <b>View code</b> loads the code from the shortened link. The work in
             progress (WIP) is saved and can be restored.
           </div>
-
+          <br />
           {links.map((link) => (
             <ShortenedLink
               link={link}
@@ -188,6 +188,45 @@ const wrapperClass = css`
     margin-top: 0.5rem !important;
     margin-bottom: 0.5rem !important;
   }
+
+  background-color: #fff;
+
+  .button {
+    background: #007acc;
+    text-transform: uppercase;
+    align-items: center;
+    cursor: pointer;
+    padding: .3rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: .8rem;
+    line-height: 1.15rem;
+    border: none;
+    outline: none;
+
+    &:hover {
+      background: #0583d8;
+    }
+
+    &:disabled {
+    cursor: not-allowed;
+    opacity: .6;
+    background: #007acc !important;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    filter: invert(100%) hue-rotate(180deg);
+
+    .not-revert {
+      filter: invert(100%) hue-rotate(180deg);
+    }
+  }
+`
+
+const createdLinks = css`
+  font-weight: 600;
+  font-size: 1.1rem;
 `
 
 const linksMsgClass = css`
@@ -196,21 +235,19 @@ const linksMsgClass = css`
 `
 
 const createBtnClass = css`
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-
-  cursor: pointer;
-  &:disabled {
-    cursor: not-allowed;
-  }
+  margin-bottom: 0.8rem;
+  font-size: .9rem !important;
+  padding-bottom: .4rem !important;
 `
 
 const failureClass = css`
-  color: #721c24;
+  color: #ad0606;
+  font-weight: 600;
 `
 
 const warningClass = css`
-  color: #856404;
+  color: #f2c304;
+  font-weight: 600;
 `
 
 const textCenter = css`
@@ -228,6 +265,7 @@ const createClass = css`
 
 const successClass = css`
   color: #155724;
+  font-weight: 600;
 `
 
 export default App
