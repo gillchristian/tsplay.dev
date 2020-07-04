@@ -27,7 +27,15 @@ export const Header = () => {
       {showMsg && (
         <div className={warningClass}>
           <p className="warning-title">
-            <b>⚠️ This plugin is still a PoC (proof of concept) ⚠️</b>
+            <b>
+              <span role="img" aria-label="warning">
+                ⚠️
+              </span>{' '}
+              This plugin is still a PoC (proof of concept){' '}
+              <span role="img" aria-label="warning">
+                ⚠️
+              </span>
+            </b>
           </p>
           <p className={p}>
             <a
