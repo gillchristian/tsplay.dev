@@ -2,6 +2,10 @@
 
 > A link shortener for [TypeScript Playground](https://www.typescriptlang.org/play)
 
+![Server: Test & Build](https://github.com/gillchristian/tsplay.dev/workflows/Server:%20Test%20&%20Build/badge.svg)
+
+![Client: Test & Build](https://github.com/gillchristian/tsplay.dev/workflows/Client:%20Test%20&%20Build/badge.svg)
+
 ## How to
 
 Short versions of the shareable playground links can be created at
