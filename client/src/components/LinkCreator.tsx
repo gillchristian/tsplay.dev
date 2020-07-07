@@ -97,7 +97,14 @@ const styles = {
   `,
 }
 
-const typescriptBaseUrl = 'https://www.typescriptlang.org/play'
+const typescriptBaseUrl = 'https://www.typescriptlang.org'
+const typescriptStagingBaseUrl = 'https://www.staging-typescript.org'
+
+const isTSLink = (url: string) => {
+  const trimmed = url.trim()
+
+  return trimmed.startsWith(typescriptBaseUrl) || trimmed.startsWith(typescriptStagingBaseUrl)
+}
 
 const handleLinksList = (url: string, setLinks: (links: string[]) => void): void => {
   try {
@@ -162,7 +169,7 @@ const useLinkInput = ({ setShortened, setShortenedCreated, showToast, setLinks }
 
   const createLink = async () => {
     if (!inputValue) return
-    if (!inputValue.trim().startsWith(typescriptBaseUrl)) {
+    if (!isTSLink(inputValue)) {
       toast(
         <div>
           <span role="img" aria-label="warning" className="prevent-hue-rotate">
