@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 21ef24e0bde2691813807f84c5f6fb1074768f2d05f1afc51a96db4f40c5f905
+-- hash: e2faec6f965c41ca3ec326a78cbfcf0ff767beda740cb439f40ae12ba363e02b
 
 name:           tsplay
 version:        0.0.2.0
@@ -35,6 +35,7 @@ library
       Api.Short.Persistence
       Config
       Database
+      General.Util
       Init
       Logger
   other-modules:
