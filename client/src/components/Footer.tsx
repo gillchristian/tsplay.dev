@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
     <div css={styles.container}>
       <div>
         <span>by </span>
-        <a href="https://dvnahuel.site/" rel="noopener noreferrer" target="_blank" css={styles.link}>
+        <a href="https://dvnahuel.website/" rel="noopener noreferrer" target="_blank" css={styles.link}>
           dvnahuel
         </a>
         <span> / </span>
