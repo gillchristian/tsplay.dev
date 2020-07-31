@@ -10,9 +10,9 @@ const styles = {
   `,
 }
 
-export const copyToClipboard: (text: string, showToast: ShowToast) => void = async (text, showToast) => {
+export const copyToClipboard = async (text: string, toCopy: string, showToast: ShowToast) => {
   try {
-    await navigator.clipboard.writeText(text)
+    await navigator.clipboard.writeText(toCopy)
     showToast(
       <span>
         <span role="img" aria-label="check mark" className="prevent-hue-rotate">

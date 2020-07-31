@@ -147,8 +147,8 @@ const Links: React.FC<Props> = ({ links, canDeleteItem, showToast, onLinkDelete 
   return (
     <div css={styles.wrapper} className={canDeleteItem && hasScroll ? 'custom-scroll' : ''} ref={divRef}>
       {links
-        .map(link => link.replace(/^https?:\/\//, ''))
-        .map((link: string) => (
+        .map(link => [link, link.replace(/^https?:\/\//, '')])
+        .map(([link, prettyLink]) => (
           <div key={link} css={styles.container} className={canDeleteItem ? 'can-delete' : ''}>
             <span
               css={css`
@@ -156,14 +156,14 @@ const Links: React.FC<Props> = ({ links, canDeleteItem, showToast, onLinkDelete 
                 ${hasScroll ? styles.linkWithScroll : ''}
               `}
             >
-              {link}
+              {prettyLink}
             </span>
             <button
               css={css`
                 ${styles.button};
                 ${hasScroll ? styles.buttonWithScroll : ''}
               `}
-              onClick={() => copyToClipboard(link, showToast)}
+              onClick={() => copyToClipboard(prettyLink, link, showToast)}
             >
               <img alt="copy logo" src={copyLogoSVG} />
             </button>
