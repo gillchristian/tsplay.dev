@@ -207,7 +207,7 @@ const useLinkInput = ({ setShortened, setShortenedCreated, showToast, setLinks }
           Short link created successfully!
         </div>
       )
-      copyToClipboard(shortened.replace(/^https?:\/\//, ''), showToast)
+      copyToClipboard(shortened.replace(/^https?:\/\//, ''), shortened, showToast)
       setInputValue('')
       setShortened(prev => (prev ? prev + 1 : 1))
     } catch (e) {
