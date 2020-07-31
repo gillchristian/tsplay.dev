@@ -29,7 +29,7 @@ import Data.Monoid
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Encoding (decodeUtf8, encodeUtf8)
-import General.Util ((&&&), (|||))
+import General.Util ((<&>), (<|>))
 import qualified Network.URI as URI
 import Servant ((:<|>) (..), (:>))
 import qualified Servant
@@ -81,8 +81,8 @@ healthzHandler = pure "200 Ok"
 isValidURL :: Text -> Bool
 isValidURL =
   (URI.isURI . Text.unpack)
-    &&& Text.isPrefixOf "https://www.typescriptlang.org/"
-    ||| Text.isPrefixOf "https://www.staging-typescript.org/"
+    <&> Text.isPrefixOf "https://www.typescriptlang.org/"
+    <|> Text.isPrefixOf "https://www.staging-typescript.org/"
 
 shorterThan :: Int -> Text -> Bool
 shorterThan n = (< n) . Text.length
@@ -91,7 +91,7 @@ longerThan :: Int -> Text -> Bool
 longerThan n = (> n) . Text.length
 
 isValidChar :: Char -> Bool
-isValidChar = Char.isAlpha ||| Char.isDigit ||| isUnderscore ||| isHyphen
+isValidChar = Char.isAlpha <|> Char.isDigit <|> isUnderscore <|> isHyphen
 
 isUnderscore :: Char -> Bool
 isUnderscore '_' = True
@@ -106,7 +106,7 @@ isHyphen _ = False
 -- > which aren't digits, are selected by this function but not by isDigit.
 -- https://hackage.haskell.org/package/base-4.14.0.0/docs/Data-Char.html#v:isAlphaNum
 isAlphaNum :: Char -> Bool
-isAlphaNum = Char.isAlpha ||| Char.isDigit
+isAlphaNum = Char.isAlpha <|> Char.isDigit
 
 headIs :: (Char -> Bool) -> Text -> Bool
 headIs _ "" = False
@@ -119,10 +119,10 @@ lastIs f t = f $ Text.last t
 isValidShort :: Text -> Bool
 isValidShort =
   longerThan 4
-    &&& shorterThan 31
-    &&& Text.all isValidChar
-    &&& headIs Char.isAlpha
-    &&& lastIs isAlphaNum
+    <&> shorterThan 31
+    <&> Text.all isValidChar
+    <&> headIs Char.isAlpha
+    <&> lastIs isAlphaNum
 
 createHandler :: MonadIO m => CreateBody -> AppT m CreateResponse
 createHandler CreateBody {..} = do
