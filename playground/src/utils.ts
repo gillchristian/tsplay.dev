@@ -1,3 +1,4 @@
+import * as IO from 'fp-ts/es6/IO'
 import * as T from 'fp-ts/es6/Task'
 import * as E from 'fp-ts/es6/Either'
 import * as TE from 'fp-ts/es6/TaskEither'
@@ -6,6 +7,10 @@ import {constVoid} from 'fp-ts/es6/function'
 
 export function runTask<A = unknown>(task: T.Task<A>) {
   return task()
+}
+
+export function runIO<A = unknown>(io: IO.IO<A>) {
+  return io()
 }
 
 export const voidTask: T.Task<void> = T.of(undefined)

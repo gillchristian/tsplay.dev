@@ -2196,6 +2196,11 @@ fp-ts-contrib@^0.1.14:
   resolved "https://registry.yarnpkg.com/fp-ts-contrib/-/fp-ts-contrib-0.1.17.tgz#208ff83b2b457c61f458016e324ff95a5671c0c1"
   integrity sha512-UBQ7AdGp0GktLkIn3e6npVIfLm1ZM+racizgVqL88j6HBLBoBjRtVjIxRIS6YbNypuP94ngaZpy2SEib9lnZ9A==
 
+fp-ts-local-storage@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/fp-ts-local-storage/-/fp-ts-local-storage-1.0.3.tgz#abf99da5cb5a7518a73be9384ae71786af424efb"
+  integrity sha512-72nXiVVA7Fj1FS0lfGIED18/AS8gA50OjOrUCWuhNEYL9f614MkLjkQVkpnAFr0QI1H8/1CxH2tAfPs0CkncHQ==
+
 fp-ts@^2.5.3:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.6.7.tgz#a86f904b86c93cd63300e6d40005e4caa57ccb6b"
@@ -2491,10 +2496,10 @@ invariant@^2.2.2, invariant@^2.2.4:
   dependencies:
     loose-envify "^1.0.0"
 
-io-ts@^2.1.3:
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-2.2.7.tgz#5c05477580bff4c0154b474316c8916253e87c44"
-  integrity sha512-kCusyu/Fa0oax5ue2Id/ZqVLEk5JOWyrXHcLbD4kHoVM50MhDEWUtcHlN7RrD94I8OrWILcVltM6OllnZiHJmg==
+io-ts@^2.2.9:
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-2.2.9.tgz#9a427512926462f20415099917a31dbf409ff2b0"
+  integrity sha512-Q9ob1VnpwyNoMam/BO6hm2dF4uu+to8NWSZNsRW6Q2Ni38PadgLZSQDo0hW7CJFgpJkQw4BXGwXzjr7c47c+fw==
 
 is-absolute-url@^2.0.0:
   version "2.1.0"

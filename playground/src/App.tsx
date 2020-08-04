@@ -2,25 +2,23 @@ import React, {FormEvent} from 'react'
 import {css} from 'goober'
 import {pipe} from 'fp-ts/es6/pipeable'
 import * as TE from 'fp-ts/es6/TaskEither'
+import * as IOE from 'fp-ts/es6/IOEither'
+import * as IO from 'fp-ts/es6/IO'
 import * as T from 'fp-ts/es6/Task'
 import * as O from 'fp-ts/es6/Option'
 
 import {usePlugin} from './plugin'
 import {createShort, Errors, CreateResponse} from './api'
 import {RemoteData, isSuccess, isLoading} from './RemoteData'
-import {runTask} from './utils'
+import {runTask, runIO} from './utils'
 import {useCopy} from './useCopy'
+import {readLinks, updateLinks, deleteLink, CreatedLink} from './storage'
 
 import {Failure} from './Failure'
 import {Header} from './Header'
 import {ShortenedLink} from './ShortenedLink'
 
 const {useState} = React
-
-interface CreatedLink {
-  url: string
-  code: string
-}
 
 type WIP = O.Option<{link: string; code: string}>
 
@@ -44,7 +42,13 @@ const shouldDisable = (
 const App: React.FC = () => {
   const {code, setDebounce, flashInfo, setCode, markers} = usePlugin()
 
-  const [links, setLinks] = useState<CreatedLink[]>([])
+  const [links, setLinks] = useState<CreatedLink[]>(() =>
+    pipe(
+      readLinks,
+      IOE.fold<Error, CreatedLink[], CreatedLink[]>(() => IO.of([]), IO.of),
+      runIO,
+    ),
+  )
   const [status, setStatus] = useState<RemoteData>({type: 'idle'})
   const [wip, setWip] = useState<WIP>(O.none)
 
@@ -86,18 +90,26 @@ const App: React.FC = () => {
         (error) => T.of({type: 'failure', error}),
         ({shortened}) => T.of({type: 'success', shortened, prev: url}),
       ),
-      T.map((newStatus) => {
+      T.chain((newStatus) => {
         setStatus(newStatus)
-        if (!isSuccess(newStatus)) return
+        if (!isSuccess(newStatus)) return T.of(undefined)
+
+        const newLink = {url: newStatus.shortened, code: shortenedCode.trim()}
 
         onCopy(newStatus.shortened)
-        setLinks((prev) =>
-          prev.concat([{url: newStatus.shortened, code: shortenedCode.trim()}]),
-        )
+        setLinks((prev) => prev.concat([newLink]))
         flashInfo('Short link created!')
+
+        return updateLinks(newLink)
       }),
       runTask,
     )
+  }
+
+  function onDeleteLink(urlToDelete: string) {
+    setLinks((links) => links.filter((saved) => saved.url !== urlToDelete))
+
+    pipe(urlToDelete, deleteLink, runTask)
   }
 
   // eslint-disable-next-line no-restricted-globals
@@ -184,10 +196,6 @@ const App: React.FC = () => {
           <h3 className={createdLinks}>Created links</h3>
 
           <div className={linksMsgClass}>
-            <b>NOTE</b>: <i>Links are not persisted when reloading the page.</i>
-          </div>
-
-          <div className={linksMsgClass}>
             <b>View code</b> loads the code from the shortened link. The work in
             progress (WIP) is saved and can be restored.
           </div>
@@ -197,6 +205,7 @@ const App: React.FC = () => {
               link={link}
               active={wip}
               onView={viewLink}
+              onDelete={onDeleteLink}
               onRestoreWip={restoreWip}
             />
           ))}
