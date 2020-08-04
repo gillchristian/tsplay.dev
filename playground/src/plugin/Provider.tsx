@@ -1,7 +1,7 @@
 import React from 'react'
 import useResizeAware from 'react-resize-aware'
 import {Sandbox} from './vendor/playground'
-import {PluginUtils} from './vendor/PluginUtils'
+import {PluginUtils} from './vendor/pluginUtils'
 const {useState, useEffect, createContext, useCallback} = React
 
 type Model = import('monaco-editor').editor.ITextModel

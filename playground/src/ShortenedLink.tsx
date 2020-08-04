@@ -14,6 +14,7 @@ interface Props {
   link: CreatedLink
   active: O.Option<{link: string}>
   onView: (link: CreatedLink) => void
+  onDelete: (urlToDelete: string) => void
   onRestoreWip: () => void
 }
 
@@ -21,6 +22,7 @@ export const ShortenedLink: FC<Props> = ({
   link,
   active,
   onView,
+  onDelete,
   onRestoreWip,
 }) => {
   const {copyStatus, onCopy} = useCopy()
@@ -76,6 +78,15 @@ export const ShortenedLink: FC<Props> = ({
         ) : (
           <span className={failureClass}>Cannot not copy</span>
         )}
+      </div>
+
+      <div className={colClass}>
+        <button
+          className={`${buttonClass} button`}
+          onClick={() => onDelete(link.url)}
+        >
+          x
+        </button>
       </div>
     </div>
   )
