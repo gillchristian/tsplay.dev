@@ -172,7 +172,6 @@ createWithRandomShort createUrl createCreatedOn createExpires = do
 listAllHandler :: MonadIO m => AppT m [ShortenedUrl]
 listAllHandler = findAllUrls
 
--- TODO: use a separate table
 statsHandler :: MonadIO m => AppT m Stats
 statsHandler = urlsStats
 
