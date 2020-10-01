@@ -135,7 +135,7 @@ const App: React.FC = () => {
           <div className={failureClass + ' ' + textCenter}>
             <div>
               <small className="not-revert">
-                There are erros in the editor
+                There are errors in the editor
               </small>
             </div>
             <div>
