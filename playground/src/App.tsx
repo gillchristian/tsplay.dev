@@ -140,7 +140,7 @@ const App: React.FC = () => {
             </div>
             <div>
               <small className="not-revert">
-                Are you sure you want to crete a short link?{' '}
+                Are you sure you want to create a short link?{' '}
                 <span role="img" aria-label="thinking">
                   🤔
                 </span>
@@ -169,7 +169,7 @@ const App: React.FC = () => {
               <span role="img" aria-label="warning">
                 ⚠️
               </span>{' '}
-              Already creted a short link for the current code{' '}
+              Already created a short link for the current code{' '}
               <span role="img" aria-label="warning">
                 ⚠️
               </span>
