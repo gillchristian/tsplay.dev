@@ -47,7 +47,7 @@ const k = 1000
 const toFixed = (n: number, digits: number) => Number.parseFloat(n.toFixed(digits))
 
 const formatStat = (stat: number) =>
-  stat > M - 1 ? `${toFixed(stat / M, 2)}M` : stat > k - 1 ? `${toFixed(stat / M, 1)}k` : stat.toString()
+  stat > M - 1 ? `${toFixed(stat / M, 2)}M` : stat > k - 1 ? `${toFixed(stat / k, 1)}k` : stat.toString()
 
 const Stats: React.FC<Props> = ({ shortened, visits }) => {
   return (
