@@ -41,25 +41,33 @@ interface Props {
   visits: number | null
 }
 
+const M = 1000000
+const k = 1000
+
+const toFixed = (n: number, digits: number) => Number.parseFloat(n.toFixed(digits))
+
+const formatStat = (stat: number) =>
+  stat > M - 1 ? `${toFixed(stat / M, 2)}M` : stat > k - 1 ? `${toFixed(stat / M, 1)}k` : stat.toString()
+
 const Stats: React.FC<Props> = ({ shortened, visits }) => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
-        {Boolean(shortened) && (
+        {shortened && (
           <React.Fragment>
             <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               🔗
             </span>
-            Created <strong> {shortened} </strong>
+            Created <strong> {formatStat(shortened)} </strong>
           </React.Fragment>
         )}
         {Boolean(shortened) && Boolean(visits) && <span>│</span>}
-        {Boolean(visits) && (
+        {visits && (
           <React.Fragment>
             <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               👩‍💻
             </span>
-            Visited <strong> {visits} </strong>
+            Visited <strong> {formatStat(visits)} </strong>
           </React.Fragment>
         )}
       </div>
