@@ -34,6 +34,7 @@ data CreatedOn
   | Plugin
   | Api
   | Other
+  | DiscordBot
   deriving stock (Generic, Show)
 
 instance Json.ToJSON CreatedOn where
