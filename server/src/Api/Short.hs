@@ -2,9 +2,7 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE ExtendedDefaultRules #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE NumericUnderscores #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TypeOperators #-}
@@ -138,15 +136,17 @@ createWithCustomShort createUrl short createCreatedOn createExpires = do
   mbByShort <- findUrlByShort short
   mbByLong <- findUrlByLong createUrl
   case (mbByShort, mbByLong) of
-    (Nothing, Nothing) -> do
-      Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 (fromMaybe False createExpires)
+    -- When the short is NOT taken, create even if there's a long url already
+    (Nothing, _) -> do
+      Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 $ Just True == createExpires
       incLinksCreated $ fromMaybe Other createCreatedOn
       respondOr400 short True
+
+    -- When short is taken we cannot create
+    (Just byShort, Nothing) -> respondOr400 short $ createUrl == shortenedUrl byShort
     (Just byShort, Just byLong) ->
       let exists = shortenedUrl byShort == createUrl && short == shortenedShort byLong
        in respondOr400 short exists
-    (Nothing, Just byLong) -> respondOr400 short $ short == shortenedShort byLong
-    (Just byShort, Nothing) -> respondOr400 short $ createUrl == shortenedUrl byShort
   where
     respondOr400 :: MonadIO m => Text -> Bool -> AppT m CreateResponse
     respondOr400 short' True = do
@@ -162,7 +162,7 @@ createWithRandomShort createUrl createCreatedOn createExpires = do
     Nothing -> do
       seed <- maybe (Servant.throwError Servant.err500) pure =<< nextShortRefCounter
       short <- asks (decodeUtf8 . flip Hashids.encode seed . configHashidsCtx)
-      Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 (fromMaybe False createExpires)
+      Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 $ Just True == createExpires
       incLinksCreated $ fromMaybe Other createCreatedOn
       pure $ CreateResponse (baseUrl <> "/" <> short) -- TODO: return 201
     Just ShortenedUrl {..} ->
