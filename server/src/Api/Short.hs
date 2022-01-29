@@ -140,19 +140,23 @@ createWithCustomShort createUrl short createCreatedOn createExpires = do
     (Nothing, _) -> do
       Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 $ Just True == createExpires
       incLinksCreated $ fromMaybe Other createCreatedOn
-      respondOr400 short True
+      respondOr400 True
 
     -- When short is taken we cannot create
-    (Just byShort, Nothing) -> respondOr400 short $ createUrl == shortenedUrl byShort
+    (Just byShort, Nothing) ->
+      let urlMatches = shortenedUrl byShort == createUrl
+       in respondOr400 urlMatches
     (Just byShort, Just byLong) ->
-      let exists = shortenedUrl byShort == createUrl && short == shortenedShort byLong
-       in respondOr400 short exists
+      let urlMatches = shortenedUrl byShort == createUrl
+          shortMatches = short == shortenedShort byLong
+          exists = urlMatches && shortMatches
+       in respondOr400 exists
   where
-    respondOr400 :: MonadIO m => Text -> Bool -> AppT m CreateResponse
-    respondOr400 short' True = do
+    respondOr400 :: MonadIO m => Bool -> AppT m CreateResponse
+    respondOr400 True = do
       baseUrl <- asks configBaseUrl
-      pure $ CreateResponse (baseUrl <> "/" <> short')
-    respondOr400 _ False = Servant.throwError Servant.err400
+      pure $ CreateResponse (baseUrl <> "/" <> short)
+    respondOr400 False = Servant.throwError Servant.err400
 
 createWithRandomShort :: MonadIO m => Text -> Maybe CreatedOn -> Maybe Bool -> AppT m CreateResponse
 createWithRandomShort createUrl createCreatedOn createExpires = do
