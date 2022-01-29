@@ -1,6 +1,9 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE ExtendedDefaultRules #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -19,14 +22,17 @@ import Api.Short.Models
 import Api.Short.Persistence
 import Config (AppT (..), Config (..))
 import qualified Control.Monad as Monad
+import Control.Monad.Except (MonadError)
 import Control.Monad.IO.Class (MonadIO)
 import Control.Monad.Reader (asks)
+import qualified Data.Aeson as Json
 import qualified Data.Char as Char
 import Data.Maybe (fromMaybe)
 import Data.Monoid
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Encoding (decodeUtf8, encodeUtf8)
+import GHC.Generics (Generic)
 import General.Util ((<&>), (<|>))
 import qualified Network.URI as URI
 import Servant ((:<|>) (..), (:>))
@@ -79,8 +85,8 @@ healthzHandler = pure "200 Ok"
 isValidURL :: Text -> Bool
 isValidURL =
   (URI.isURI . Text.unpack)
-    <&> Text.isPrefixOf "https://www.typescriptlang.org/"
-    <|> Text.isPrefixOf "https://www.staging-typescript.org/"
+    <&> Text.isPrefixOf "https://www.typescriptlang.org"
+    <|> Text.isPrefixOf "https://www.staging-typescript.org"
 
 shorterThan :: Int -> Text -> Bool
 shorterThan n = (< n) . Text.length
@@ -124,10 +130,10 @@ isValidShort =
 
 createHandler :: MonadIO m => CreateBody -> AppT m CreateResponse
 createHandler CreateBody {..} = do
-  Monad.unless (isValidURL createUrl) $ Servant.throwError Servant.err400
+  Monad.unless (isValidURL createUrl) $ clientError "Invalid URL"
   case createShort of
     Just short -> do
-      Monad.unless (isValidShort short) $ Servant.throwError Servant.err400
+      Monad.unless (isValidShort short) $ clientError "Invalid custom short"
       createWithCustomShort createUrl short createCreatedOn createExpires
     Nothing -> createWithRandomShort createUrl createCreatedOn createExpires
 
@@ -136,27 +142,25 @@ createWithCustomShort createUrl short createCreatedOn createExpires = do
   mbByShort <- findUrlByShort short
   mbByLong <- findUrlByLong createUrl
   case (mbByShort, mbByLong) of
-    -- When the short is NOT taken, create even if there's a long url already
+    -- Short NOT taken, create even if there's a long url already
     (Nothing, _) -> do
       Monad.void $ insertUrl $ ShortenedUrl short createUrl 0 $ Just True == createExpires
       incLinksCreated $ fromMaybe Other createCreatedOn
-      respondOr400 True
+      alreadyExists
 
-    -- When short is taken we cannot create
-    (Just byShort, Nothing) ->
-      let urlMatches = shortenedUrl byShort == createUrl
-       in respondOr400 urlMatches
-    (Just byShort, Just byLong) ->
-      let urlMatches = shortenedUrl byShort == createUrl
-          shortMatches = short == shortenedShort byLong
-          exists = urlMatches && shortMatches
-       in respondOr400 exists
+    -- Short taken, don't create
+    (Just byShort, Nothing)
+      | shortenedUrl byShort == createUrl ->
+        alreadyExists
+    (Just byShort, Just byLong)
+      | shortenedUrl byShort == createUrl && short == shortenedShort byLong ->
+        alreadyExists
+    _ -> clientError "Custom short already taken"
   where
-    respondOr400 :: MonadIO m => Bool -> AppT m CreateResponse
-    respondOr400 True = do
+    alreadyExists :: MonadIO m => AppT m CreateResponse
+    alreadyExists = do
       baseUrl <- asks configBaseUrl
       pure $ CreateResponse (baseUrl <> "/" <> short)
-    respondOr400 False = Servant.throwError Servant.err400
 
 createWithRandomShort :: MonadIO m => Text -> Maybe CreatedOn -> Maybe Bool -> AppT m CreateResponse
 createWithRandomShort createUrl createCreatedOn createExpires = do
@@ -193,3 +197,14 @@ redirectTo :: MonadIO m => Text -> AppT m ()
 redirectTo url =
   Servant.throwError $
     Servant.err302 {Servant.errHeaders = [("Location", encodeUtf8 url)]}
+
+newtype ErrorMessage = ErrorMessage {message :: Text}
+  deriving (Generic, Json.ToJSON)
+
+clientError :: MonadError Servant.ServerError m => Text -> m a
+clientError msg =
+  Servant.throwError $
+    Servant.err400
+      { Servant.errHeaders = [("Content-Type", "application/json")],
+        Servant.errBody = Json.encode $ ErrorMessage msg
+      }
