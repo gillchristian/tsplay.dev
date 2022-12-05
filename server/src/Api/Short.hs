@@ -82,11 +82,13 @@ shortApi = Servant.Proxy
 healthzHandler :: MonadIO m => AppT m Text
 healthzHandler = pure "200 Ok"
 
-isValidURL :: Text -> Bool
-isValidURL =
-  (URI.isURI . Text.unpack)
-    <&> Text.isPrefixOf "https://www.typescriptlang.org"
-    <|> Text.isPrefixOf "https://www.staging-typescript.org"
+isValidTypeScriptURL :: Text -> Bool
+isValidTypeScriptURL url =
+  case Text.pack <$> URI.uriRegName <$> (URI.uriAuthority =<< URI.parseURI (Text.unpack url)) of
+    Nothing -> False
+    Just host ->
+      Text.isPrefixOf "www.typescriptlang.org" <|>
+        Text.isPrefixOf "www.staging-typescript.org" $ host
 
 shorterThan :: Int -> Text -> Bool
 shorterThan n = (< n) . Text.length
@@ -130,7 +132,7 @@ isValidShort =
 
 createHandler :: MonadIO m => CreateBody -> AppT m CreateResponse
 createHandler CreateBody {..} = do
-  Monad.unless (isValidURL createUrl) $ clientError "Invalid URL"
+  Monad.unless (isValidTypeScriptURL createUrl) $ clientError "Invalid URL"
   case createShort of
     Just short -> do
       Monad.unless (isValidShort short) $ clientError "Invalid custom short"
