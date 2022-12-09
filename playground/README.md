@@ -20,7 +20,7 @@ and skip to [Step 4](#step-4-plugin-is-enabled). Or install manually from Step 1
 #### Step 3. Add the plugin
 
 On the **Custom npm Modules** input add `typescript-playground-link-shortener`
-and reaload the page.
+and reload the page.
 
 <img src="./assets/plugins-02.png" style="max-width: 80%;"/>
 
