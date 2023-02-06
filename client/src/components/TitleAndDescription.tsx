@@ -111,7 +111,7 @@ const TitleAndDescription: React.FC = () => {
 
         <div css={styles.description}>
           <a
-            href="https://www.buymeacoffee.com/gillchristian"
+            href="https://tsplay.dev/support"
             target="_blank"
             rel="noopener noreferrer"
             css={styles.strong}

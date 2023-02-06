@@ -3,5 +3,5 @@
 </h1>
 
 <p align="center">
-  <strong><a href="https://www.buymeacoffee.com/gillchristian">Buy me a burrito 🌯</a> to support the project</strong>
+  <strong><a href="https://tsplay.dev/support">Buy me a burrito 🌯</a> to support the project</strong>
 </p>
