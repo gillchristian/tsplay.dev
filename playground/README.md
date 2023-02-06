@@ -1,6 +1,10 @@
-# typescript-playground-link-shortener
+<h1 align="center">
+  typescript-playground-link-shortener
+</h1>
 
-**[Buy me a burrito 🌯](https://www.buymeacoffee.com/gillchristian) to support the project**
+<p align="center">
+  <strong><a href="https://www.buymeacoffee.com/gillchristian">Buy me a burrito 🌯</a> to support the project</strong>
+</p>
 
 TypeScript
 [Playground Plugin](https://www.typescriptlang.org/dev/playground-plugins/)
