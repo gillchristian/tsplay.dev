@@ -1,6 +1,10 @@
-# [tsplay.dev](https://tsplay.dev)
+<h1 align="center">
+  <a href="https://tsplay.dev">tsplay.dev</a>
+</h1>
 
-**[Buy me a burrito 🌯](https://www.buymeacoffee.com/gillchristian) to support the project**
+<p align="center">
+  <strong><a href="https://www.buymeacoffee.com/gillchristian">Buy me a burrito 🌯</a> to support the project</strong>
+</p>
 
 > A link shortener for [TypeScript Playground](https://www.typescriptlang.org/play)
 
