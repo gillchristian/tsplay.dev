@@ -10,10 +10,6 @@ const styles = {
     align-items: center;
     margin-top: -10px;
 
-    .strong {
-      font-weight: 600;
-    }
-
     @media (max-width: 1000px) {
       margin-top: 0;
     }
@@ -63,10 +59,10 @@ const styles = {
       font-size: 15px;
     }
   `,
+  strong: css`
+    font-weight: bold;
+  `,
 }
-
-// NOTE: this should be added once the new version of the TypeScript website is released
-const showPluginDescription = false
 
 const TitleAndDescription: React.FC = () => {
   return (
@@ -87,26 +83,42 @@ const TitleAndDescription: React.FC = () => {
           Easily share TypeScript snippets without having to send an URL that is longer than a <i>yarn.lock</i>.
         </div>
 
-        {showPluginDescription && (
-          <React.Fragment>
-            <div css={styles.description}>Create short-links directly in the playground with the plugin:</div>
-            <div css={styles.description}>
-              <pre className="strong">
-                <a
-                  href="https://www.typescriptlang.org/play?install-plugin=typescript-playground-link-shortener"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  typescript-playground-link-shortener
-                </a>
-              </pre>
-            </div>
-          </React.Fragment>
-        )}
         <div css={styles.description}>
-          <strong className="strong">Why a dedicated link shortener?</strong> Did we mention short links? Ok, besides
-          that, security is also a concern. <a href="https://tsplay.dev">tsplay.dev</a> links will always redirect to
-          the TypeScript Playground. <i>You never know where bit.ly or tinyurl.com links could take you</i>
+          <span css={styles.strong}>Why a dedicated link shortener?</span> Did we mention short links? Ok, besides that,
+          security is also a concern. <a href="https://tsplay.dev">tsplay.dev</a> links will always redirect to the{' '}
+          <a
+            href="https://www.typescriptlang.org/play?install-plugin=typescript-playground-link-shortener"
+            target="_blank"
+            rel="noopener noreferrer"
+            css={styles.strong}
+          >
+            TypeScript Playground
+          </a>
+          . <i>You never know where bit.ly or tinyurl.com links could take you</i>
+        </div>
+
+        <div css={styles.description}>
+          To create short-links directly in the playground use the plugin:
+          <a
+            href="https://www.typescriptlang.org/play?install-plugin=typescript-playground-link-shortener"
+            target="_blank"
+            rel="noopener noreferrer"
+            css={styles.strong}
+          >
+            typescript-playground-link-shortener
+          </a>
+        </div>
+
+        <div css={styles.description}>
+          <a
+            href="https://www.buymeacoffee.com/gillchristian"
+            target="_blank"
+            rel="noopener noreferrer"
+            css={styles.strong}
+          >
+            Buy me a burrito 🌯
+          </a>{' '}
+          to support tsplay.dev
         </div>
       </div>
     </div>

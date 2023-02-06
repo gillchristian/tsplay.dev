@@ -2,7 +2,8 @@ import {TypeScriptWorker} from './tsWorker' // import { TypeScriptWorker } from 
 // import lzstring from './vendor/lzstring.min';
 
 import * as tsvfs from './typescript-vfs'
-declare type CompilerOptions = import('monaco-editor').languages.typescript.CompilerOptions
+declare type CompilerOptions =
+  import('monaco-editor').languages.typescript.CompilerOptions
 /**
  * These are settings for the playground which are the equivalent to props in React
  * any changes to it should require a new setup of the playground

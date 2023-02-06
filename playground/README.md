@@ -1,5 +1,7 @@
 # typescript-playground-link-shortener
 
+**[Buy me a burrito 🌯](https://www.buymeacoffee.com/gillchristian) to support the project**
+
 TypeScript
 [Playground Plugin](https://www.typescriptlang.org/dev/playground-plugins/)
 for [tsplay.dev](https://tsplay.dev).

@@ -3,14 +3,24 @@ import {css} from 'goober'
 
 export const Header = () => (
   <header className={header}>
-    <h2 className={h2}>Playground Link Shortener</h2>
+    <h2 className={h2}>
+      <a
+        href="https://tsplay.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={tsLink}
+      >
+        tsplay.dev
+      </a>
+    </h2>
+
     <a
-      href="https://tsplay.dev"
+      href="https://www.buymeacoffee.com/gillchristian"
       target="_blank"
       rel="noopener noreferrer"
-      className={tsLink}
+      className={burrito}
     >
-      tsplay.dev
+      Support this plugging 🌯
     </a>
   </header>
 )
@@ -32,6 +42,12 @@ const h2 = css`
 
 const tsLink = css`
   color: #262626 !important;
-  margin-bottom: 1rem;
   font-size: 1.3rem;
+`
+
+const burrito = css`
+  color: #262626 !important;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-decoration: none;
 `
