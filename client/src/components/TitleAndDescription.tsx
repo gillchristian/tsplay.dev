@@ -116,7 +116,10 @@ const TitleAndDescription: React.FC = () => {
             rel="noopener noreferrer"
             css={styles.strong}
           >
-            Buy me a burrito 🌯
+            Buy me a burrito{' '}
+            <span role="img" aria-label="burrito emoji">
+              🌯
+            </span>
           </a>{' '}
           to support tsplay.dev
         </div>
