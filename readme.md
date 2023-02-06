@@ -1,5 +1,7 @@
 # [tsplay.dev](https://tsplay.dev)
 
+**[Buy me a burrito 🌯](https://www.buymeacoffee.com/gillchristian) to support the project**
+
 > A link shortener for [TypeScript Playground](https://www.typescriptlang.org/play)
 
 ![Server: Test & Build](https://github.com/gillchristian/tsplay.dev/workflows/Server:%20Test%20&%20Build/badge.svg)

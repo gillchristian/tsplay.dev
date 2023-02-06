@@ -22,7 +22,8 @@ const {useState} = React
 
 type WIP = O.Option<{link: string; code: string}>
 
-const urlWithCode = /(typescriptlang|staging-typescript)\.org\/.*code\/[A-Za-z0-9]+/
+const urlWithCode =
+  /(typescriptlang|staging-typescript)\.org\/.*code\/[A-Za-z0-9]+/
 const hasEncodedCode = (url: string) => urlWithCode.test(url)
 
 const matchesOtherLinks = (code: string, links: CreatedLink[]) =>
@@ -216,7 +217,7 @@ const App: React.FC = () => {
 }
 
 const wrapperClass = css`
-  padding: 10px;
+  padding: 0 10px 10px;
   color: black;
 
   h1,
