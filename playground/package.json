@@ -1,7 +1,7 @@
 {
   "name": "typescript-playground-link-shortener",
   "description": "Create short-links for your current playground code and compiler settings",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "git@github.com:gillchristian/tsplay.dev.git",
   "author": "Christian Gill <gillchristian@gmail.com>",
   "license": "MIT",
