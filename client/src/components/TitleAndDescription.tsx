@@ -110,12 +110,7 @@ const TitleAndDescription: React.FC = () => {
         </div>
 
         <div css={styles.description}>
-          <a
-            href="https://tsplay.dev/support"
-            target="_blank"
-            rel="noopener noreferrer"
-            css={styles.strong}
-          >
+          <a href="https://tsplay.dev/support" target="_blank" rel="noopener noreferrer" css={styles.strong}>
             Buy me a burrito{' '}
             <span role="img" aria-label="burrito emoji">
               🌯
