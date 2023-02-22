@@ -9,7 +9,7 @@ services:
       - database_data:/var/lib/postgresql/data/ 
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 5432:5432
+      - 8001:5432
 
 volumes:
   database_data:

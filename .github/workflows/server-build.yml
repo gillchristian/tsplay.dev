@@ -22,7 +22,7 @@ jobs:
       matrix:
         os: [ubuntu-18.04]
         plan:
-          - { stack-lts: "14.27", resolver: "--resolver lts-14.27" }
+          - { stack-lts: "20.11", resolver: "--resolver lts-20.11" }
 
     runs-on: ${{ matrix.os }}
 
@@ -37,7 +37,7 @@ jobs:
     - name: Setup stack
       uses: haskell/actions/setup@v2
       with:
-        ghc-version: '8.6.5'
+        ghc-version: '9.2.5'
         enable-stack: true
         stack-version: 'latest'
 

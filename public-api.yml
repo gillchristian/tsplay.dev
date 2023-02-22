@@ -1,0 +1,189 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Tsplay.dev public API
+  license:
+    name: MIT
+servers:
+  - url: https://tsplay.dev
+paths:
+  '':
+    get:
+      summary: Visit Tsplay.dev
+      operationId: visitTsplay
+      responses:
+        '302':
+          description: Redirect to Tsplay.dev app
+          headers:
+            Location:
+              description: The Tsplay.dev app URL
+              required: true
+              schema:
+                type: string
+  /healthz:
+    get:
+      summary: Health check endpoint
+      operationId: healthCheck
+      responses:
+        '200':
+          description: The application is healthy
+  /api/short:
+    get:
+      summary: List all shortened URLs
+      operationId: listAllShorts
+      responses:
+        '200':
+          description: A list of shortened URLs
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ShortenedUrls"
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a shortened URL
+      operationId: createShort
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/CreateRequest'
+      responses:
+        '201':
+          description: URL shortened successfully
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ShortenedUrl"
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/short/stats:
+    get:
+      summary: Stats
+      operationId: stats
+      responses:
+        '200':
+          description: Stats
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Stats"
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /{short}:
+    parameters:
+      - '$ref': '#/components/parameters/short'
+    get:
+      summary: Visit shortened URL
+      operationId: visitShortened
+      responses:
+        '302':
+          description: TypeScript Playground URL (or app if not found)
+          headers:
+            Location:
+              description: The TypeScript Playground long URL
+              required: true
+              schema:
+                type: string
+components:
+  parameters:
+    short:
+      name: short
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    ShortenedUrl:
+      type: object
+      required:
+        - short
+        - shortened
+        - url
+        - visits
+        - expires
+      properties:
+        short:
+          type: string
+        shortened:
+          type: string
+        url:
+          type: string
+        visits:
+          type: integer
+          format: int64
+        expires:
+          type: boolean
+    CreateRequest:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+        short:
+          type: string
+        expires:
+          type: boolean
+        created_on:
+          '$ref': '#/components/schemas/CreatedOn'
+    CreatedOn:
+      type: string
+      enum:
+        - client
+        - plugin
+        - api
+        - other
+    ShortenedUrls:
+      type: array
+      items:
+        $ref: "#/components/schemas/ShortenedUrl"
+    Stats:
+      type: object
+      required:
+        - shortened
+        - visits
+      properties:
+        shortened:
+          type: integer
+          format: int64
+        visits:
+          type: integer
+          format: int64
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string

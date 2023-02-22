@@ -39,8 +39,8 @@ const getLinksFromLocalStorage = () => {
 }
 
 export type StatsResponse = {
-  totalShortened: number | null
-  totalVisits: number | null
+  shortened: number
+  visits: number
 }
 
 const fetchStats = async () => {
@@ -55,8 +55,8 @@ const fetchStats = async () => {
 }
 
 const App: React.FC = () => {
-  const [shortened, setShortened] = React.useState<number | null>(null)
-  const [visits, setVisits] = React.useState<number | null>(null)
+  const [shortened, setShortened] = React.useState<number>(0)
+  const [visits, setVisits] = React.useState<number>(0)
   const [shortenedCreated, setShortenedCreated] = React.useState('')
   const [links, setLinks] = React.useState<string[]>([])
 
@@ -71,8 +71,8 @@ const App: React.FC = () => {
 
     const stats = await fetchStats()
     if (stats) {
-      setShortened(stats.totalShortened)
-      setVisits(stats.totalVisits)
+      setShortened(stats.shortened)
+      setVisits(stats.visits)
     }
   }, [])
 
