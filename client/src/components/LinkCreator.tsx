@@ -230,7 +230,7 @@ const useLinkInput = ({ setShortened, setShortenedCreated, showToast, setLinks }
 }
 
 interface Props {
-  setShortened: React.Dispatch<React.SetStateAction<number | null>>
+  setShortened: React.Dispatch<React.SetStateAction<number>>
   setShortenedCreated: React.Dispatch<React.SetStateAction<string>>
   showToast: ShowToast
   setLinks: (links: string[]) => void

@@ -4,11 +4,7 @@ github:              "gillchristian/tsplay"
 license:             MIT
 author:              "Christian Gill"
 maintainer:          "gillchristiang@gmail.com"
-copyright:           "2020 Christian Gill"
-
-extra-source-files:
-- readme.md
-- ChangeLog.md
+copyright:           "2023 Christian Gill"
 
 synopsis:            Link shortener for TypeScript Playground
 category:            Web
@@ -17,58 +13,45 @@ description:         Please see the README on GitHub at <https://github.com/gill
 
 dependencies:
 - base >= 4.7 && < 5
-- aeson
-- bson
 - bytestring
-- casing
-- data-default-class
-- ekg
-- ekg-core
-- fast-logger
 - hashids
-- http-client
-- http-media
 - http-types
-- katip
-- microlens
-- monad-control
-- monad-logger
 - mtl
 - network-uri
-- parsec
+- postgresql-migration
 - postgresql-simple
-- postgresql-simple-migration
 - resource-pool
 - safe
-- servant
-- servant-server
 - text
-- time
 - transformers
-- unordered-containers
-- utf8-string
+- tsplay-public
 - wai
 - wai-cors
 - wai-extra
 - warp
-- wreq
+
+ghc-options:
+# For details on warnings: https://downloads.haskell.org/~ghc/master/users-guide/using-warnings.html
+# This list taken from https://medium.com/mercury-bank/enable-all-the-warnings-a0517bc081c3
+# Enable all warnings with -Weverything, then disable the ones we don’t care about
+- -Weverything
+- -Werror
+- -Wno-missing-exported-signatures # missing-exported-signatures turns off the more strict -Wmissing-signatures. See https://ghc.haskell.org/trac/ghc/ticket/14794#ticket
+- -Wno-missing-import-lists # Requires explicit imports of _every_ function (e.g. ‘$’); too strict
+- -Wno-missed-specialisations # When GHC can’t specialize a polymorphic function. No big deal and requires fixing underlying libraries to solve.
+- -Wno-all-missed-specialisations # See missed-specialisations
+- -Wno-unsafe # Don’t use Safe Haskell warnings
+- -Wno-safe # Don’t use Safe Haskell warnings
+- -Wno-missing-local-signatures # Warning for polymorphic local bindings; nothing wrong with those.
+- -Wno-monomorphism-restriction # Don’t warn if the monomorphism restriction is used
+- -Wno-missing-kind-signatures # Ain't nobody got time for that
+- -Wno-missing-safe-haskell-mode
+
+default-extensions:
+- ImportQualifiedPost
 
 library:
   source-dirs: src
-  ghc-options:
-  # For details on warnings: https://downloads.haskell.org/~ghc/master/users-guide/using-warnings.html
-  # This list taken from https://medium.com/mercury-bank/enable-all-the-warnings-a0517bc081c3
-  # Enable all warnings with -Weverything, then disable the ones we don’t care about
-  - -Weverything
-  - -Werror
-  - -Wno-missing-exported-signatures # missing-exported-signatures turns off the more strict -Wmissing-signatures. See https://ghc.haskell.org/trac/ghc/ticket/14794#ticket
-  - -Wno-missing-import-lists # Requires explicit imports of _every_ function (e.g. ‘$’); too strict
-  - -Wno-missed-specialisations # When GHC can’t specialize a polymorphic function. No big deal and requires fixing underlying libraries to solve.
-  - -Wno-all-missed-specialisations # See missed-specialisations
-  - -Wno-unsafe # Don’t use Safe Haskell warnings
-  - -Wno-safe # Don’t use Safe Haskell warnings
-  - -Wno-missing-local-signatures # Warning for polymorphic local bindings; nothing wrong with those.
-  - -Wno-monomorphism-restriction # Don’t warn if the monomorphism restriction is used
 
 executables:
   tsplay-exe:
@@ -78,6 +61,7 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wno-unused-packages
     dependencies:
     - tsplay
 

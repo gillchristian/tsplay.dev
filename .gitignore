@@ -1,3 +1,5 @@
 .now
 .idea
 .vscode
+.stack-work/
+public-api/.stack-work/

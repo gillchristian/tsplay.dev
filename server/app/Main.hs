@@ -1,7 +1,7 @@
 module Main (main) where
 
-import Init (runApp)
 import Prelude
+import Init
 
 main :: IO ()
 main = runApp

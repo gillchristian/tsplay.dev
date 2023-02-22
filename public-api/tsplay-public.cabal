@@ -1,0 +1,34 @@
+cabal-version: 3.0
+name: tsplay-public
+version: 0.1.0.0
+library
+  build-depends:
+    , aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , ghc-prim
+    , http-api-data
+    , http-media
+    , http-types
+    , text
+    , time
+    , unordered-containers
+    , wai
+  exposed-modules:
+    TsplayPublic.Api
+    TsplayPublic.Request
+    TsplayPublic.Response
+    TsplayPublic.Response.CreateShort
+    TsplayPublic.Response.HealthCheck
+    TsplayPublic.Response.ListAllShorts
+    TsplayPublic.Response.Stats
+    TsplayPublic.Response.VisitShortened
+    TsplayPublic.Response.VisitTsplay
+    TsplayPublic.Schemas.CreateRequest
+    TsplayPublic.Schemas.CreatedOn
+    TsplayPublic.Schemas.Error
+    TsplayPublic.Schemas.ShortenedUrl
+    TsplayPublic.Schemas.ShortenedUrls
+    TsplayPublic.Schemas.Stats

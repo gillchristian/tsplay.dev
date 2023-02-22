@@ -37,8 +37,8 @@ const styles = {
 }
 
 interface Props {
-  shortened: number | null
-  visits: number | null
+  shortened: number
+  visits: number
 }
 
 const M = 1000000
@@ -53,23 +53,23 @@ const Stats: React.FC<Props> = ({ shortened, visits }) => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
-        {shortened && (
+        {shortened ? (
           <React.Fragment>
             <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               🔗
             </span>
             Created <strong> {formatStat(shortened)} </strong>
           </React.Fragment>
-        )}
+        ) : null}
         {Boolean(shortened) && Boolean(visits) && <span>│</span>}
-        {visits && (
+        {visits ? (
           <React.Fragment>
             <span role="img" aria-label="emoji" className="prevent-hue-rotate">
               👩‍💻
             </span>
             Visited <strong> {formatStat(visits)} </strong>
           </React.Fragment>
-        )}
+        ) : null}
       </div>
     </div>
   )

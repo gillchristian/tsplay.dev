@@ -1,45 +1,40 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeOperators #-}
+module Api (app) where
 
-module Api
-  ( app,
-    shortApp,
-  )
-where
-
-import Api.Short (ShortAPI, shortApi, shortServer)
-import Config (AppT (..), Config (..))
-import Control.Monad.Reader (runReaderT)
-import Servant
-  ( -- (:<|>) ((:<|>)),
-    Proxy (Proxy),
-    Server,
-    serve,
-  )
-import Servant.Server
+import Config (App, AppT (runApp), Config (..))
+import Control.Monad.Reader (asks, runReaderT)
+import Network.HTTP.Types.Status qualified as Wai
+import Network.Wai qualified as Wai
+import Short.Api (createHandler, listAllHandler, visitHandler)
+import Short.Persistence
+import TsplayPublic.Api as TsplayPublic
 import Prelude
 
--- | This is the function we export to run our 'Short
--- a 'Config', we return a WAI 'Application' which any WAI compliant server
--- can run.
-shortApp :: Config -> Application
-shortApp cfg = serve shortApi (appToServer cfg)
+import TsplayPublic.Response.HealthCheck (HealthCheckResponse (..))
+import TsplayPublic.Response.Stats (StatsResponse (..))
+import TsplayPublic.Response.VisitTsplay (VisitTsplayResponse (..))
 
--- | This functions tells Servant how to run the 'App' monad with our
--- 'server' function.
-appToServer :: Config -> Server ShortAPI
-appToServer cfg = hoistServer shortApi (convertApp cfg) shortServer
+api :: TsplayPublic.Api App
+api =
+    TsplayPublic.Api
+        { healthCheck = pure HealthCheckResponse200
+        , visitTsplay = visitTsplayHandler
+        , stats = StatsResponse200 <$> urlsStats -- TODO: handle error
+        , -- Shorts
+          createShort = createHandler
+        , visitShortened = visitHandler
+        , listAllShorts = listAllHandler
+        }
 
--- | This function converts our @'AppT' m@ monad into the @ExceptT ServantErr
--- m@ monad that Servant's 'enter' function needs in order to run the
--- application.
-convertApp :: Config -> AppT IO a -> Handler a
-convertApp cfg appt = Handler $ runReaderT (runApp appt) cfg
+notFound :: Wai.Application
+notFound _req respond = respond $ Wai.responseLBS Wai.status404 [] mempty
 
-type AppAPI = ShortAPI
+run :: Config -> Wai.Request -> App a -> IO a
+run cfg _ appt = runReaderT (runApp appt) cfg
 
-appApi :: Proxy AppAPI
-appApi = Proxy
+app :: Config -> Wai.Application
+app cfg = TsplayPublic.application (run cfg) api notFound
 
-app :: Config -> Application
-app cfg = serve appApi $ appToServer cfg
+visitTsplayHandler :: App VisitTsplayResponse
+visitTsplayHandler = do
+    client <- asks configClientUrl
+    pure $ VisitTsplayResponse302 client
