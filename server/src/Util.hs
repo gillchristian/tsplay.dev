@@ -1,7 +1,7 @@
-module Util (
-    (<&>),
-    (<|>),
-)
+module Util
+  ( (<&>)
+  , (<|>)
+  )
 where
 
 import Control.Applicative (liftA2)

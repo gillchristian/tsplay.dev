@@ -39,20 +39,20 @@ import TsplayPublic.Schemas.ShortenedUrl
 import TsplayPublic.Response
 
 data CreateShortResponse
-    = CreateShortResponse201 ShortenedUrl
-    | CreateShortResponse400 Error
-    | CreateShortResponse500 Error
-    deriving (Show)
+  = CreateShortResponse201 ShortenedUrl
+  | CreateShortResponse400 Error
+  | CreateShortResponse500 Error
+  deriving (Show)
 
 instance ToResponse CreateShortResponse where
-    toResponse (CreateShortResponse201 x) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status201 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
-    toResponse (CreateShortResponse400 x) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status400 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
-    toResponse (CreateShortResponse500 x) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status500 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
+  toResponse (CreateShortResponse201 x) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status201 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
+  toResponse (CreateShortResponse400 x) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status400 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
+  toResponse (CreateShortResponse500 x) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status500 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
 
 instance GHC.Records.HasField "status" CreateShortResponse Network.HTTP.Types.Status where
-    getField (CreateShortResponse201{}) = Network.HTTP.Types.status201
-    getField (CreateShortResponse400{}) = Network.HTTP.Types.status400
-    getField (CreateShortResponse500{}) = Network.HTTP.Types.status500
+  getField (CreateShortResponse201{}) = Network.HTTP.Types.status201
+  getField (CreateShortResponse400{}) = Network.HTTP.Types.status400
+  getField (CreateShortResponse500{}) = Network.HTTP.Types.status500

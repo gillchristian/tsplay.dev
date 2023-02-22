@@ -35,12 +35,12 @@ import qualified Web.HttpApiData
 import TsplayPublic.Response
 
 data VisitShortenedResponse
-    = VisitShortenedResponse302 Data.Text.Text
-    deriving (Show)
+  = VisitShortenedResponse302 Data.Text.Text
+  deriving (Show)
 
 instance ToResponse VisitShortenedResponse where
-    toResponse (VisitShortenedResponse302 __Location) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status302 ([("Location", Web.HttpApiData.toHeader __Location)]) mempty
+  toResponse (VisitShortenedResponse302 __Location) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status302 ([("Location", Web.HttpApiData.toHeader __Location)]) mempty
 
 instance GHC.Records.HasField "status" VisitShortenedResponse Network.HTTP.Types.Status where
-    getField (VisitShortenedResponse302{}) = Network.HTTP.Types.status302
+  getField (VisitShortenedResponse302{}) = Network.HTTP.Types.status302

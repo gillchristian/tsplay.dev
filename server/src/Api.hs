@@ -15,15 +15,15 @@ import TsplayPublic.Response.VisitTsplay (VisitTsplayResponse (..))
 
 api :: TsplayPublic.Api App
 api =
-    TsplayPublic.Api
-        { healthCheck = pure HealthCheckResponse200
-        , visitTsplay = visitTsplayHandler
-        , stats = StatsResponse200 <$> urlsStats -- TODO: handle error
-        , -- Shorts
-          createShort = createHandler
-        , visitShortened = visitHandler
-        , listAllShorts = listAllHandler
-        }
+  TsplayPublic.Api
+    { healthCheck = pure HealthCheckResponse200
+    , visitTsplay = visitTsplayHandler
+    , stats = StatsResponse200 <$> urlsStats -- TODO: handle error
+    , -- Shorts
+      createShort = createHandler
+    , visitShortened = visitHandler
+    , listAllShorts = listAllHandler
+    }
 
 notFound :: Wai.Application
 notFound _req respond = respond $ Wai.responseLBS Wai.status404 [] mempty
@@ -36,5 +36,5 @@ app cfg = TsplayPublic.application (run cfg) api notFound
 
 visitTsplayHandler :: App VisitTsplayResponse
 visitTsplayHandler = do
-    client <- asks configClientUrl
-    pure $ VisitTsplayResponse302 client
+  client <- asks configClientUrl
+  pure $ VisitTsplayResponse302 client

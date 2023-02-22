@@ -33,27 +33,27 @@ import qualified Network.Wai
 import qualified Web.HttpApiData
 
 data Stats = Stats
-    { shortened :: GHC.Int.Int64
-    , visits :: GHC.Int.Int64
-    }
-    deriving (Show)
+  { shortened :: GHC.Int.Int64
+  , visits :: GHC.Int.Int64
+  }
+  deriving (Show)
 
 instance Data.Aeson.ToJSON Stats where
-    toJSON Stats{..} =
-        Data.Aeson.object
-            ( [ "shortened" Data.Aeson..= shortened
-              , "visits" Data.Aeson..= visits
-              ]
-            )
+  toJSON Stats{..} =
+    Data.Aeson.object
+      ( [ "shortened" Data.Aeson..= shortened
+        , "visits" Data.Aeson..= visits
+        ]
+      )
 
-    toEncoding Stats{..} =
-        Data.Aeson.Encoding.pairs
-            ( Data.Aeson.Encoding.pair "shortened" (Data.Aeson.toEncoding shortened)
-                <> Data.Aeson.Encoding.pair "visits" (Data.Aeson.toEncoding visits)
-            )
+  toEncoding Stats{..} =
+    Data.Aeson.Encoding.pairs
+      ( Data.Aeson.Encoding.pair "shortened" (Data.Aeson.toEncoding shortened)
+          <> Data.Aeson.Encoding.pair "visits" (Data.Aeson.toEncoding visits)
+      )
 
 instance Data.Aeson.FromJSON Stats where
-    parseJSON = Data.Aeson.withObject "Stats" $ \o ->
-        Stats
-            <$> o Data.Aeson..: "shortened"
-            <*> o Data.Aeson..: "visits"
+  parseJSON = Data.Aeson.withObject "Stats" $ \o ->
+    Stats
+      <$> o Data.Aeson..: "shortened"
+      <*> o Data.Aeson..: "visits"

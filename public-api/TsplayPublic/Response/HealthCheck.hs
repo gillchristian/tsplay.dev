@@ -35,12 +35,12 @@ import qualified Web.HttpApiData
 import TsplayPublic.Response
 
 data HealthCheckResponse
-    = HealthCheckResponse200
-    deriving (Show)
+  = HealthCheckResponse200
+  deriving (Show)
 
 instance ToResponse HealthCheckResponse where
-    toResponse (HealthCheckResponse200) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status200 ([]) mempty
+  toResponse (HealthCheckResponse200) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status200 ([]) mempty
 
 instance GHC.Records.HasField "status" HealthCheckResponse Network.HTTP.Types.Status where
-    getField (HealthCheckResponse200{}) = Network.HTTP.Types.status200
+  getField (HealthCheckResponse200{}) = Network.HTTP.Types.status200
