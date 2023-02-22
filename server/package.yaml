@@ -73,5 +73,6 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wno-unused-packages
     dependencies:
     - tsplay
