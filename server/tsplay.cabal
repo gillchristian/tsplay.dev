@@ -97,7 +97,7 @@ test-suite tsplay-test
       test
   default-extensions:
       ImportQualifiedPost
-  ghc-options: -Weverything -Werror -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-kind-signatures -Wno-missing-safe-haskell-mode -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Weverything -Werror -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-kind-signatures -Wno-missing-safe-haskell-mode -threaded -rtsopts -with-rtsopts=-N -Wno-unused-packages
   build-depends:
       base >=4.7 && <5
     , bytestring
