@@ -33,23 +33,23 @@ import qualified Network.Wai
 import qualified Web.HttpApiData
 
 newtype Error = Error
-    { message :: Data.Text.Text
-    }
-    deriving (Show)
+  { message :: Data.Text.Text
+  }
+  deriving (Show)
 
 instance Data.Aeson.ToJSON Error where
-    toJSON Error{..} =
-        Data.Aeson.object
-            ( [ "message" Data.Aeson..= message
-              ]
-            )
+  toJSON Error{..} =
+    Data.Aeson.object
+      ( [ "message" Data.Aeson..= message
+        ]
+      )
 
-    toEncoding Error{..} =
-        Data.Aeson.Encoding.pairs
-            ( Data.Aeson.Encoding.pair "message" (Data.Aeson.toEncoding message)
-            )
+  toEncoding Error{..} =
+    Data.Aeson.Encoding.pairs
+      ( Data.Aeson.Encoding.pair "message" (Data.Aeson.toEncoding message)
+      )
 
 instance Data.Aeson.FromJSON Error where
-    parseJSON = Data.Aeson.withObject "Error" $ \o ->
-        Error
-            <$> o Data.Aeson..: "message"
+  parseJSON = Data.Aeson.withObject "Error" $ \o ->
+    Error
+      <$> o Data.Aeson..: "message"

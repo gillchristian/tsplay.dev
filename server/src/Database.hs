@@ -1,14 +1,14 @@
 {-# LANGUAGE FlexibleContexts #-}
 
-module Database (
-    initializeDatabase,
-    runDb1_,
-    runDb1,
-    runDbN_,
-    runDbN,
-    execDb1,
-    execDb1_,
-)
+module Database
+  ( initializeDatabase
+  , runDb1_
+  , runDb1
+  , runDbN_
+  , runDbN
+  , execDb1
+  , execDb1_
+  )
 where
 
 import Config (Config, configPool)
@@ -23,38 +23,38 @@ import Prelude
 
 initializeDatabase :: FilePath -> PG.Connection -> IO ()
 initializeDatabase dir con =
-    PG.withTransaction con $
-        mapM_ migrate [PG.MigrationInitialization, PG.MigrationDirectory dir]
-  where
-    migrate = PG.runMigration con $ PG.defaultOptions{PG.optVerbose = PG.Verbose}
+  PG.withTransaction con $
+    mapM_ migrate [PG.MigrationInitialization, PG.MigrationDirectory dir]
+ where
+  migrate = PG.runMigration con $ PG.defaultOptions{PG.optVerbose = PG.Verbose}
 
 runDb1_ :: (MonadReader Config m, MonadIO m, PG.FromRow a) => PG.Query -> m (Maybe a)
 runDb1_ query = do
-    pool <- asks configPool
-    liftIO $ Pool.withResource pool (\con -> listToMaybe <$> PG.query_ con query)
+  pool <- asks configPool
+  liftIO $ Pool.withResource pool (\con -> listToMaybe <$> PG.query_ con query)
 
 runDb1 ::
-    (MonadReader Config m, MonadIO m, PG.FromRow a, PG.ToRow b) => PG.Query -> b -> m (Maybe a)
+  (MonadReader Config m, MonadIO m, PG.FromRow a, PG.ToRow b) => PG.Query -> b -> m (Maybe a)
 runDb1 query args = do
-    pool <- asks configPool
-    liftIO $ Pool.withResource pool (\con -> listToMaybe <$> PG.query con query args)
+  pool <- asks configPool
+  liftIO $ Pool.withResource pool (\con -> listToMaybe <$> PG.query con query args)
 
 runDbN_ :: (MonadReader Config m, MonadIO m, PG.FromRow a) => PG.Query -> m [a]
 runDbN_ query = do
-    pool <- asks configPool
-    liftIO $ Pool.withResource pool (`PG.query_` query)
+  pool <- asks configPool
+  liftIO $ Pool.withResource pool (`PG.query_` query)
 
 runDbN :: (MonadReader Config m, MonadIO m, PG.FromRow a, PG.ToRow b) => PG.Query -> b -> m [a]
 runDbN query args = do
-    pool <- asks configPool
-    liftIO $ Pool.withResource pool (\con -> PG.query con query args)
+  pool <- asks configPool
+  liftIO $ Pool.withResource pool (\con -> PG.query con query args)
 
 execDb1 :: (MonadReader Config m, MonadIO m, PG.ToRow b) => PG.Query -> b -> m Int64
 execDb1 query args = do
-    pool <- asks configPool
-    liftIO $ Pool.withResource pool (\con -> PG.execute con query args)
+  pool <- asks configPool
+  liftIO $ Pool.withResource pool (\con -> PG.execute con query args)
 
 execDb1_ :: (MonadReader Config m, MonadIO m) => PG.Query -> m Int64
 execDb1_ query = do
-    pool <- asks configPool
-    liftIO $ Pool.withResource pool (`PG.execute_` query)
+  pool <- asks configPool
+  liftIO $ Pool.withResource pool (`PG.execute_` query)

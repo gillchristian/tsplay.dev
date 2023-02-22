@@ -38,16 +38,16 @@ import TsplayPublic.Schemas.Stats
 import TsplayPublic.Response
 
 data StatsResponse
-    = StatsResponse200 Stats
-    | StatsResponse500 Error
-    deriving (Show)
+  = StatsResponse200 Stats
+  | StatsResponse500 Error
+  deriving (Show)
 
 instance ToResponse StatsResponse where
-    toResponse (StatsResponse200 x) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status200 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
-    toResponse (StatsResponse500 x) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status500 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
+  toResponse (StatsResponse200 x) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status200 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
+  toResponse (StatsResponse500 x) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status500 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
 
 instance GHC.Records.HasField "status" StatsResponse Network.HTTP.Types.Status where
-    getField (StatsResponse200{}) = Network.HTTP.Types.status200
-    getField (StatsResponse500{}) = Network.HTTP.Types.status500
+  getField (StatsResponse200{}) = Network.HTTP.Types.status200
+  getField (StatsResponse500{}) = Network.HTTP.Types.status500

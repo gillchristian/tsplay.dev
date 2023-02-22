@@ -38,16 +38,16 @@ import TsplayPublic.Schemas.ShortenedUrls
 import TsplayPublic.Response
 
 data ListAllShortsResponse
-    = ListAllShortsResponse200 ShortenedUrls
-    | ListAllShortsResponse500 Error
-    deriving (Show)
+  = ListAllShortsResponse200 ShortenedUrls
+  | ListAllShortsResponse500 Error
+  deriving (Show)
 
 instance ToResponse ListAllShortsResponse where
-    toResponse (ListAllShortsResponse200 x) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status200 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
-    toResponse (ListAllShortsResponse500 x) =
-        Network.Wai.responseBuilder Network.HTTP.Types.status500 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
+  toResponse (ListAllShortsResponse200 x) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status200 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
+  toResponse (ListAllShortsResponse500 x) =
+    Network.Wai.responseBuilder Network.HTTP.Types.status500 ([(Network.HTTP.Types.hContentType, "application/json")]) (Data.Aeson.fromEncoding (Data.Aeson.toEncoding x))
 
 instance GHC.Records.HasField "status" ListAllShortsResponse Network.HTTP.Types.Status where
-    getField (ListAllShortsResponse200{}) = Network.HTTP.Types.status200
-    getField (ListAllShortsResponse500{}) = Network.HTTP.Types.status500
+  getField (ListAllShortsResponse200{}) = Network.HTTP.Types.status200
+  getField (ListAllShortsResponse500{}) = Network.HTTP.Types.status500

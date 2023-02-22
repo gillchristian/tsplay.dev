@@ -1,0 +1,4 @@
+indentation: 2
+let-style: auto
+in-style: right-align
+import-export-style: leading
