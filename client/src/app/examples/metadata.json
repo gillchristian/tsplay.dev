@@ -1,0 +1,941 @@
+{
+  "sections": [
+    {
+      "name": "JavaScript",
+      "id": "JavaScript",
+      "subtitle": "See how TypeScript improves day to day working with JavaScript with minimal additional syntax."
+    },
+    { "name": "TypeScript", "id": "TypeScript", "subtitle": "Explore how TypeScript extends JavaScript to add more safety and tooling." },
+    {
+      "name": "3.7",
+      "id": "3.7",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-3-7/'>Release notes</a>."
+    },
+    {
+      "name": "3.8",
+      "id": "3.8",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-3-8/'>Release notes</a>."
+    },
+    {
+      "name": "4.0",
+      "id": "4.0",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-4-0/'>Release notes</a>."
+    },
+    {
+      "name": "4.1",
+      "id": "4.1",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/'>Release notes</a>."
+    },
+    {
+      "name": "4.2",
+      "id": "4.2",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-4-2-beta/'>Release notes</a>."
+    },
+    {
+      "name": "4.3",
+      "id": "4.3",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-4-3/'>Release notes</a>."
+    },
+    {
+      "name": "4.4",
+      "id": "4.4",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-4-4/'>Release notes</a>."
+    },
+    {
+      "name": "4.7",
+      "id": "4.7",
+      "subtitle": "See the <a href='https://devblogs.microsoft.com/typescript/announcing-typescript-4-7/'>Release notes</a>."
+    },
+    { "name": "Playground V3", "id": "Playground", "subtitle": "Learn what has changed in this website." }
+  ],
+  "sortedSubSections": [
+    "JavaScript Essentials",
+    "Functions with JavaScript",
+    "Working With Classes",
+    "Modern JavaScript",
+    "External APIs",
+    "Helping with JavaScript",
+    "Primitives",
+    "Type Primitives",
+    "Meta-Types",
+    "Language",
+    "Language Extensions",
+    "Syntax and Messaging",
+    "Types and Code Flow",
+    "Fixits",
+    "Config",
+    "Tooling",
+    "Breaking Changes",
+    "JSDoc Improvements",
+    "New JS Features",
+    "New TS Features",
+    "New Checks",
+    "Template Literals"
+  ],
+  "examples": [
+    {
+      "path": ["3-7", "Fixits"],
+      "title": "Big number literals",
+      "name": "Big number literals.ts",
+      "lang": "en",
+      "id": "big-number-literals",
+      "sortIndex": 1,
+      "hash": "825910677db5ef34b5903dbbe9633e95",
+      "compilerSettings": { "target": 99 }
+    },
+    {
+      "path": ["3-7", "Fixits"],
+      "title": "Const to let",
+      "name": "Const to let.ts",
+      "lang": "en",
+      "id": "const-to-let",
+      "sortIndex": 1,
+      "hash": "6f3a80385d433628304c9fc65e7d3fe7",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["3-7", "Fixits"],
+      "title": "Infer From Usage Changes",
+      "name": "Infer From Usage Changes.ts",
+      "lang": "en",
+      "id": "infer-from-usage-changes",
+      "sortIndex": 2,
+      "hash": "7c0ae1958119aadcef7cef9a9318d119",
+      "compilerSettings": { "noImplicitAny": false }
+    },
+    {
+      "path": ["3-7", "Syntax and Messaging"],
+      "title": "Flattened Error Reporting",
+      "name": "Flattened Error Reporting.ts",
+      "lang": "en",
+      "id": "flattened-error-reporting",
+      "sortIndex": 3,
+      "hash": "006c70a8a961fdfa4ac9d9982ac04448",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["3-7", "Syntax and Messaging"],
+      "title": "Nullish Coalescing",
+      "name": "Nullish Coalescing.ts",
+      "lang": "en",
+      "id": "nullish-coalescing",
+      "sortIndex": 2,
+      "hash": "7baa4a458be040137e2934cf73908a98",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["3-7", "Syntax and Messaging"],
+      "title": "Optional Chaining",
+      "name": "Optional Chaining.ts",
+      "lang": "en",
+      "id": "optional-chaining",
+      "sortIndex": 1,
+      "hash": "7c78973f566aa6991af927e05a81c805",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["3-7", "Types and Code Flow"],
+      "title": "Assertion Functions",
+      "name": "Assertion Functions.ts",
+      "lang": "en",
+      "id": "assertion-functions",
+      "sortIndex": 1,
+      "hash": "9ceb6ca614f1b90260ca8f1d450d719e",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["3-7", "Types and Code Flow"],
+      "title": "Recursive Type References",
+      "name": "Recursive Type References.ts",
+      "lang": "en",
+      "id": "recursive-type-references",
+      "sortIndex": 2,
+      "hash": "f0d64132c66dc3e0476b836a8b299357",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["3-7", "Types and Code Flow"],
+      "title": "Uncalled Function Checks",
+      "name": "Uncalled Function Checks.ts",
+      "lang": "en",
+      "id": "uncalled-function-checks",
+      "sortIndex": 1,
+      "hash": "5648a1d14ed70f51ae8129647b8ef8a8",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["3-8", "Breaking Changes"],
+      "title": "Checking Unions with Index Signatures",
+      "name": "Checking Unions with Index Signatures.ts",
+      "lang": "en",
+      "id": "checking-unions-with-index-signatures",
+      "sortIndex": 1,
+      "hash": "5e5faf5d8a38e450cdc1f8216f446dc6",
+      "compilerSettings": { "ts": "3.8.3" }
+    },
+    {
+      "path": ["3-8", "JSDoc Improvements"],
+      "title": "Accessibility Modifiers",
+      "name": "Accessibility Modifiers.js",
+      "lang": "en",
+      "id": "accessibility-modifiers",
+      "sortIndex": 1,
+      "hash": "40ea235651f4c43b41af4795a0fce426",
+      "compilerSettings": { "ts": "3.8.3" }
+    },
+    {
+      "path": ["3-8", "Syntax and Messaging"],
+      "title": "Export Modules From",
+      "name": "Export Modules From.ts",
+      "lang": "en",
+      "id": "export-modules-from",
+      "sortIndex": 1,
+      "hash": "0cec3d12aa959014ad7f2deab11aceba",
+      "compilerSettings": { "ts": "3.8.3" }
+    },
+    {
+      "path": ["3-8", "Syntax and Messaging"],
+      "title": "Private Class Fields",
+      "name": "Private Class Fields.ts",
+      "lang": "en",
+      "id": "private-class-fields",
+      "sortIndex": 1,
+      "hash": "007b7908b25582edf359840a8b65310f",
+      "compilerSettings": { "ts": "3.8.3" }
+    },
+    {
+      "path": ["3-8", "Syntax and Messaging"],
+      "title": "Type Imports",
+      "name": "Type Imports.tsx",
+      "lang": "en",
+      "id": "type-imports",
+      "sortIndex": 1,
+      "hash": "2b94c6b3fc93f07c385f87d69a6c4058",
+      "compilerSettings": { "ts": "3.8.3" }
+    },
+    {
+      "path": ["4-0", "New Checks"],
+      "title": "Class Constructor Code Flow",
+      "name": "Class Constructor Code Flow.ts",
+      "lang": "en",
+      "id": "class-constructor-code-flow",
+      "sortIndex": 1,
+      "hash": "1c0fac9b9493327356874293a6a56a45",
+      "compilerSettings": { "ts": "4.0.2" }
+    },
+    {
+      "path": ["4-0", "New JS Features"],
+      "title": "JSDoc Deprecated",
+      "name": "JSDoc Deprecated.ts",
+      "lang": "en",
+      "id": "jsdoc-deprecated",
+      "sortIndex": 1,
+      "hash": "882205414e2f4236e307a7e6b6af2780",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["4-0", "New JS Features"],
+      "title": "Logical Operators and Assignment",
+      "name": "Logical Operators and Assignment.ts",
+      "lang": "en",
+      "id": "logical-operators-and-assignment",
+      "sortIndex": 1,
+      "hash": "0d7c067d12a3dc12a1935ef0cc7a2919",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["4-0", "New JS Features"],
+      "title": "Nullish Coalescing",
+      "name": "Nullish Coalescing.ts",
+      "lang": "en",
+      "id": "nullish-coalescing",
+      "sortIndex": 1,
+      "hash": "25d21bca71dcdcef434b97f0a8b68689",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["4-0", "New TS Features"],
+      "title": "Named Tuples",
+      "name": "Named Tuples.ts",
+      "lang": "en",
+      "id": "named-tuples",
+      "sortIndex": 1,
+      "hash": "9f5ff56c7665387a6bf8d43c31915a7c",
+      "compilerSettings": { "ts": "4.0.2" }
+    },
+    {
+      "path": ["4-0", "New TS Features"],
+      "title": "Unknown in Catch",
+      "name": "Unknown in Catch.ts",
+      "lang": "en",
+      "id": "unknown-in-catch",
+      "sortIndex": 1,
+      "hash": "471a3cebfb4ef0184df4a25025fa234e",
+      "compilerSettings": { "ts": "4.0.2" }
+    },
+    {
+      "path": ["4-0", "New TS Features"],
+      "title": "Variadic Tuples",
+      "name": "Variadic Tuples.ts",
+      "lang": "en",
+      "id": "variadic-tuples",
+      "sortIndex": 1,
+      "hash": "ebf32e04b783404ed0fd42f9a8c88b97",
+      "compilerSettings": { "ts": "4.0.2" }
+    },
+    {
+      "path": ["4-1", "New JS Features"],
+      "title": "New JSX Support",
+      "name": "New JSX Support.tsx",
+      "lang": "en",
+      "id": "new-jsx-support",
+      "sortIndex": 1,
+      "hash": "1873593d52bf3b988576196ba34a67f9",
+      "compilerSettings": { "ts": "4.1.0-dev.20201028", "jsx": 4 }
+    },
+    {
+      "path": ["4-1", "New JS Features"],
+      "title": "See in JSDoc",
+      "name": "See in JSDoc.ts",
+      "lang": "en",
+      "id": "see-in-jsdoc",
+      "sortIndex": 1,
+      "hash": "6fd3a8d713ba5c129c7c04243cd15548",
+      "compilerSettings": { "ts": "4.1.0-beta" }
+    },
+    {
+      "path": ["4-1", "Template Literals"],
+      "title": "Intro to Template Literals",
+      "name": "Intro to Template Literals.ts",
+      "lang": "en",
+      "id": "intro-to-template-literals",
+      "sortIndex": 1,
+      "hash": "a702cc4f34f842c937b6a5953961b009",
+      "compilerSettings": { "ts": "4.1.0-dev.20201028" }
+    },
+    {
+      "path": ["4-1", "Template Literals"],
+      "title": "Mapped Types with Template Literals",
+      "name": "Mapped Types with Template Literals.ts",
+      "lang": "en",
+      "id": "mapped-types-with-template-literals",
+      "sortIndex": 1,
+      "hash": "f2df1e6ff682803cda7d3133efdb7f58",
+      "compilerSettings": { "ts": "4.1.0-dev.20201028" }
+    },
+    {
+      "path": ["4-1", "Template Literals"],
+      "title": "String Manipulation with Template Literals",
+      "name": "String Manipulation with Template Literals.ts",
+      "lang": "en",
+      "id": "string-manipulation-with-template-literals",
+      "sortIndex": 1,
+      "hash": "5127bb5d7c14895caff3cc39f1fd4b85",
+      "compilerSettings": { "ts": "4.1.0-dev.20201028" }
+    },
+    {
+      "path": ["4-2", "Fixits"],
+      "title": "Create Function from Call",
+      "name": "Create Function from Call.ts",
+      "lang": "en",
+      "id": "create-function-from-call",
+      "sortIndex": 1,
+      "hash": "487a42e067cd980de0375e4000d8ecea",
+      "compilerSettings": { "ts": "4.2.0-beta" }
+    },
+    {
+      "path": ["4-2", "New TS Features"],
+      "title": "Abstract Class Constructors",
+      "name": "Abstract Class Constructors.ts",
+      "lang": "en",
+      "id": "abstract-class-constructors",
+      "sortIndex": 1,
+      "hash": "cc2799185834d0027e8e6c6462956408",
+      "compilerSettings": { "ts": "4.2.0-beta" }
+    },
+    {
+      "path": ["4-2", "New TS Features"],
+      "title": "Rest Elements in Tuple Types",
+      "name": "Rest Elements in Tuple Types.ts",
+      "lang": "en",
+      "id": "rest-elements-in-tuple-types",
+      "sortIndex": 1,
+      "hash": "f0d75cf9274d37d40b24c6c6935b067a",
+      "compilerSettings": { "ts": "4.2.0-beta" }
+    },
+    {
+      "path": ["4-2", "New TS Features"],
+      "title": "Smarter Type Alias Preservation",
+      "name": "Smarter Type Alias Preservation.ts",
+      "lang": "en",
+      "id": "smarter-type-alias-preservation",
+      "sortIndex": 1,
+      "hash": "9dc869de5445f8fae8b4762126a539bf",
+      "compilerSettings": { "ts": "4.2.0-beta" }
+    },
+    {
+      "path": ["4-2", "New TS Features"],
+      "title": "Use Index Accessors for Index Signatures",
+      "name": "Use Index Accessors for Index Signatures.ts",
+      "lang": "en",
+      "id": "use-index-accessors-for-index-signatures",
+      "sortIndex": 1,
+      "hash": "b17655a57ea03e05cc398249afe4dc4f",
+      "compilerSettings": { "ts": "4.2.0-beta", "noPropertyAccessFromIndexSignature": true }
+    },
+    {
+      "path": ["4-3", "New TS Features"],
+      "title": "No Implicit Class Overrides",
+      "name": "No Implicit Class Overrides.ts",
+      "lang": "en",
+      "id": "no-implicit-class-overrides",
+      "sortIndex": 1,
+      "hash": "78f3f927135716b19f8eab5b78103724",
+      "compilerSettings": { "ts": "4.3.4" }
+    },
+    {
+      "path": ["4-3", "New TS Features"],
+      "title": "Separate Write vs Read on Properties",
+      "name": "Separate Write vs Read on Properties.ts",
+      "lang": "en",
+      "id": "separate-write-vs-read-on-properties",
+      "sortIndex": 1,
+      "hash": "2a0d83e3767babac56fa73db8c61d7eb",
+      "compilerSettings": { "ts": "4.3.4" }
+    },
+    {
+      "path": ["4-4", "New JS Features"],
+      "title": "Control Flow Improvements",
+      "name": "Control Flow Improvements.ts",
+      "lang": "en",
+      "id": "control-flow-improvements",
+      "sortIndex": 1,
+      "hash": "89e84eae89ff824720113b149ede2651",
+      "compilerSettings": { "ts": "4.4.2" }
+    },
+    {
+      "path": ["4-4", "New JS Features"],
+      "title": "Errors for High Confidence Errors",
+      "name": "Errors for High Confidence Errors.ts",
+      "lang": "en",
+      "id": "errors-for-high-confidence-errors",
+      "sortIndex": 1,
+      "hash": "5f43cace57d96a03e56cf4106a2b5401",
+      "compilerSettings": { "ts": "4.4.2", "useJavaScript": true, "checkJS": false }
+    },
+    {
+      "path": ["4-4", "New TS Features"],
+      "title": "Exact Optional Properties",
+      "name": "Exact Optional Properties.ts",
+      "lang": "en",
+      "id": "exact-optional-properties",
+      "sortIndex": 1,
+      "hash": "30de307ca7a47ba3e17c79aed44bdfec",
+      "compilerSettings": { "ts": "4.4.2", "exactOptionalPropertyTypes": true }
+    },
+    {
+      "path": ["4-4", "New TS Features"],
+      "title": "Use unknown for Catch Variables",
+      "name": "Use unknown for Catch Variables.ts",
+      "lang": "en",
+      "id": "use-unknown-for-catch-variables",
+      "sortIndex": 1,
+      "hash": "4dd1acc37f8381c89a65e3a73a8e599d",
+      "compilerSettings": { "ts": "4.4.2", "useUnknownInCatchVariables": true }
+    },
+    {
+      "path": ["4-7", "New JS Features"],
+      "title": "Control Flow Improvements",
+      "name": "Control Flow Improvements.ts",
+      "lang": "en",
+      "id": "control-flow-improvements",
+      "sortIndex": 1,
+      "hash": "59e02fff9cab1ee8a96b1f089f430ba1",
+      "compilerSettings": { "ts": "4.7.3" }
+    },
+    {
+      "path": ["4-7", "New JS Features"],
+      "title": "Improved Function Inference",
+      "name": "Improved Function Inference.ts",
+      "lang": "en",
+      "id": "improved-function-inference",
+      "sortIndex": 1,
+      "hash": "1ce96554ee19d8e6fc300a108aa45967",
+      "compilerSettings": { "ts": "4.7.3" }
+    },
+    {
+      "path": ["4-7", "New TS Features"],
+      "title": "Extends Constraints",
+      "name": "Extends Constraints.ts",
+      "lang": "en",
+      "id": "extends-constraints",
+      "sortIndex": 1,
+      "hash": "7a48f3d72bcc90e338ebc3efdec1a247",
+      "compilerSettings": { "ts": "4.7.3" }
+    },
+    {
+      "path": ["4-7", "New TS Features"],
+      "title": "Instantiation Expressions",
+      "name": "Instantiation Expressions.ts",
+      "lang": "en",
+      "id": "instantiation-expressions",
+      "sortIndex": 1,
+      "hash": "c903f481ace67710247bb28266567ab8",
+      "compilerSettings": { "ts": "4.7.3" }
+    },
+    {
+      "path": ["JavaScript", "External APIs"],
+      "title": "TypeScript with Deno",
+      "name": "TypeScript with Deno.ts",
+      "lang": "en",
+      "id": "typescript-with-deno",
+      "sortIndex": 3,
+      "hash": "a96b99b656118ea0e5934b6d5928d684"
+    },
+    {
+      "path": ["JavaScript", "External APIs"],
+      "title": "TypeScript with Node",
+      "name": "TypeScript with Node.js",
+      "lang": "en",
+      "id": "typescript-with-node",
+      "sortIndex": 3,
+      "hash": "f5d6d0ca77d36946973d45a6d26cd55e"
+    },
+    {
+      "path": ["JavaScript", "External APIs"],
+      "title": "TypeScript with React",
+      "name": "TypeScript with React.tsx",
+      "lang": "en",
+      "id": "typescript-with-react",
+      "sortIndex": 2,
+      "hash": "00f1fd1347cdb0c43d05ac7c26436b65",
+      "compilerSettings": { "jsx": 2, "esModuleInterop": true }
+    },
+    {
+      "path": ["JavaScript", "External APIs"],
+      "title": "TypeScript with Web",
+      "name": "TypeScript with Web.js",
+      "lang": "en",
+      "id": "typescript-with-web",
+      "sortIndex": 1,
+      "hash": "e143e59b2b7c9e033269136cf35b9114"
+    },
+    {
+      "path": ["JavaScript", "External APIs"],
+      "title": "TypeScript with WebGL",
+      "name": "TypeScript with WebGL.js",
+      "lang": "en",
+      "id": "typescript-with-webgl",
+      "sortIndex": 5,
+      "hash": "f7b964a6f0211592d843943a016b67aa"
+    },
+    {
+      "path": ["JavaScript", "Functions with JavaScript"],
+      "title": "Function Chaining",
+      "name": "Function Chaining.ts",
+      "lang": "en",
+      "id": "function-chaining",
+      "sortIndex": 2,
+      "hash": "6f9f8928643732da713f73e4b5c33a44",
+      "compilerSettings": { "esModuleInterop": true }
+    },
+    {
+      "path": ["JavaScript", "Functions with JavaScript"],
+      "title": "Generic Functions",
+      "name": "Generic Functions.ts",
+      "lang": "en",
+      "id": "generic-functions",
+      "sortIndex": 1,
+      "hash": "93285a3d5f3fd2dcc99ae08ed1566570",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["JavaScript", "Functions with JavaScript"],
+      "title": "Typing Functions",
+      "name": "Typing Functions.ts",
+      "lang": "en",
+      "id": "typing-functions",
+      "sortIndex": 1,
+      "hash": "1fcf279cc44359488c1080d4c89a21c7",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["JavaScript", "Helping with JavaScript"],
+      "title": "Errors",
+      "name": "Errors.ts",
+      "lang": "en",
+      "id": "errors",
+      "sortIndex": 3,
+      "hash": "a8002c1590daaa3e8de9a64bb700fab6"
+    },
+    {
+      "path": ["JavaScript", "Helping with JavaScript"],
+      "title": "Quick Fixes",
+      "name": "Quick Fixes.ts",
+      "lang": "en",
+      "id": "quick-fixes",
+      "sortIndex": 1,
+      "hash": "6a3b23a7a0b59f35a275a22ac3c26caa",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["JavaScript", "JavaScript Essentials"],
+      "title": "Code Flow",
+      "name": "Code Flow.ts",
+      "lang": "en",
+      "id": "code-flow",
+      "sortIndex": 3,
+      "hash": "9ae5b97b721d9c0ba93af3bd1ee7d31b",
+      "compilerSettings": { "strictNullChecks": true }
+    },
+    {
+      "path": ["JavaScript", "JavaScript Essentials"],
+      "title": "Functions",
+      "name": "Functions.ts",
+      "lang": "en",
+      "id": "functions",
+      "sortIndex": 2,
+      "hash": "ae890345afc3df359caafe86c2b84dde",
+      "compilerSettings": { "noImplicitAny": false }
+    },
+    {
+      "path": ["JavaScript", "JavaScript Essentials"],
+      "title": "Hello World",
+      "name": "Hello World.ts",
+      "lang": "en",
+      "id": "hello-world",
+      "sortIndex": 1,
+      "hash": "004f7574a06b960af23fb5e836cb0d1c",
+      "compilerSettings": { "target": 1 }
+    },
+    {
+      "path": ["JavaScript", "JavaScript Essentials"],
+      "title": "Objects and Arrays",
+      "name": "Objects and Arrays.ts",
+      "lang": "en",
+      "id": "objects-and-arrays",
+      "sortIndex": 1,
+      "hash": "c69e8b70dda681d3392a560224c0264a",
+      "compilerSettings": { "strict": false }
+    },
+    {
+      "path": ["JavaScript", "Modern JavaScript"],
+      "title": "Async Await",
+      "name": "Async Await.ts",
+      "lang": "en",
+      "id": "async-await",
+      "sortIndex": 1,
+      "hash": "1566feca03a4b78acde37b0938744bfb"
+    },
+    {
+      "path": ["JavaScript", "Modern JavaScript"],
+      "title": "Immutability",
+      "name": "Immutability.ts",
+      "lang": "en",
+      "id": "immutability",
+      "sortIndex": 1,
+      "hash": "3d4a9eb8140b978d5a2038b229ed7358",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["JavaScript", "Modern JavaScript"],
+      "title": "Import Export",
+      "name": "Import Export.ts",
+      "lang": "en",
+      "id": "import-export",
+      "sortIndex": 1,
+      "hash": "ed9c473c3170e3d302be0dc25a166d94"
+    },
+    {
+      "path": ["JavaScript", "Modern JavaScript"],
+      "title": "JSDoc Support",
+      "name": "JSDoc Support.js",
+      "lang": "en",
+      "id": "jsdoc-support",
+      "sortIndex": 3,
+      "hash": "6d49c5c5529742c4e79cd356aa20da28"
+    },
+    {
+      "path": ["JavaScript", "Working With Classes"],
+      "title": "Classes 101",
+      "name": "Classes 101.ts",
+      "lang": "en",
+      "id": "classes-101",
+      "sortIndex": 1,
+      "hash": "f8fb270601471de56c437ed3a08771fd"
+    },
+    {
+      "path": ["JavaScript", "Working With Classes"],
+      "title": "Generic Classes",
+      "name": "Generic Classes.ts",
+      "lang": "en",
+      "id": "generic-classes",
+      "sortIndex": 3,
+      "hash": "fc4bdd9cb8eb5f55b4f2139adb0c73d5"
+    },
+    {
+      "path": ["JavaScript", "Working With Classes"],
+      "title": "Mixins",
+      "name": "Mixins.ts",
+      "lang": "en",
+      "id": "mixins",
+      "sortIndex": 4,
+      "hash": "9585388ab95b974dbcd87d1f1a82e712"
+    },
+    {
+      "path": ["JavaScript", "Working With Classes"],
+      "title": "This",
+      "name": "This.ts",
+      "lang": "en",
+      "id": "this",
+      "sortIndex": 2,
+      "hash": "591560f285cca99ba2fbabe023d39b1d"
+    },
+    {
+      "path": ["Playground", "Config"],
+      "title": "JavaScript Playgrounds",
+      "name": "JavaScript Playgrounds.js",
+      "lang": "en",
+      "id": "javascript-playgrounds",
+      "sortIndex": 3,
+      "hash": "2ee4201455d66dd6019ae713ddffd685"
+    },
+    {
+      "path": ["Playground", "Config"],
+      "title": "New Compiler Defaults",
+      "name": "New Compiler Defaults.ts",
+      "lang": "en",
+      "id": "new-compiler-defaults",
+      "sortIndex": 1,
+      "hash": "f3473b83d37581743fa71313d56624d7"
+    },
+    {
+      "path": ["Playground", "Language"],
+      "title": "Automatic Type Acquisition",
+      "name": "Automatic Type Acquisition.ts",
+      "lang": "en",
+      "id": "automatic-type-acquisition",
+      "sortIndex": 1,
+      "hash": "f1000ade89e47d459fc53029b59cb844",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["Playground", "Language"],
+      "title": "Fixits",
+      "name": "Fixits.ts",
+      "lang": "en",
+      "id": "fixits",
+      "sortIndex": 1,
+      "hash": "1c24830951754d4fca1237bbe9672b1a",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["Playground", "Tooling"],
+      "title": "Mobile Support",
+      "name": "Mobile Support.ts",
+      "lang": "en",
+      "id": "mobile-support",
+      "sortIndex": 99,
+      "hash": "dc9d34849197ad69472b94af0eeb84ec"
+    },
+    {
+      "path": ["Playground", "Tooling"],
+      "title": "Sharable URLs",
+      "name": "Sharable URLs.ts",
+      "lang": "en",
+      "id": "sharable-urls",
+      "sortIndex": 1,
+      "hash": "14ce23fb4c12857c8bdb0ef876400428"
+    },
+    {
+      "path": ["Playground", "Tooling"],
+      "title": "TypeScript Versions",
+      "name": "TypeScript Versions.ts",
+      "lang": "en",
+      "id": "typescript-versions",
+      "sortIndex": 1,
+      "hash": "c8eff2d0d97ab930482b8ed6609e40e0",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Language"],
+      "title": "Soundness",
+      "name": "Soundness.ts",
+      "lang": "en",
+      "id": "soundness",
+      "sortIndex": 1,
+      "hash": "a0d223482c2c720af6527143102483a1",
+      "compilerSettings": { "strictFunctionTypes": false }
+    },
+    {
+      "path": ["TypeScript", "Language"],
+      "title": "Structural Typing",
+      "name": "Structural Typing.ts",
+      "lang": "en",
+      "id": "structural-typing",
+      "sortIndex": 1,
+      "hash": "f06d1c57e5e20267c18ad9c9a9543061",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Language"],
+      "title": "Type Guards",
+      "name": "Type Guards.ts",
+      "lang": "en",
+      "id": "type-guards",
+      "sortIndex": 1,
+      "hash": "ae79c6c3ddb40933f33fcdea82267e1a",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Language"],
+      "title": "Type Widening and Narrowing",
+      "name": "Type Widening and Narrowing.ts",
+      "lang": "en",
+      "id": "type-widening-and-narrowing",
+      "sortIndex": 1,
+      "hash": "11d2f4b0e4029906aefc31649152bcc6",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Language Extensions"],
+      "title": "Enums",
+      "name": "Enums.ts",
+      "lang": "en",
+      "id": "enums",
+      "sortIndex": 1,
+      "hash": "3f9d750a80f2e4a837a325e5a7c5d0c8",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Language Extensions"],
+      "title": "Nominal Typing",
+      "name": "Nominal Typing.ts",
+      "lang": "en",
+      "id": "nominal-typing",
+      "sortIndex": 1,
+      "hash": "4e0fb97c0e99f9d0c2c5746a80be2621",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Language Extensions"],
+      "title": "Types vs Interfaces",
+      "name": "Types vs Interfaces.ts",
+      "lang": "en",
+      "id": "types-vs-interfaces",
+      "sortIndex": 1,
+      "hash": "0ad4d11b7ff81f93c103c255f29ae752",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Meta-Types"],
+      "title": "Conditional Types",
+      "name": "Conditional Types.ts",
+      "lang": "en",
+      "id": "conditional-types",
+      "sortIndex": 1,
+      "hash": "f3bfbde0451ddb85c69834417e1d2bb7",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Meta-Types"],
+      "title": "Discriminate Types",
+      "name": "Discriminate Types.ts",
+      "lang": "en",
+      "id": "discriminate-types",
+      "sortIndex": 1,
+      "hash": "fbe0e8e877b3493476684bb25d3fe647",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Meta-Types"],
+      "title": "Indexed Types",
+      "name": "Indexed Types.ts",
+      "lang": "en",
+      "id": "indexed-types",
+      "sortIndex": 1,
+      "hash": "b24f590997a688a0ad23c72559e1dc81",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Meta-Types"],
+      "title": "Mapped Types",
+      "name": "Mapped Types.ts",
+      "lang": "en",
+      "id": "mapped-types",
+      "sortIndex": 1,
+      "hash": "92a920ec0ed84d6aaf0156b5c14eb5c0",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Primitives"],
+      "title": "Any",
+      "name": "Any.ts",
+      "lang": "en",
+      "id": "any",
+      "sortIndex": 1,
+      "hash": "59efed43e47eac17963ab07b009916ed",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Primitives"],
+      "title": "Literals",
+      "name": "Literals.ts",
+      "lang": "en",
+      "id": "literals",
+      "sortIndex": 1,
+      "hash": "91d762e45e60180c395e9538613e1f8a",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Primitives"],
+      "title": "Union and Intersection Types",
+      "name": "Union and Intersection Types.ts",
+      "lang": "en",
+      "id": "union-and-intersection-types",
+      "sortIndex": 1,
+      "hash": "8131575408d4a26d9471c2bdd71fb633",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Primitives"],
+      "title": "Unknown and Never",
+      "name": "Unknown and Never.ts",
+      "lang": "en",
+      "id": "unknown-and-never",
+      "sortIndex": 1,
+      "hash": "93996587b00d20782ee730895f8ccbeb",
+      "compilerSettings": {}
+    },
+    {
+      "path": ["TypeScript", "Type Primitives"],
+      "title": "Built-in Utility Types",
+      "name": "Built-in Utility Types.ts",
+      "lang": "en",
+      "id": "built-in-utility-types",
+      "sortIndex": 3,
+      "hash": "697cdcc79d2ec793c46849ad5386f5d4",
+      "compilerSettings": { "strictNullChecks": true }
+    },
+    {
+      "path": ["TypeScript", "Type Primitives"],
+      "title": "Nullable Types",
+      "name": "Nullable Types.ts",
+      "lang": "en",
+      "id": "nullable-types",
+      "sortIndex": 3,
+      "hash": "36427128912498b79311954366020493",
+      "compilerSettings": { "strictNullChecks": false }
+    },
+    {
+      "path": ["TypeScript", "Type Primitives"],
+      "title": "Tuples",
+      "name": "Tuples.ts",
+      "lang": "en",
+      "id": "tuples",
+      "sortIndex": 1,
+      "hash": "fb853ccfd91dcecf492b498942ef2897",
+      "compilerSettings": {}
+    }
+  ]
+}
