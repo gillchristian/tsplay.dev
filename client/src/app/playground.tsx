@@ -6,7 +6,7 @@ import * as playground from "./playground/src/index"
 
 import playgroundHandbookTOC from "./vendor/play-handbook.json"
 import optionsSummary from "./vendor/en-summary.json"
-import examples from "./examples/metadata.json"
+import examples from "../../docs/examples/metadata.json"
 
 import React, { useEffect } from "react"
 import ReactDOM from "react-dom"
@@ -104,6 +104,7 @@ export function Playground() {
       re(
         ["vs/editor/editor.main", "vs/language/typescript/tsWorker"],
         async (main: typeof import("monaco-editor"), tsWorker: typeof import("typescript")) => {
+          // @ts-ignore
           const ts = (global as any).ts || tsWorker.typescript
           const isOK = main && ts
           if (isOK) {
@@ -317,18 +318,18 @@ export function Playground() {
                   </a>
                   <ul className="dropdown-menu" id="export-dropdown-menu" aria-labelledby="whatisnew-button">
                     <li>
-                      <a href="#" onClick={() => globalThis.playground.exporter.exportAsTweet()} aria-label={i("play_export_tweet_md")}>
+                      <a href="#" onClick={() => exporter().exportAsTweet()} aria-label={i("play_export_tweet_md")}>
                         {i("play_export_tweet_md")}
                       </a>
                     </li>
                     <li role="separator" className="divider"></li>
                     <li>
-                      <a href="#" onClick={(e: any) => globalThis.playground.exporter.copyAsMarkdownIssue(e)} aria-label={i("play_export_copy_md")}>
+                      <a href="#" onClick={(e: any) => exporter().copyAsMarkdownIssue(e)} aria-label={i("play_export_copy_md")}>
                         {i("play_export_copy_md")}
                       </a>
                     </li>
                     <li>
-                      <a href="#" onClick={(e: any) => playground.exporter.copyForChat(e)} aria-label={i("play_export_copy_link")}>
+                      <a href="#" onClick={(e: any) => exporter().copyForChat(e)} aria-label={i("play_export_copy_link")}>
                         {i("play_export_copy_link")}
                       </a>
                     </li>
@@ -336,7 +337,7 @@ export function Playground() {
                       {" "}
                       <a
                         href="#"
-                        onClick={(e: any) => playground.exporter.copyForChatWithPreview(e)}
+                        onClick={(e: any) => exporter().copyForChatWithPreview(e)}
                         aria-label={i("play_export_copy_link_preview")}
                       >
                         {i("play_export_copy_link_preview")}
@@ -344,28 +345,28 @@ export function Playground() {
                     </li>
                     <li role="separator" className="divider"></li>
                     <li>
-                      <a href="#" onClick={() => playground.exporter.openInTSAST()} aria-label={i("play_export_tsast")}>
+                      <a href="#" onClick={() => exporter().openInTSAST()} aria-label={i("play_export_tsast")}>
                         {i("play_export_tsast")}
                       </a>
                     </li>
                     <li>
-                      <a href="#" onClick={() => playground.exporter.openInBugWorkbench()} aria-label={i("play_export_bugworkbench")}>
+                      <a href="#" onClick={() => exporter().openInBugWorkbench()} aria-label={i("play_export_bugworkbench")}>
                         {i("play_export_bugworkbench")}
                       </a>
                     </li>
                     <li>
-                      <a href="#" onClick={() => playground.exporter.openInVSCodeDev()} aria-label={i("play_export_vscode_dev_play")}>
+                      <a href="#" onClick={() => exporter().openInVSCodeDev()} aria-label={i("play_export_vscode_dev_play")}>
                         {i("play_export_vscode_dev_play")}
                       </a>
                     </li>
                     <li role="separator" className="divider"></li>
                     <li>
-                      <a href="#" onClick={() => playground.exporter.openProjectInCodeSandbox()} aria-label={i("play_export_sandbox")}>
+                      <a href="#" onClick={() => exporter().openProjectInCodeSandbox()} aria-label={i("play_export_sandbox")}>
                         {i("play_export_sandbox")}
                       </a>
                     </li>
                     <li>
-                      <a href="#" onClick={() => playground.exporter.openProjectInStackBlitz()} aria-label={i("play_export_stackblitz")}>
+                      <a href="#" onClick={() => exporter().openProjectInStackBlitz()} aria-label={i("play_export_stackblitz")}>
                         {i("play_export_stackblitz")}
                       </a>
                     </li>
@@ -393,4 +394,9 @@ export function Playground() {
       </div>
     </main>
   )
+}
+
+const exporter = () => {
+  // @ts-ignore
+  return globalThis.playground.exporter
 }

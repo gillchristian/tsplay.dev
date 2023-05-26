@@ -11,7 +11,7 @@ interface SamplesJSON {
 type Example = SamplesJSON["examples"][0]
 
 const sortedSectionsDictionary = (locale: SamplesJSON, section: SamplesJSON["sections"][0]) => {
-  const sectionDict = {}
+  const sectionDict = {} as any
   locale.examples.forEach(e => {
     // Allow switching a "-" to "." so that titles can have
     // a dot for version numbers, this own works once.
@@ -39,7 +39,7 @@ const hrefForExample = (example: Example, lang: string) => {
 }
 
 
-const buttonOnClick = (id: string) => (e) => {
+const buttonOnClick = (id: string) => (e: any) => {
   const tappedButton = e.target
   const contentID = id
   const examplesParent = tappedButton.closest(".examples")
@@ -74,14 +74,14 @@ export type Props = {
 
   locale?: string
   /** DI'd copy of the examples, or fallback to eng */
-  examples?: typeof import("../examples/metadata.json")
+  examples?: typeof import("../../../docs/examples/metadata.json")
 }
 
 export const RenderExamples = (props: Props) => {
 
   useEffect(() => {
     // Update the dots after it's loaded and running in the client instead
-    let seenExamples = {}
+    let seenExamples = {} as any
 
     if (hasLocalStorage) {
       const examplesFromLS = localStorage.getItem("examples-seen") || "{}"
@@ -102,11 +102,13 @@ export const RenderExamples = (props: Props) => {
 
   const lang = props.locale || "en"
   const locale = props.examples
-  const sections = props.sections.map(sectionID => locale.sections.find(localeSection => sectionID === localeSection.id) || english.sections.find(localeSection => sectionID === localeSection.id))
+  const sections = props.sections.map(sectionID => locale?.sections.find(localeSection => sectionID === localeSection.id))
   return (
     <div className="examples">
       <div role="tablist">
-        {sections.map(section => {
+        {(sections ?? []).map(section => {
+          if(!section) return null
+
           const startOpen = section.id === props.defaultSection
           const selectedClass = startOpen ? " selected" : ""
           return (
@@ -117,7 +119,11 @@ export const RenderExamples = (props: Props) => {
       </div>
 
       {sections.map(section => {
-        const sectionDict = sortedSectionsDictionary(locale, section)
+        if(!section) return null
+        if(!locale) return null
+
+
+        const sectionDict = sortedSectionsDictionary(locale as any, section)
         const subsectionNames = Object.keys(sectionDict).sort((lhs, rhs) => locale.sortedSubSections.indexOf(lhs) - locale.sortedSubSections.indexOf(rhs))
         const startOpen = section.id === props.defaultSection
         const style = startOpen ? {} : { display: "none" }
@@ -126,7 +132,7 @@ export const RenderExamples = (props: Props) => {
           <p style={{ width: "100%" }} dangerouslySetInnerHTML={{ __html: section.subtitle }} />
 
           {subsectionNames.map(sectionName => {
-            const sectionExamples = sectionDict[sectionName].sort((lhs, rhs) => lhs.sortIndex - rhs.sortIndex) as Example[]
+            const sectionExamples = sectionDict[sectionName].sort((lhs: any, rhs: any) => lhs.sortIndex - rhs.sortIndex) as Example[]
 
             return <div className="section-list" key={sectionName}>
               <h4>{sectionName}</h4>

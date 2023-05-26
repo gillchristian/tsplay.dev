@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   const sanitizedPath = decodeURIComponent(path)
 
   // src/app/examples/en/JavaScript/External APIs/TypeScript with Node.js
-  const fullPath = `./src/app/examples/en/${sanitizedPath}`
+  const fullPath = `./docs/examples/en/${sanitizedPath}`
   
   return NextResponse.json({ code: readFileSync(fullPath, "utf8") }, { status: 200 })
 }

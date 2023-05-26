@@ -58,7 +58,7 @@ const languageType = (config: SandboxConfig) => (config.filetype === "js" ? "jav
 // Basically android and monaco is pretty bad, this makes it less bad
 // See https://github.com/microsoft/pxt/pull/7099 for this, and the long
 // read is in https://github.com/microsoft/monaco-editor/issues/563
-const isAndroid = typeof navigator !== undefined && /android/i.test(navigator.userAgent)
+const isAndroid = false //typeof globalThis.navigator !== undefined && /android/i.test(globalThis.navigator.userAgent)
 
 /** Default Monaco settings for playground */
 const sharedEditorOptions: import("monaco-editor").editor.IEditorOptions = {
