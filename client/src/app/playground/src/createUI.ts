@@ -157,7 +157,7 @@ export const createUI = (): UI => {
 
     selectAllButton.onclick = selectAll
     copyButton.onclick = () => {
-      navigator.clipboard.writeText(code)
+      globalThis.navigator.clipboard.writeText(code)
     }
   }
 

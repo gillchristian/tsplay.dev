@@ -1,4 +1,4 @@
-import examples from "../../examples/metadata.json"
+import examples from "../../../../docs/examples/metadata.json"
 
 export const getExampleSourceCode = async (prefix: string, lang: string, exampleID: string) => {
   try {

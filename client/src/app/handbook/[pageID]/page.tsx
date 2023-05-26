@@ -20,7 +20,7 @@ import WritingJavaScript from "../writing-javascript.mdx"
 import WritingPlugins from "../writing-plugins.mdx"
 
 
-const Page = ({ params }) => {
+const Page = ({ params }:{ params: { pageID: string}}) => {
     const pageID = params.pageID.replace(".html", "")
     switch (pageID) {
       case 'examples': return <Examples />
