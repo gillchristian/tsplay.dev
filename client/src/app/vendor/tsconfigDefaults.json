@@ -1,0 +1,8 @@
+{
+  "module": 1,
+  "target": 3,
+  "strict": true,
+  "esModuleInterop": true,
+  "forceConsistentCasingInFileNames": true,
+  "skipLibCheck": true
+}

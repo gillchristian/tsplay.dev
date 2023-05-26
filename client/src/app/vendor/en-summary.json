@@ -1,0 +1,823 @@
+{
+  "options": [
+    {
+      "id": "files",
+      "display": "Files",
+      "oneliner": "<p>Include a list of files. This does not support glob patterns, as opposed to <a href=\"#include\"><code>include</code></a>.</p>\n",
+      "categoryID": "Top Level",
+      "categoryDisplay": "Top Level"
+    },
+    {
+      "id": "extends",
+      "display": "Extends",
+      "oneliner": "<p>Specify one or more path or node module references to base configuration files from which settings are inherited.</p>\n",
+      "categoryID": "Top Level",
+      "categoryDisplay": "Top Level"
+    },
+    {
+      "id": "include",
+      "display": "Include",
+      "oneliner": "<p>Specify a list of glob patterns that match files to be included in compilation.</p>\n",
+      "categoryID": "Top Level",
+      "categoryDisplay": "Top Level"
+    },
+    {
+      "id": "exclude",
+      "display": "Exclude",
+      "oneliner": "<p>Filters results from the <a href=\"#include\"><code>include</code></a> option.</p>\n",
+      "categoryID": "Top Level",
+      "categoryDisplay": "Top Level"
+    },
+    {
+      "id": "references",
+      "display": "References",
+      "oneliner": "<p>Specify an array of objects that specify paths for projects. Used in project references.</p>\n",
+      "categoryID": "Top Level",
+      "categoryDisplay": "Top Level"
+    },
+    {
+      "id": "allowUnreachableCode",
+      "display": "Allow Unreachable Code",
+      "oneliner": "<p>Disable error reporting for unreachable code.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "allowUnusedLabels",
+      "display": "Allow Unused Labels",
+      "oneliner": "<p>Disable error reporting for unused labels.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "alwaysStrict",
+      "display": "Always Strict",
+      "oneliner": "<p>Ensure 'use strict' is always emitted.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "exactOptionalPropertyTypes",
+      "display": "exactOptionalPropertyTypes",
+      "oneliner": "<p>Interpret optional property types as written, rather than adding <code>undefined</code>.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noFallthroughCasesInSwitch",
+      "display": "No Fallthrough Cases In Switch",
+      "oneliner": "<p>Enable error reporting for fallthrough cases in switch statements.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noImplicitAny",
+      "display": "No Implicit Any",
+      "oneliner": "<p>Enable error reporting for expressions and declarations with an implied <code>any</code> type.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noImplicitOverride",
+      "display": "noImplicitOverride",
+      "oneliner": "<p>Ensure overriding members in derived classes are marked with an override modifier.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noImplicitReturns",
+      "display": "No Implicit Returns",
+      "oneliner": "<p>Enable error reporting for codepaths that do not explicitly return in a function.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noImplicitThis",
+      "display": "No Implicit This",
+      "oneliner": "<p>Enable error reporting when <code>this</code> is given the type <code>any</code>.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noPropertyAccessFromIndexSignature",
+      "display": "noPropertyAccessFromIndexSignature",
+      "oneliner": "<p>Enforces using indexed accessors for keys declared using an indexed type.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noUncheckedIndexedAccess",
+      "display": "noUncheckedIndexedAccess",
+      "oneliner": "<p>Add <code>undefined</code> to a type when accessed using an index.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noUnusedLocals",
+      "display": "No Unused Locals",
+      "oneliner": "<p>Enable error reporting when local variables aren't read.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "noUnusedParameters",
+      "display": "No Unused Parameters",
+      "oneliner": "<p>Raise an error when a function parameter isn't read.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "strict",
+      "display": "Strict",
+      "oneliner": "<p>Enable all strict type-checking options.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "strictBindCallApply",
+      "display": "Strict Bind Call Apply",
+      "oneliner": "<p>Check that the arguments for <code>bind</code>, <code>call</code>, and <code>apply</code> methods match the original function.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "strictFunctionTypes",
+      "display": "Strict Function Types",
+      "oneliner": "<p>When assigning functions, check to ensure parameters and the return values are subtype-compatible.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "strictNullChecks",
+      "display": "Strict Null Checks",
+      "oneliner": "<p>When type checking, take into account <code>null</code> and <code>undefined</code>.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "strictPropertyInitialization",
+      "display": "Strict Property Initialization",
+      "oneliner": "<p>Check for class properties that are declared but not set in the constructor.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "useUnknownInCatchVariables",
+      "display": "useUnknownInCatchVariables",
+      "oneliner": "<p>Default catch clause variables as <code>unknown</code> instead of <code>any</code>.</p>\n",
+      "categoryID": "Type_Checking_6248",
+      "categoryDisplay": "Type Checking"
+    },
+    {
+      "id": "allowUmdGlobalAccess",
+      "display": "Allow Umd Global Access",
+      "oneliner": "<p>Allow accessing UMD globals from modules.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "baseUrl",
+      "display": "Base Url",
+      "oneliner": "<p>Specify the base directory to resolve non-relative module names.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "module",
+      "display": "Module",
+      "oneliner": "<p>Specify what module code is generated.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "moduleResolution",
+      "display": "Module Resolution",
+      "oneliner": "<p>Specify how TypeScript looks up a file from a given module specifier.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "moduleSuffixes",
+      "display": "moduleSuffixes",
+      "oneliner": "<p>A way to add extra suffixes to module resolution</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "noResolve",
+      "display": "No Resolve",
+      "oneliner": "<p>Disallow <code>import</code>s, <code>require</code>s or <code>&#x3C;reference></code>s from expanding the number of files TypeScript should add to a project.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "paths",
+      "display": "Paths",
+      "oneliner": "<p>Specify a set of entries that re-map imports to additional lookup locations.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "resolveJsonModule",
+      "display": "Resolve JSON Module",
+      "oneliner": "<p>Enable importing .json files.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "rootDir",
+      "display": "Root Dir",
+      "oneliner": "<p>Specify the root folder within your source files.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "rootDirs",
+      "display": "Root Dirs",
+      "oneliner": "<p>Allow multiple folders to be treated as one when resolving modules.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "typeRoots",
+      "display": "Type Roots",
+      "oneliner": "<p>Specify multiple folders that act like <code>./node_modules/@types</code>.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "types",
+      "display": "Types",
+      "oneliner": "<p>Specify type package names to be included without being referenced in a source file.</p>\n",
+      "categoryID": "Modules_6244",
+      "categoryDisplay": "Modules"
+    },
+    {
+      "id": "declaration",
+      "display": "Declaration",
+      "oneliner": "<p>Generate .d.ts files from TypeScript and JavaScript files in your project.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "declarationDir",
+      "display": "Declaration Dir",
+      "oneliner": "<p>Specify the output directory for generated declaration files.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "declarationMap",
+      "display": "Declaration Map",
+      "oneliner": "<p>Create sourcemaps for d.ts files.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "downlevelIteration",
+      "display": "Downlevel Iteration",
+      "oneliner": "<p>Emit more compliant, but verbose and less performant JavaScript for iteration.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "emitBOM",
+      "display": "Emit BOM",
+      "oneliner": "<p>Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "emitDeclarationOnly",
+      "display": "Emit Declaration Only",
+      "oneliner": "<p>Only output d.ts files and not JavaScript files.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "importHelpers",
+      "display": "Import Helpers",
+      "oneliner": "<p>Allow importing helper functions from tslib once per project, instead of including them per-file.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "importsNotUsedAsValues",
+      "display": "Imports Not Used As Values",
+      "oneliner": "<p>Specify emit/checking behavior for imports that are only used for types.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "inlineSourceMap",
+      "display": "Inline Source Map",
+      "oneliner": "<p>Include sourcemap files inside the emitted JavaScript.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "inlineSources",
+      "display": "Inline Sources",
+      "oneliner": "<p>Include source code in the sourcemaps inside the emitted JavaScript.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "mapRoot",
+      "display": "Map Root",
+      "oneliner": "<p>Specify the location where debugger should locate map files instead of generated locations.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "newLine",
+      "display": "New Line",
+      "oneliner": "<p>Set the newline character for emitting files.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "noEmit",
+      "display": "No Emit",
+      "oneliner": "<p>Disable emitting files from a compilation.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "noEmitHelpers",
+      "display": "No Emit Helpers",
+      "oneliner": "<p>Disable generating custom helper functions like <code>__extends</code> in compiled output.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "noEmitOnError",
+      "display": "No Emit On Error",
+      "oneliner": "<p>Disable emitting files if any type checking errors are reported.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "outDir",
+      "display": "Out Dir",
+      "oneliner": "<p>Specify an output folder for all emitted files.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "outFile",
+      "display": "Out File",
+      "oneliner": "<p>Specify a file that bundles all outputs into one JavaScript file. If <a href=\"#declaration\"><code>declaration</code></a> is true, also designates a file that bundles all .d.ts output.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "preserveConstEnums",
+      "display": "Preserve Const Enums",
+      "oneliner": "<p>Disable erasing <code>const enum</code> declarations in generated code.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "preserveValueImports",
+      "display": "preserveValueImports",
+      "oneliner": "<p>Preserve unused imported values in the JavaScript output that would otherwise be removed.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "removeComments",
+      "display": "Remove Comments",
+      "oneliner": "<p>Disable emitting comments.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "sourceMap",
+      "display": "Source Map",
+      "oneliner": "<p>Create source map files for emitted JavaScript files.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "sourceRoot",
+      "display": "Source Root",
+      "oneliner": "<p>Specify the root path for debuggers to find the reference source code.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "stripInternal",
+      "display": "Strip Internal",
+      "oneliner": "<p>Disable emitting declarations that have <code>@internal</code> in their JSDoc comments.</p>\n",
+      "categoryID": "Emit_6246",
+      "categoryDisplay": "Emit"
+    },
+    {
+      "id": "allowJs",
+      "display": "Allow JS",
+      "oneliner": "<p>Allow JavaScript files to be a part of your program. Use the <code>checkJS</code> option to get errors from these files.</p>\n",
+      "categoryID": "JavaScript_Support_6247",
+      "categoryDisplay": "JavaScript Support"
+    },
+    {
+      "id": "checkJs",
+      "display": "Check JS",
+      "oneliner": "<p>Enable error reporting in type-checked JavaScript files.</p>\n",
+      "categoryID": "JavaScript_Support_6247",
+      "categoryDisplay": "JavaScript Support"
+    },
+    {
+      "id": "maxNodeModuleJsDepth",
+      "display": "Max Node Module JS Depth",
+      "oneliner": "<p>Specify the maximum folder depth used for checking JavaScript files from <code>node_modules</code>. Only applicable with <a href=\"#allowJs\"><code>allowJs</code></a>.</p>\n",
+      "categoryID": "JavaScript_Support_6247",
+      "categoryDisplay": "JavaScript Support"
+    },
+    {
+      "id": "disableSizeLimit",
+      "display": "Disable Size Limit",
+      "oneliner": "<p>Remove the 20mb cap on total source code size for JavaScript files in the TypeScript language server.</p>\n",
+      "categoryID": "Editor_Support_6249",
+      "categoryDisplay": "Editor Support"
+    },
+    {
+      "id": "plugins",
+      "display": "Plugins",
+      "oneliner": "<p>Specify a list of language service plugins to include.</p>\n",
+      "categoryID": "Editor_Support_6249",
+      "categoryDisplay": "Editor Support"
+    },
+    {
+      "id": "allowSyntheticDefaultImports",
+      "display": "Allow Synthetic Default Imports",
+      "oneliner": "<p>Allow 'import x from y' when a module doesn't have a default export.</p>\n",
+      "categoryID": "Interop_Constraints_6252",
+      "categoryDisplay": "Interop Constraints"
+    },
+    {
+      "id": "esModuleInterop",
+      "display": "ES Module Interop",
+      "oneliner": "<p>Emit additional JavaScript to ease support for importing CommonJS modules. This enables <a href=\"#allowSyntheticDefaultImports\"><code>allowSyntheticDefaultImports</code></a> for type compatibility.</p>\n",
+      "categoryID": "Interop_Constraints_6252",
+      "categoryDisplay": "Interop Constraints"
+    },
+    {
+      "id": "forceConsistentCasingInFileNames",
+      "display": "Force Consistent Casing In File Names",
+      "oneliner": "<p>Ensure that casing is correct in imports.</p>\n",
+      "categoryID": "Interop_Constraints_6252",
+      "categoryDisplay": "Interop Constraints"
+    },
+    {
+      "id": "isolatedModules",
+      "display": "Isolated Modules",
+      "oneliner": "<p>Ensure that each file can be safely transpiled without relying on other imports.</p>\n",
+      "categoryID": "Interop_Constraints_6252",
+      "categoryDisplay": "Interop Constraints"
+    },
+    {
+      "id": "preserveSymlinks",
+      "display": "Preserve Symlinks",
+      "oneliner": "<p>Disable resolving symlinks to their realpath. This correlates to the same flag in node.</p>\n",
+      "categoryID": "Interop_Constraints_6252",
+      "categoryDisplay": "Interop Constraints"
+    },
+    {
+      "id": "charset",
+      "display": "Charset",
+      "oneliner": "<p>No longer supported. In early versions, manually set the text encoding for reading files.</p>\n",
+      "categoryID": "Backwards_Compatibility_6253",
+      "categoryDisplay": "Backwards Compatibility"
+    },
+    {
+      "id": "keyofStringsOnly",
+      "display": "Keyof Strings Only",
+      "oneliner": "<p>Make keyof only return strings instead of string, numbers or symbols. Legacy option.</p>\n",
+      "categoryID": "Backwards_Compatibility_6253",
+      "categoryDisplay": "Backwards Compatibility"
+    },
+    {
+      "id": "noImplicitUseStrict",
+      "display": "No Implicit Use Strict",
+      "oneliner": "<p>Disable adding 'use strict' directives in emitted JavaScript files.</p>\n",
+      "categoryID": "Backwards_Compatibility_6253",
+      "categoryDisplay": "Backwards Compatibility"
+    },
+    {
+      "id": "noStrictGenericChecks",
+      "display": "No Strict Generic Checks",
+      "oneliner": "<p>Disable strict checking of generic signatures in function types.</p>\n",
+      "categoryID": "Backwards_Compatibility_6253",
+      "categoryDisplay": "Backwards Compatibility"
+    },
+    {
+      "id": "out",
+      "display": "Out",
+      "oneliner": "<p>Deprecated setting. Use <a href=\"#outFile\"><code>outFile</code></a> instead.</p>\n",
+      "categoryID": "Backwards_Compatibility_6253",
+      "categoryDisplay": "Backwards Compatibility"
+    },
+    {
+      "id": "suppressExcessPropertyErrors",
+      "display": "Suppress Excess Property Errors",
+      "oneliner": "<p>Disable reporting of excess property errors during the creation of object literals.</p>\n",
+      "categoryID": "Backwards_Compatibility_6253",
+      "categoryDisplay": "Backwards Compatibility"
+    },
+    {
+      "id": "suppressImplicitAnyIndexErrors",
+      "display": "Suppress Implicit Any Index Errors",
+      "oneliner": "<p>Suppress <a href=\"#noImplicitAny\"><code>noImplicitAny</code></a> errors when indexing objects that lack index signatures.</p>\n",
+      "categoryID": "Backwards_Compatibility_6253",
+      "categoryDisplay": "Backwards Compatibility"
+    },
+    {
+      "id": "emitDecoratorMetadata",
+      "display": "Emit Decorator Metadata",
+      "oneliner": "<p>Emit design-type metadata for decorated declarations in source files.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "experimentalDecorators",
+      "display": "Experimental Decorators",
+      "oneliner": "<p>Enable experimental support for TC39 stage 2 draft decorators.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "jsx",
+      "display": "JSX",
+      "oneliner": "<p>Specify what JSX code is generated.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "jsxFactory",
+      "display": "JSX Factory",
+      "oneliner": "<p>Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "jsxFragmentFactory",
+      "display": "jsxFragmentFactory",
+      "oneliner": "<p>Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "jsxImportSource",
+      "display": "jsxImportSource",
+      "oneliner": "<p>Specify module specifier used to import the JSX factory functions when using <code>jsx: react-jsx*</code>.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "lib",
+      "display": "Lib",
+      "oneliner": "<p>Specify a set of bundled library declaration files that describe the target runtime environment.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "moduleDetection",
+      "display": "moduleDetection",
+      "oneliner": "<p>Control what method is used to detect the whether a JS file is a module.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "noLib",
+      "display": "No Lib",
+      "oneliner": "<p>Disable including any library files, including the default lib.d.ts.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "reactNamespace",
+      "display": "React Namespace",
+      "oneliner": "<p>Specify the object invoked for <code>createElement</code>. This only applies when targeting <code>react</code> JSX emit.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "target",
+      "display": "Target",
+      "oneliner": "<p>Set the JavaScript language version for emitted JavaScript and include compatible library declarations.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "useDefineForClassFields",
+      "display": "Use Define For Class Fields",
+      "oneliner": "<p>Emit ECMAScript-standard-compliant class fields.</p>\n",
+      "categoryID": "Language_and_Environment_6254",
+      "categoryDisplay": "Language and Environment"
+    },
+    {
+      "id": "diagnostics",
+      "display": "Diagnostics",
+      "oneliner": "<p>Output compiler performance information after building.</p>\n",
+      "categoryID": "Compiler_Diagnostics_6251",
+      "categoryDisplay": "Compiler Diagnostics"
+    },
+    {
+      "id": "explainFiles",
+      "display": "explainFiles",
+      "oneliner": "<p>Print files read during the compilation including why it was included.</p>\n",
+      "categoryID": "Compiler_Diagnostics_6251",
+      "categoryDisplay": "Compiler Diagnostics"
+    },
+    {
+      "id": "extendedDiagnostics",
+      "display": "Extended Diagnostics",
+      "oneliner": "<p>Output more detailed compiler performance information after building.</p>\n",
+      "categoryID": "Compiler_Diagnostics_6251",
+      "categoryDisplay": "Compiler Diagnostics"
+    },
+    {
+      "id": "generateCpuProfile",
+      "display": "Generate CPU Profile",
+      "oneliner": "<p>Emit a v8 CPU profile of the compiler run for debugging.</p>\n",
+      "categoryID": "Compiler_Diagnostics_6251",
+      "categoryDisplay": "Compiler Diagnostics"
+    },
+    {
+      "id": "listEmittedFiles",
+      "display": "List Emitted Files",
+      "oneliner": "<p>Print the names of emitted files after a compilation.</p>\n",
+      "categoryID": "Compiler_Diagnostics_6251",
+      "categoryDisplay": "Compiler Diagnostics"
+    },
+    {
+      "id": "listFiles",
+      "display": "List Files",
+      "oneliner": "<p>Print all of the files read during the compilation.</p>\n",
+      "categoryID": "Compiler_Diagnostics_6251",
+      "categoryDisplay": "Compiler Diagnostics"
+    },
+    {
+      "id": "traceResolution",
+      "display": "Trace Resolution",
+      "oneliner": "<p>Log paths used during the <a href=\"#moduleResolution\"><code>moduleResolution</code></a> process.</p>\n",
+      "categoryID": "Compiler_Diagnostics_6251",
+      "categoryDisplay": "Compiler Diagnostics"
+    },
+    {
+      "id": "composite",
+      "display": "Composite",
+      "oneliner": "<p>Enable constraints that allow a TypeScript project to be used with project references.</p>\n",
+      "categoryID": "Projects_6255",
+      "categoryDisplay": "Projects"
+    },
+    {
+      "id": "disableReferencedProjectLoad",
+      "display": "disableReferencedProjectLoad",
+      "oneliner": "<p>Reduce the number of projects loaded automatically by TypeScript.</p>\n",
+      "categoryID": "Projects_6255",
+      "categoryDisplay": "Projects"
+    },
+    {
+      "id": "disableSolutionSearching",
+      "display": "Disable Solution Searching",
+      "oneliner": "<p>Opt a project out of multi-project reference checking when editing.</p>\n",
+      "categoryID": "Projects_6255",
+      "categoryDisplay": "Projects"
+    },
+    {
+      "id": "disableSourceOfProjectReferenceRedirect",
+      "display": "Disable Source Project Reference Redirect",
+      "oneliner": "<p>Disable preferring source files instead of declaration files when referencing composite projects.</p>\n",
+      "categoryID": "Projects_6255",
+      "categoryDisplay": "Projects"
+    },
+    {
+      "id": "incremental",
+      "display": "Incremental",
+      "oneliner": "<p>Save .tsbuildinfo files to allow for incremental compilation of projects.</p>\n",
+      "categoryID": "Projects_6255",
+      "categoryDisplay": "Projects"
+    },
+    {
+      "id": "tsBuildInfoFile",
+      "display": "TS Build Info File",
+      "oneliner": "<p>Specify the folder for .tsbuildinfo incremental compilation files.</p>\n",
+      "categoryID": "Projects_6255",
+      "categoryDisplay": "Projects"
+    },
+    {
+      "id": "noErrorTruncation",
+      "display": "No Error Truncation",
+      "oneliner": "<p>Disable truncating types in error messages.</p>\n",
+      "categoryID": "Output_Formatting_6256",
+      "categoryDisplay": "Output Formatting"
+    },
+    {
+      "id": "preserveWatchOutput",
+      "display": "Preserve Watch Output",
+      "oneliner": "<p>Disable wiping the console in watch mode.</p>\n",
+      "categoryID": "Output_Formatting_6256",
+      "categoryDisplay": "Output Formatting"
+    },
+    {
+      "id": "pretty",
+      "display": "Pretty",
+      "oneliner": "<p>Enable color and formatting in TypeScript's output to make compiler errors easier to read.</p>\n",
+      "categoryID": "Output_Formatting_6256",
+      "categoryDisplay": "Output Formatting"
+    },
+    {
+      "id": "skipDefaultLibCheck",
+      "display": "Skip Default Lib Check",
+      "oneliner": "<p>Skip type checking .d.ts files that are included with TypeScript.</p>\n",
+      "categoryID": "Completeness_6257",
+      "categoryDisplay": "Completeness"
+    },
+    {
+      "id": "skipLibCheck",
+      "display": "Skip Lib Check",
+      "oneliner": "<p>Skip type checking all .d.ts files.</p>\n",
+      "categoryID": "Completeness_6257",
+      "categoryDisplay": "Completeness"
+    },
+    {
+      "id": "assumeChangesOnlyAffectDirectDependencies",
+      "display": "Assume Changes Only Affect Direct Dependencies",
+      "oneliner": "<p>Have recompiles in projects that use <a href=\"#incremental\"><code>incremental</code></a> and <code>watch</code> mode assume that changes within a file will only affect files directly depending on it.</p>\n",
+      "categoryID": "Watch_and_Build_Modes_6250",
+      "categoryDisplay": "Watch Options"
+    },
+    {
+      "id": "watchFile",
+      "display": "watchFile",
+      "oneliner": "<p>Specify how the TypeScript watch mode works.</p>\n",
+      "categoryID": "watchOptions",
+      "categoryDisplay": "watchOptions"
+    },
+    {
+      "id": "watchDirectory",
+      "display": "watchDirectory",
+      "oneliner": "<p>Specify how directories are watched on systems that lack recursive file-watching functionality.</p>\n",
+      "categoryID": "watchOptions",
+      "categoryDisplay": "watchOptions"
+    },
+    {
+      "id": "fallbackPolling",
+      "display": "fallbackPolling",
+      "oneliner": "<p>Specify what approach the watcher should use if the system runs out of native file watchers.</p>\n",
+      "categoryID": "watchOptions",
+      "categoryDisplay": "watchOptions"
+    },
+    {
+      "id": "synchronousWatchDirectory",
+      "display": "synchronousWatchDirectory",
+      "oneliner": "<p>Synchronously call callbacks and update the state of directory watchers on platforms that don`t support recursive watching natively.</p>\n",
+      "categoryID": "watchOptions",
+      "categoryDisplay": "watchOptions"
+    },
+    {
+      "id": "excludeDirectories",
+      "display": "excludeDirectories",
+      "oneliner": "<p>Remove a list of directories from the watch process.</p>\n",
+      "categoryID": "watchOptions",
+      "categoryDisplay": "watchOptions"
+    },
+    {
+      "id": "excludeFiles",
+      "display": "excludeFiles",
+      "oneliner": "<p>Remove a list of files from the watch mode's processing.</p>\n",
+      "categoryID": "watchOptions",
+      "categoryDisplay": "watchOptions"
+    },
+    {
+      "id": "enable",
+      "display": "enable",
+      "oneliner": "<p>Disable the type acquisition for JavaScript projects.</p>\n",
+      "categoryID": "typeAcquisition",
+      "categoryDisplay": "typeAcquisition"
+    },
+    {
+      "id": "include",
+      "display": "Include",
+      "oneliner": "<p>Specify a list of modules which to acquire types for.</p>\n",
+      "categoryID": "typeAcquisition",
+      "categoryDisplay": "typeAcquisition"
+    },
+    {
+      "id": "exclude",
+      "display": "Exclude",
+      "oneliner": "<p>Specify a list of modules which to exclude from type acquisition.</p>\n",
+      "categoryID": "typeAcquisition",
+      "categoryDisplay": "typeAcquisition"
+    },
+    {
+      "id": "disableFilenameBasedTypeAcquisition",
+      "display": "disableFilenameBasedTypeAcquisition",
+      "oneliner": "<p>Disables inference for type acquisition by looking at filenames in a project.</p>\n",
+      "categoryID": "typeAcquisition",
+      "categoryDisplay": "typeAcquisition"
+    }
+  ]
+}
