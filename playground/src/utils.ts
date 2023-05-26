@@ -19,7 +19,7 @@ export const delay = (ms: number) => () => T.delay(ms)(voidTask)
 
 export const writeToClipboard = (str: string) =>
   pipe(
-    E.tryCatch(() => navigator.clipboard.writeText(str), constVoid),
+    E.tryCatch(() => globalThis.navigator.clipboard.writeText(str), constVoid),
     TE.fromEither,
     TE.chain((p) => TE.tryCatch(() => p, constVoid)),
   )
