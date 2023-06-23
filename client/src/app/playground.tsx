@@ -16,8 +16,15 @@ const i = (s: string) => (playCopy as any)[s] || s
 import "./playground.scss"
 import { playCopy } from "./en"
 import { RenderExamples } from "./components/ShowExamples"
+
+const newWorker = typeof Worker !== 'undefined' ? new Worker( new URL(`./worker/worker`, import.meta.url)) : undefined;
+
+
 export function Playground() {
   useEffect(() => {
+      // Using TS in the main browser needs this
+    globalThis.module = {}
+
     // Don't even bother getting monaco
 
     // @ts-ignore - so the playground handbook can grab this data
@@ -56,6 +63,8 @@ export function Playground() {
       const latestRelease = [...playgroundReleases.versions].sort().pop()!
       const tsVersion = tsVersionParam || latestRelease
 
+      newWorker?.postMessage({type: "init", tsVersion})
+
       // Because we can reach to localhost ports from the site, it's possible for the locally built compiler to
       // be hosted and to power the editor with a bit of elbow grease.
       const useLocalCompiler = tsVersion === "dev"
@@ -86,7 +95,7 @@ export function Playground() {
           unpkg: "https://unpkg.com",
           local: "http://localhost:5000",
         },
-        ignoreDuplicateModules: ["vs/editor/editor.main"],
+        ignoreDuplicateModules: ["vs/editor/editor.main", "===added==="],
         catchError: true,
         onError: function (err: any) {
           if (document.getElementById("loading-message")) {
@@ -101,12 +110,17 @@ export function Playground() {
         },
       })
 
+      const useVolar = false // true
+      const imports = useVolar ? ["vs/editor/editor.main", `unpkg/typescript@${tsVersion}/lib/typescript`] : ["vs/editor/editor.main", "vs/language/typescript/tsWorker"]
+      // console.log("Loading monaco and typescript", { imports })
       re(
-        ["vs/editor/editor.main", "vs/language/typescript/tsWorker"],
-        async (main: typeof import("monaco-editor"), tsWorker: typeof import("typescript")) => {
+       imports,
+        async (main: typeof import("monaco-editor"), tsWorker?: typeof import("typescript")) => {
+          // console.log("Loaded monaco and typescript", { main, tsWorker })
           // @ts-ignore
-          const ts = (global as any).ts || tsWorker.typescript
+          const ts = (global as any).ts || tsWorker?.typescript
           const isOK = main && ts
+          console.log({ ts})
           if (isOK) {
             document.getElementById("loader")!.parentNode?.removeChild(document.getElementById("loader")!)
           } else {

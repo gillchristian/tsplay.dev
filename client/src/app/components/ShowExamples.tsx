@@ -32,7 +32,7 @@ const hrefForExample = (example: Example, lang: string) => {
   const prefix = isJS ? "useJavaScript=true" : ""
   const hash = "example/" + example.id
   const params = example.compilerSettings || {}
-  params.q = Math.floor(Math.random() * 512)
+  // params.q = Math.floor(Math.random() * 512)
   const queryParams = Object.keys(params).map(key => key + '=' + params[key]).join('&');
   const langPrefix = lang === "en" ? "" : lang
   return `${langPrefix}/?${prefix + queryParams}#${hash}`

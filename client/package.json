@@ -29,6 +29,9 @@
     "react-dom": "18.2.0",
     "sass": "^1.62.1",
     "typescript": "5.0.4",
+    "volar-service-typescript": "0.0.8",
+    "@volar/monaco": "1.7.8",
+    "@volar/typescript": "1.7.8",
     "vscode-loader": "1.0.2"
   },
   "prettier": {
