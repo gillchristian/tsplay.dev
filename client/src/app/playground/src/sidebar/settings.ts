@@ -5,6 +5,7 @@ import { showErrors } from "./showErrors"
 import { optionsPlugin } from "./plugins"
 import { showASTPlugin } from "./ast"
 import { runPlugin } from "./runtime"
+import { shortenerPlugin } from "./shortener"
 import { LocalStorageOption } from "../ds/createDesignSystem"
 
 export const getPlaygroundPlugins = (): PluginFactory[] => {
@@ -13,6 +14,7 @@ export const getPlaygroundPlugins = (): PluginFactory[] => {
   if (!localStorage.getItem("disable-sidebar-dts")) defaults.push(showDTSPlugin)
   if (!localStorage.getItem("disable-sidebar-err")) defaults.push(showErrors)
   if (!localStorage.getItem("disable-sidebar-run")) defaults.push(runPlugin)
+  if (!localStorage.getItem("disable-sidebar-shortener")) defaults.push(shortenerPlugin)
   if (!localStorage.getItem("disable-sidebar-plugins")) defaults.push(optionsPlugin)
 
   // Sidebar items which are more dev/introspection focused

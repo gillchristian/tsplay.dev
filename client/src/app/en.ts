@@ -18,6 +18,7 @@ export const playCopy = {
     play_sidebar_errors_no_errors: "No errors",
     play_sidebar_logs: "Logs",
     play_sidebar_logs_no_logs: "No logs",
+    play_sidebar_shortener: "Shortener",
     play_sidebar_options: "Options",
     play_sidebar_options_restart_required: "Browser Refresh Required",
     play_sidebar_options_disable_ata: "Disable ATA",
