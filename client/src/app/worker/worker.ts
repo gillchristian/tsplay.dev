@@ -13,10 +13,10 @@ self.onmessage = (msg) => {
     const tsURI = `https://unpkg.com/typescript@${msg.data.tsVersion}/lib/typescript.js`
     importScripts(tsURI)
     console.log("grabbed ts")
-    console.log({ worker})
+    console.log({ worker })
     worker.initialize((ctx: any) => {
-        console.log("booting worker")
-      
+      console.log("booting worker")
+
       const env = createServiceEnvironment();
 
       // Enable auto fetch node_modules types
