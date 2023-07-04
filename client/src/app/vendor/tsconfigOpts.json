@@ -1,0 +1,2276 @@
+[
+  {
+    "name": "allowJs",
+    "type": "boolean",
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6600,
+      "category": 3,
+      "key": "Allow_JavaScript_files_to_be_a_part_of_your_program_Use_the_checkJS_option_to_get_errors_from_these__6600",
+      "message": "Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6247,
+    "related": ["checkJs", "emitDeclarationOnly"],
+    "releaseVersion": "1.8",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "allowSyntheticDefaultImports",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6601,
+      "category": 3,
+      "key": "Allow_import_x_from_y_when_a_module_doesn_t_have_a_default_export_6601",
+      "message": "Allow 'import x from y' when a module doesn't have a default export."
+    },
+    "defaultValueDescription": {
+      "code": 6904,
+      "category": 3,
+      "key": "module_system_or_esModuleInterop_6904",
+      "message": "module === \"system\" or esModuleInterop"
+    },
+    "categoryCode": 6252,
+    "related": ["esModuleInterop"],
+    "releaseVersion": "1.8",
+    "defaultValue": [
+      "`true` if [`module`](#module) is `system`, or [`esModuleInterop`](#esModuleInterop) and [`module`](#module) is not `es6`/`es2015` or `esnext`,",
+      "`false` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "allowUmdGlobalAccess",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6602,
+      "category": 3,
+      "key": "Allow_accessing_UMD_globals_from_modules_6602",
+      "message": "Allow accessing UMD globals from modules."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6244,
+    "releaseVersion": "3.5",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "allowUnreachableCode",
+    "type": "boolean",
+    "affectsBindDiagnostics": true,
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6603,
+      "category": 3,
+      "key": "Disable_error_reporting_for_unreachable_code_6603",
+      "message": "Disable error reporting for unreachable code."
+    },
+    "categoryCode": 6248,
+    "releaseVersion": "1.8",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "allowUnusedLabels",
+    "type": "boolean",
+    "affectsBindDiagnostics": true,
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6604,
+      "category": 3,
+      "key": "Disable_error_reporting_for_unused_labels_6604",
+      "message": "Disable error reporting for unused labels."
+    },
+    "categoryCode": 6248,
+    "releaseVersion": "1.8",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "alwaysStrict",
+    "type": "boolean",
+    "affectsSourceFile": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6605,
+      "category": 3,
+      "key": "Ensure_use_strict_is_always_emitted_6605",
+      "message": "Ensure 'use strict' is always emitted."
+    },
+    "defaultValueDescription": {
+      "code": 6905,
+      "category": 3,
+      "key": "false_unless_strict_is_set_6905",
+      "message": "`false`, unless `strict` is set"
+    },
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "recommended": true,
+    "releaseVersion": "2.1",
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "assumeChangesOnlyAffectDirectDependencies",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6606,
+      "category": 3,
+      "key": "Have_recompiles_in_projects_that_use_incremental_and_watch_mode_assume_that_changes_within_a_file_wi_6606",
+      "message": "Have recompiles in projects that use 'incremental' and 'watch' mode assume that changes within a file will only affect files directly depending on it."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6250,
+    "releaseVersion": "3.8",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "baseUrl",
+    "type": "string",
+    "affectsModuleResolution": true,
+    "isFilePath": true,
+    "description": {
+      "code": 6607,
+      "category": 3,
+      "key": "Specify_the_base_directory_to_resolve_non_relative_module_names_6607",
+      "message": "Specify the base directory to resolve non-relative module names."
+    },
+    "categoryCode": 6244,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "charset",
+    "type": "string",
+    "description": {
+      "code": 6608,
+      "category": 3,
+      "key": "No_longer_supported_In_early_versions_manually_set_the_text_encoding_for_reading_files_6608",
+      "message": "No longer supported. In early versions, manually set the text encoding for reading files."
+    },
+    "defaultValueDescription": "utf8",
+    "categoryCode": 6253,
+    "deprecated": "Deprecated",
+    "defaultValue": "utf8",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "checkJs",
+    "type": "boolean",
+    "description": {
+      "code": 6609,
+      "category": 3,
+      "key": "Enable_error_reporting_in_type_checked_JavaScript_files_6609",
+      "message": "Enable error reporting in type-checked JavaScript files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6247,
+    "related": ["allowJs", "emitDeclarationOnly"],
+    "releaseVersion": "2.3",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "composite",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsBundleEmitBuildInfo": true,
+    "isTSConfigOnly": true,
+    "defaultValueDescription": false,
+    "description": {
+      "code": 6611,
+      "category": 3,
+      "key": "Enable_constraints_that_allow_a_TypeScript_project_to_be_used_with_project_references_6611",
+      "message": "Enable constraints that allow a TypeScript project to be used with project references."
+    },
+    "categoryCode": 6255,
+    "related": ["incremental", "tsBuildInfoFile"],
+    "releaseVersion": "3.0",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "declaration",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6612,
+      "category": 3,
+      "key": "Generate_d_ts_files_from_TypeScript_and_JavaScript_files_in_your_project_6612",
+      "message": "Generate .d.ts files from TypeScript and JavaScript files in your project."
+    },
+    "defaultValueDescription": {
+      "code": 6906,
+      "category": 3,
+      "key": "false_unless_composite_is_set_6906",
+      "message": "`false`, unless `composite` is set"
+    },
+    "categoryCode": 6246,
+    "related": ["declarationDir", "emitDeclarationOnly"],
+    "releaseVersion": "1.0",
+    "defaultValue": [
+      "`true` if [`composite`](#composite),",
+      "`false` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "declarationDir",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsDeclarationPath": true,
+    "isFilePath": true,
+    "paramType": {
+      "code": 6038,
+      "category": 3,
+      "key": "DIRECTORY_6038",
+      "message": "DIRECTORY"
+    },
+    "description": {
+      "code": 6613,
+      "category": 3,
+      "key": "Specify_the_output_directory_for_generated_declaration_files_6613",
+      "message": "Specify the output directory for generated declaration files."
+    },
+    "categoryCode": 6246,
+    "related": ["declaration"],
+    "releaseVersion": "2.0",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "declarationMap",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "defaultValueDescription": false,
+    "description": {
+      "code": 6614,
+      "category": 3,
+      "key": "Create_sourcemaps_for_d_ts_files_6614",
+      "message": "Create sourcemaps for d.ts files."
+    },
+    "categoryCode": 6246,
+    "releaseVersion": "2.9",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "diagnostics",
+    "type": "boolean",
+    "description": {
+      "code": 6615,
+      "category": 3,
+      "key": "Output_compiler_performance_information_after_building_6615",
+      "message": "Output compiler performance information after building."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6251,
+    "related": ["extendedDiagnostics"],
+    "deprecated": "Deprecated",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "disableFilenameBasedTypeAcquisition",
+    "type": "boolean",
+    "defaultValueDescription": false,
+    "releaseVersion": "4.1",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "disableReferencedProjectLoad",
+    "type": "boolean",
+    "isTSConfigOnly": true,
+    "description": {
+      "code": 6617,
+      "category": 3,
+      "key": "Reduce_the_number_of_projects_loaded_automatically_by_TypeScript_6617",
+      "message": "Reduce the number of projects loaded automatically by TypeScript."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6255,
+    "releaseVersion": "4.0",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "disableSizeLimit",
+    "type": "boolean",
+    "affectsProgramStructure": true,
+    "description": {
+      "code": 6618,
+      "category": 3,
+      "key": "Remove_the_20mb_cap_on_total_source_code_size_for_JavaScript_files_in_the_TypeScript_language_server_6618",
+      "message": "Remove the 20mb cap on total source code size for JavaScript files in the TypeScript language server."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6249,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "disableSolutionSearching",
+    "type": "boolean",
+    "isTSConfigOnly": true,
+    "description": {
+      "code": 6619,
+      "category": 3,
+      "key": "Opt_a_project_out_of_multi_project_reference_checking_when_editing_6619",
+      "message": "Opt a project out of multi-project reference checking when editing."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6255,
+    "releaseVersion": "3.8",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "disableSourceOfProjectReferenceRedirect",
+    "type": "boolean",
+    "isTSConfigOnly": true,
+    "description": {
+      "code": 6620,
+      "category": 3,
+      "key": "Disable_preferring_source_files_instead_of_declaration_files_when_referencing_composite_projects_6620",
+      "message": "Disable preferring source files instead of declaration files when referencing composite projects."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6255,
+    "releaseVersion": "3.7",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "downlevelIteration",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6621,
+      "category": 3,
+      "key": "Emit_more_compliant_but_verbose_and_less_performant_JavaScript_for_iteration_6621",
+      "message": "Emit more compliant, but verbose and less performant JavaScript for iteration."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "related": ["importHelpers"],
+    "releaseVersion": "2.3",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "emitBOM",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6622,
+      "category": 3,
+      "key": "Emit_a_UTF_8_Byte_Order_Mark_BOM_in_the_beginning_of_output_files_6622",
+      "message": "Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "emitDeclarationOnly",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6623,
+      "category": 3,
+      "key": "Only_output_d_ts_files_and_not_JavaScript_files_6623",
+      "message": "Only output d.ts files and not JavaScript files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "related": ["declaration"],
+    "releaseVersion": "2.8",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "emitDecoratorMetadata",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6624,
+      "category": 3,
+      "key": "Emit_design_type_metadata_for_decorated_declarations_in_source_files_6624",
+      "message": "Emit design-type metadata for decorated declarations in source files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6254,
+    "related": ["experimentalDecorators"],
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "enable",
+    "type": "boolean",
+    "defaultValueDescription": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "esModuleInterop",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6626,
+      "category": 3,
+      "key": "Emit_additional_JavaScript_to_ease_support_for_importing_CommonJS_modules_This_enables_allowSyntheti_6626",
+      "message": "Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6252,
+    "related": ["allowSyntheticDefaultImports"],
+    "recommended": true,
+    "releaseVersion": "2.7",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "exactOptionalPropertyTypes",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6243,
+      "category": 3,
+      "key": "Interpret_optional_property_types_as_written_rather_than_adding_undefined_6243",
+      "message": "Interpret optional property types as written, rather than adding 'undefined'."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "recommended": true,
+    "releaseVersion": "4.4",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "exclude",
+    "type": "list",
+    "categoryCode": 0,
+    "description": {
+      "message": "Print names of files part of the compilation."
+    },
+    "defaultValue": [
+      "node_modules",
+      "bower_components",
+      "jspm_packages",
+      "[`outDir`](#outDir)"
+    ],
+    "hostObj": "compilerOptions",
+    "related": ["include", "files"]
+  },
+  {
+    "name": "exclude",
+    "type": "list",
+    "element": {
+      "name": "exclude",
+      "type": "string"
+    },
+    "related": ["include", "files"],
+    "defaultValue": [
+      "node_modules",
+      "bower_components",
+      "jspm_packages",
+      "[`outDir`](#outDir)"
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "excludeDirectories",
+    "type": "list",
+    "element": {
+      "name": "excludeDirectory",
+      "type": "string",
+      "isFilePath": true
+    },
+    "description": {
+      "code": 6628,
+      "category": 3,
+      "key": "Remove_a_list_of_directories_from_the_watch_process_6628",
+      "message": "Remove a list of directories from the watch process."
+    },
+    "categoryCode": 6250,
+    "hostObj": "watchOptions"
+  },
+  {
+    "name": "excludeFiles",
+    "type": "list",
+    "element": {
+      "name": "excludeFile",
+      "type": "string",
+      "isFilePath": true
+    },
+    "description": {
+      "code": 6629,
+      "category": 3,
+      "key": "Remove_a_list_of_files_from_the_watch_mode_s_processing_6629",
+      "message": "Remove a list of files from the watch mode's processing."
+    },
+    "categoryCode": 6250,
+    "hostObj": "watchOptions"
+  },
+  {
+    "name": "experimentalDecorators",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6630,
+      "category": 3,
+      "key": "Enable_experimental_support_for_TC39_stage_2_draft_decorators_6630",
+      "message": "Enable experimental support for TC39 stage 2 draft decorators."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6254,
+    "related": ["emitDecoratorMetadata"],
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "explainFiles",
+    "type": "boolean",
+    "description": {
+      "code": 6631,
+      "category": 3,
+      "key": "Print_files_read_during_the_compilation_including_why_it_was_included_6631",
+      "message": "Print files read during the compilation including why it was included."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6251,
+    "releaseVersion": "4.2",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "extendedDiagnostics",
+    "type": "boolean",
+    "description": {
+      "code": 6632,
+      "category": 3,
+      "key": "Output_more_detailed_compiler_performance_information_after_building_6632",
+      "message": "Output more detailed compiler performance information after building."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6251,
+    "related": ["diagnostics"],
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "extends",
+    "type": "string",
+    "categoryCode": 0,
+    "description": {
+      "message": "Print names of files part of the compilation."
+    },
+    "defaultValue": "false",
+    "hostObj": "compilerOptions",
+    "releaseVersion": "2.1"
+  },
+  {
+    "name": "fallbackPolling",
+    "type": {
+      "fixedinterval": 0,
+      "priorityinterval": 1,
+      "dynamicpriority": 2,
+      "fixedchunksize": 3
+    },
+    "description": {
+      "code": 6634,
+      "category": 3,
+      "key": "Specify_what_approach_the_watcher_should_use_if_the_system_runs_out_of_native_file_watchers_6634",
+      "message": "Specify what approach the watcher should use if the system runs out of native file watchers."
+    },
+    "defaultValueDescription": 1,
+    "categoryCode": 6250,
+    "allowedValues": [
+      "fixedinterval",
+      "priorityinterval",
+      "dynamicpriority",
+      "fixedchunksize"
+    ],
+    "releaseVersion": "3.8",
+    "hostObj": "watchOptions"
+  },
+  {
+    "name": "files",
+    "type": "list",
+    "categoryCode": 0,
+    "description": {
+      "message": "Print names of files part of the compilation."
+    },
+    "defaultValue": "false",
+    "hostObj": "compilerOptions",
+    "related": ["include", "exclude"]
+  },
+  {
+    "name": "force",
+    "description": {
+      "code": 6636,
+      "category": 3,
+      "key": "Build_all_projects_including_those_that_appear_to_be_up_to_date_6636",
+      "message": "Build all projects, including those that appear to be up to date."
+    },
+    "type": "boolean",
+    "defaultValueDescription": false,
+    "categoryCode": 6171,
+    "hostObj": "build"
+  },
+  {
+    "name": "forceConsistentCasingInFileNames",
+    "type": "boolean",
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6637,
+      "category": 3,
+      "key": "Ensure_that_casing_is_correct_in_imports_6637",
+      "message": "Ensure that casing is correct in imports."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6252,
+    "recommended": true,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "generateCpuProfile",
+    "type": "string",
+    "isFilePath": true,
+    "paramType": {
+      "code": 6040,
+      "category": 3,
+      "key": "FILE_OR_DIRECTORY_6040",
+      "message": "FILE OR DIRECTORY"
+    },
+    "description": {
+      "code": 6638,
+      "category": 3,
+      "key": "Emit_a_v8_CPU_profile_of_the_compiler_run_for_debugging_6638",
+      "message": "Emit a v8 CPU profile of the compiler run for debugging."
+    },
+    "defaultValueDescription": "profile.cpuprofile",
+    "categoryCode": 6251,
+    "releaseVersion": "3.7",
+    "defaultValue": "profile.cpuprofile",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "importHelpers",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6639,
+      "category": 3,
+      "key": "Allow_importing_helper_functions_from_tslib_once_per_project_instead_of_including_them_per_file_6639",
+      "message": "Allow importing helper functions from tslib once per project, instead of including them per-file."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "related": ["noEmitHelpers", "downlevelIteration"],
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "importsNotUsedAsValues",
+    "type": {
+      "remove": 0,
+      "preserve": 1,
+      "error": 2
+    },
+    "affectsEmit": true,
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6718,
+      "category": 3,
+      "key": "Specify_emit_Slashchecking_behavior_for_imports_that_are_only_used_for_types_6718",
+      "message": "Specify emit/checking behavior for imports that are only used for types."
+    },
+    "defaultValueDescription": 0,
+    "categoryCode": 6246,
+    "allowedValues": ["remove", "preserve", "error"],
+    "releaseVersion": "3.8",
+    "defaultValue": "remove",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "include",
+    "type": "list",
+    "categoryCode": 0,
+    "description": {
+      "message": "Print names of files part of the compilation."
+    },
+    "defaultValue": [
+      "`[]` if [`files`](#files) is specified,",
+      "`**` otherwise."
+    ],
+    "hostObj": "compilerOptions",
+    "related": ["files", "exclude"],
+    "releaseVersion": "2.0"
+  },
+  {
+    "name": "include",
+    "type": "list",
+    "element": {
+      "name": "include",
+      "type": "string"
+    },
+    "related": ["files", "exclude"],
+    "releaseVersion": "2.0",
+    "defaultValue": [
+      "`[]` if [`files`](#files) is specified,",
+      "`**` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "incremental",
+    "type": "boolean",
+    "description": {
+      "code": 6642,
+      "category": 3,
+      "key": "Save_tsbuildinfo_files_to_allow_for_incremental_compilation_of_projects_6642",
+      "message": "Save .tsbuildinfo files to allow for incremental compilation of projects."
+    },
+    "defaultValueDescription": {
+      "code": 6906,
+      "category": 3,
+      "key": "false_unless_composite_is_set_6906",
+      "message": "`false`, unless `composite` is set"
+    },
+    "categoryCode": 6255,
+    "related": ["composite", "tsBuildInfoFile"],
+    "releaseVersion": "3.4",
+    "defaultValue": [
+      "`true` if [`composite`](#composite),",
+      "`false` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "inlineSourceMap",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6643,
+      "category": 3,
+      "key": "Include_sourcemap_files_inside_the_emitted_JavaScript_6643",
+      "message": "Include sourcemap files inside the emitted JavaScript."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "releaseVersion": "1.5",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "inlineSources",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6644,
+      "category": 3,
+      "key": "Include_source_code_in_the_sourcemaps_inside_the_emitted_JavaScript_6644",
+      "message": "Include source code in the sourcemaps inside the emitted JavaScript."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "releaseVersion": "1.5",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "isolatedModules",
+    "type": "boolean",
+    "description": {
+      "code": 6645,
+      "category": 3,
+      "key": "Ensure_that_each_file_can_be_safely_transpiled_without_relying_on_other_imports_6645",
+      "message": "Ensure that each file can be safely transpiled without relying on other imports."
+    },
+    "transpileOptionValue": true,
+    "defaultValueDescription": false,
+    "categoryCode": 6252,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "jsx",
+    "type": {
+      "preserve": 1,
+      "react-native": 3,
+      "react": 2,
+      "react-jsx": 4,
+      "react-jsxdev": 5
+    },
+    "affectsSourceFile": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsModuleResolution": true,
+    "paramType": {
+      "code": 6034,
+      "category": 3,
+      "key": "KIND_6034",
+      "message": "KIND"
+    },
+    "description": {
+      "code": 6646,
+      "category": 3,
+      "key": "Specify_what_JSX_code_is_generated_6646",
+      "message": "Specify what JSX code is generated."
+    },
+    "categoryCode": 6254,
+    "related": ["jsxFactory", "jsxFragmentFactory", "jsxImportSource"],
+    "allowedValues": [
+      "preserve",
+      "react",
+      "react-native",
+      "react-jsx",
+      "react-jsxdev"
+    ],
+    "releaseVersion": "2.2",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "jsxFactory",
+    "type": "string",
+    "description": {
+      "code": 6647,
+      "category": 3,
+      "key": "Specify_the_JSX_factory_function_used_when_targeting_React_JSX_emit_e_g_React_createElement_or_h_6647",
+      "message": "Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'."
+    },
+    "defaultValueDescription": "`React.createElement`",
+    "categoryCode": 6254,
+    "related": ["jsx", "jsxFragmentFactory", "jsxImportSource"],
+    "allowedValues": ["Any identifier or dotted identifier."],
+    "defaultValue": "React.createElement",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "jsxFragmentFactory",
+    "type": "string",
+    "description": {
+      "code": 6648,
+      "category": 3,
+      "key": "Specify_the_JSX_Fragment_reference_used_for_fragments_when_targeting_React_JSX_emit_e_g_React_Fragme_6648",
+      "message": "Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'."
+    },
+    "defaultValueDescription": "React.Fragment",
+    "categoryCode": 6254,
+    "related": ["jsx", "jsxFactory", "jsxImportSource"],
+    "releaseVersion": "4.0",
+    "defaultValue": "React.Fragment",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "jsxImportSource",
+    "type": "string",
+    "affectsSemanticDiagnostics": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6649,
+      "category": 3,
+      "key": "Specify_module_specifier_used_to_import_the_JSX_factory_functions_when_using_jsx_Colon_react_jsx_Ast_6649",
+      "message": "Specify module specifier used to import the JSX factory functions when using 'jsx: react-jsx*'."
+    },
+    "defaultValueDescription": "react",
+    "categoryCode": 6254,
+    "related": ["jsx", "jsxFactory"],
+    "releaseVersion": "4.1",
+    "defaultValue": "react",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "keyofStringsOnly",
+    "type": "boolean",
+    "description": {
+      "code": 6650,
+      "category": 3,
+      "key": "Make_keyof_only_return_strings_instead_of_string_numbers_or_symbols_Legacy_option_6650",
+      "message": "Make keyof only return strings instead of string, numbers or symbols. Legacy option."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6253,
+    "deprecated": "Deprecated",
+    "releaseVersion": "2.9",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "lib",
+    "type": "list",
+    "element": {
+      "name": "lib",
+      "type": {}
+    },
+    "affectsProgramStructure": true,
+    "description": {
+      "code": 6651,
+      "category": 3,
+      "key": "Specify_a_set_of_bundled_library_declaration_files_that_describe_the_target_runtime_environment_6651",
+      "message": "Specify a set of bundled library declaration files that describe the target runtime environment."
+    },
+    "categoryCode": 6254,
+    "related": ["noLib"],
+    "releaseVersion": "2.0",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "listEmittedFiles",
+    "type": "boolean",
+    "description": {
+      "code": 6652,
+      "category": 3,
+      "key": "Print_the_names_of_emitted_files_after_a_compilation_6652",
+      "message": "Print the names of emitted files after a compilation."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6251,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "listFiles",
+    "type": "boolean",
+    "description": {
+      "code": 6653,
+      "category": 3,
+      "key": "Print_all_of_the_files_read_during_the_compilation_6653",
+      "message": "Print all of the files read during the compilation."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6251,
+    "related": ["explainFiles"],
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "mapRoot",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "paramType": {
+      "code": 6037,
+      "category": 3,
+      "key": "LOCATION_6037",
+      "message": "LOCATION"
+    },
+    "description": {
+      "code": 6655,
+      "category": 3,
+      "key": "Specify_the_location_where_debugger_should_locate_map_files_instead_of_generated_locations_6655",
+      "message": "Specify the location where debugger should locate map files instead of generated locations."
+    },
+    "categoryCode": 6246,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "maxNodeModuleJsDepth",
+    "type": "number",
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6656,
+      "category": 3,
+      "key": "Specify_the_maximum_folder_depth_used_for_checking_JavaScript_files_from_node_modules_Only_applicabl_6656",
+      "message": "Specify the maximum folder depth used for checking JavaScript files from 'node_modules'. Only applicable with 'allowJs'."
+    },
+    "defaultValueDescription": 0,
+    "categoryCode": 6247,
+    "defaultValue": 0,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "module",
+    "type": {
+      "none": 0,
+      "commonjs": 1,
+      "amd": 2,
+      "system": 4,
+      "umd": 3,
+      "es6": 5,
+      "es2015": 5,
+      "es2020": 6,
+      "es2022": 7,
+      "esnext": 99,
+      "node16": 100,
+      "nodenext": 199
+    },
+    "affectsModuleResolution": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "paramType": {
+      "code": 6034,
+      "category": 3,
+      "key": "KIND_6034",
+      "message": "KIND"
+    },
+    "description": {
+      "code": 6657,
+      "category": 3,
+      "key": "Specify_what_module_code_is_generated_6657",
+      "message": "Specify what module code is generated."
+    },
+    "categoryCode": 6244,
+    "related": ["moduleResolution"],
+    "allowedValues": [
+      "none",
+      "commonjs",
+      "amd",
+      "umd",
+      "system",
+      "`es6`/`es2015`",
+      "es2020",
+      "es2022",
+      "esnext",
+      "node16",
+      "nodenext"
+    ],
+    "releaseVersion": "1.0",
+    "defaultValue": [
+      "`CommonJS` if [`target`](#target) is `ES3` or `ES5`,",
+      "`ES6`/`ES2015` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "moduleDetection",
+    "type": {
+      "auto": 2,
+      "legacy": 1,
+      "force": 3
+    },
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 1475,
+      "category": 3,
+      "key": "Control_what_method_is_used_to_detect_module_format_JS_files_1475",
+      "message": "Control what method is used to detect module-format JS files."
+    },
+    "defaultValueDescription": {
+      "code": 1476,
+      "category": 3,
+      "key": "auto_Colon_Treat_files_with_imports_exports_import_meta_jsx_with_jsx_Colon_react_jsx_or_esm_format_w_1476",
+      "message": "\"auto\": Treat files with imports, exports, import.meta, jsx (with jsx: react-jsx), or esm format (with module: node16+) as modules."
+    },
+    "categoryCode": 6254,
+    "allowedValues": ["legacy", "auto", "force"],
+    "releaseVersion": "4.7",
+    "defaultValue": "\"auto\": Treat files with imports, exports, import.meta, jsx (with jsx: react-jsx), or esm format (with module: node16+) as modules.",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "moduleResolution",
+    "type": {
+      "node": 2,
+      "classic": 1,
+      "node16": 3,
+      "nodenext": 99
+    },
+    "affectsModuleResolution": true,
+    "paramType": {
+      "code": 6039,
+      "category": 3,
+      "key": "STRATEGY_6039",
+      "message": "STRATEGY"
+    },
+    "description": {
+      "code": 6658,
+      "category": 3,
+      "key": "Specify_how_TypeScript_looks_up_a_file_from_a_given_module_specifier_6658",
+      "message": "Specify how TypeScript looks up a file from a given module specifier."
+    },
+    "defaultValueDescription": {
+      "code": 69010,
+      "category": 3,
+      "key": "module_AMD_or_UMD_or_System_or_ES6_then_Classic_Otherwise_Node_69010",
+      "message": "module === `AMD` or `UMD` or `System` or `ES6`, then `Classic`, Otherwise `Node`"
+    },
+    "categoryCode": 6244,
+    "related": ["module"],
+    "allowedValues": ["classic", "node", "node16", "nodenext"],
+    "defaultValue": [
+      "`Classic` if [`module`](#module) is `AMD`, `UMD`, `System` or `ES6`/`ES2015`,",
+      "Matches if [`module`](#module) is `node12` or `nodenext`,",
+      "`Node` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "moduleSuffixes",
+    "type": "list",
+    "element": {
+      "name": "suffix",
+      "type": "string"
+    },
+    "listPreserveFalsyValues": true,
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6931,
+      "category": 1,
+      "key": "List_of_file_name_suffixes_to_search_when_resolving_a_module_6931",
+      "message": "List of file name suffixes to search when resolving a module."
+    },
+    "categoryCode": 6244,
+    "releaseVersion": "4.7",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "newLine",
+    "type": {
+      "crlf": 0,
+      "lf": 1
+    },
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "paramType": {
+      "code": 6061,
+      "category": 3,
+      "key": "NEWLINE_6061",
+      "message": "NEWLINE"
+    },
+    "description": {
+      "code": 6659,
+      "category": 3,
+      "key": "Set_the_newline_character_for_emitting_files_6659",
+      "message": "Set the newline character for emitting files."
+    },
+    "defaultValueDescription": {
+      "code": 6912,
+      "category": 3,
+      "key": "Platform_specific_6912",
+      "message": "Platform specific"
+    },
+    "categoryCode": 6246,
+    "allowedValues": ["crlf", "lf"],
+    "releaseVersion": "1.5",
+    "defaultValue": "Platform specific.",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noEmit",
+    "type": "boolean",
+    "description": {
+      "code": 6660,
+      "category": 3,
+      "key": "Disable_emitting_files_from_a_compilation_6660",
+      "message": "Disable emitting files from a compilation."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noEmitHelpers",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6661,
+      "category": 3,
+      "key": "Disable_generating_custom_helper_functions_like_extends_in_compiled_output_6661",
+      "message": "Disable generating custom helper functions like '__extends' in compiled output."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "related": ["importHelpers"],
+    "releaseVersion": "1.5",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noEmitOnError",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6662,
+      "category": 3,
+      "key": "Disable_emitting_files_if_any_type_checking_errors_are_reported_6662",
+      "message": "Disable emitting files if any type checking errors are reported."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "releaseVersion": "1.4",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noErrorTruncation",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6663,
+      "category": 3,
+      "key": "Disable_truncating_types_in_error_messages_6663",
+      "message": "Disable truncating types in error messages."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6256,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noFallthroughCasesInSwitch",
+    "type": "boolean",
+    "affectsBindDiagnostics": true,
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6664,
+      "category": 3,
+      "key": "Enable_error_reporting_for_fallthrough_cases_in_switch_statements_6664",
+      "message": "Enable error reporting for fallthrough cases in switch statements."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "releaseVersion": "1.8",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noImplicitAny",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6665,
+      "category": 3,
+      "key": "Enable_error_reporting_for_expressions_and_declarations_with_an_implied_any_type_6665",
+      "message": "Enable error reporting for expressions and declarations with an implied 'any' type."
+    },
+    "defaultValueDescription": {
+      "code": 6905,
+      "category": 3,
+      "key": "false_unless_strict_is_set_6905",
+      "message": "`false`, unless `strict` is set"
+    },
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "recommended": true,
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noImplicitOverride",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6666,
+      "category": 3,
+      "key": "Ensure_overriding_members_in_derived_classes_are_marked_with_an_override_modifier_6666",
+      "message": "Ensure overriding members in derived classes are marked with an override modifier."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "releaseVersion": "4.3",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noImplicitReturns",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6667,
+      "category": 3,
+      "key": "Enable_error_reporting_for_codepaths_that_do_not_explicitly_return_in_a_function_6667",
+      "message": "Enable error reporting for codepaths that do not explicitly return in a function."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "releaseVersion": "1.8",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noImplicitThis",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6668,
+      "category": 3,
+      "key": "Enable_error_reporting_when_this_is_given_the_type_any_6668",
+      "message": "Enable error reporting when 'this' is given the type 'any'."
+    },
+    "defaultValueDescription": {
+      "code": 6905,
+      "category": 3,
+      "key": "false_unless_strict_is_set_6905",
+      "message": "`false`, unless `strict` is set"
+    },
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "recommended": true,
+    "releaseVersion": "2.0",
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noImplicitUseStrict",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6669,
+      "category": 3,
+      "key": "Disable_adding_use_strict_directives_in_emitted_JavaScript_files_6669",
+      "message": "Disable adding 'use strict' directives in emitted JavaScript files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6253,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noLib",
+    "type": "boolean",
+    "affectsProgramStructure": true,
+    "description": {
+      "code": 6670,
+      "category": 3,
+      "key": "Disable_including_any_library_files_including_the_default_lib_d_ts_6670",
+      "message": "Disable including any library files, including the default lib.d.ts."
+    },
+    "transpileOptionValue": true,
+    "defaultValueDescription": false,
+    "categoryCode": 6254,
+    "related": ["lib"],
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noPropertyAccessFromIndexSignature",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6671,
+      "category": 3,
+      "key": "Enforces_using_indexed_accessors_for_keys_declared_using_an_indexed_type_6671",
+      "message": "Enforces using indexed accessors for keys declared using an indexed type."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "releaseVersion": "4.2",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noResolve",
+    "type": "boolean",
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6672,
+      "category": 3,
+      "key": "Disallow_import_s_require_s_or_reference_s_from_expanding_the_number_of_files_TypeScript_should_add__6672",
+      "message": "Disallow 'import's, 'require's or '<reference>'s from expanding the number of files TypeScript should add to a project."
+    },
+    "transpileOptionValue": true,
+    "defaultValueDescription": false,
+    "categoryCode": 6244,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noStrictGenericChecks",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6673,
+      "category": 3,
+      "key": "Disable_strict_checking_of_generic_signatures_in_function_types_6673",
+      "message": "Disable strict checking of generic signatures in function types."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6253,
+    "releaseVersion": "2.4",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noUncheckedIndexedAccess",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6674,
+      "category": 3,
+      "key": "Add_undefined_to_a_type_when_accessed_using_an_index_6674",
+      "message": "Add 'undefined' to a type when accessed using an index."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "releaseVersion": "4.1",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noUnusedLocals",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6675,
+      "category": 3,
+      "key": "Enable_error_reporting_when_local_variables_aren_t_read_6675",
+      "message": "Enable error reporting when local variables aren't read."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "releaseVersion": "2.0",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "noUnusedParameters",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6676,
+      "category": 3,
+      "key": "Raise_an_error_when_a_function_parameter_isn_t_read_6676",
+      "message": "Raise an error when a function parameter isn't read."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "releaseVersion": "2.0",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "out",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsDeclarationPath": true,
+    "affectsBundleEmitBuildInfo": true,
+    "isFilePath": false,
+    "paramType": {
+      "code": 6035,
+      "category": 3,
+      "key": "FILE_6035",
+      "message": "FILE"
+    },
+    "description": {
+      "code": 6677,
+      "category": 3,
+      "key": "Deprecated_setting_Use_outFile_instead_6677",
+      "message": "Deprecated setting. Use 'outFile' instead."
+    },
+    "categoryCode": 6253,
+    "related": ["outDir", "outFile"],
+    "deprecated": "Deprecated",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "outDir",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsDeclarationPath": true,
+    "isFilePath": true,
+    "paramType": {
+      "code": 6038,
+      "category": 3,
+      "key": "DIRECTORY_6038",
+      "message": "DIRECTORY"
+    },
+    "description": {
+      "code": 6678,
+      "category": 3,
+      "key": "Specify_an_output_folder_for_all_emitted_files_6678",
+      "message": "Specify an output folder for all emitted files."
+    },
+    "categoryCode": 6246,
+    "related": ["out", "outFile"],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "outFile",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsDeclarationPath": true,
+    "affectsBundleEmitBuildInfo": true,
+    "isFilePath": true,
+    "paramType": {
+      "code": 6035,
+      "category": 3,
+      "key": "FILE_6035",
+      "message": "FILE"
+    },
+    "description": {
+      "code": 6679,
+      "category": 3,
+      "key": "Specify_a_file_that_bundles_all_outputs_into_one_JavaScript_file_If_declaration_is_true_also_designa_6679",
+      "message": "Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output."
+    },
+    "categoryCode": 6246,
+    "related": ["out", "outDir"],
+    "releaseVersion": "1.0",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "paths",
+    "type": "object",
+    "affectsModuleResolution": true,
+    "isTSConfigOnly": true,
+    "description": {
+      "code": 6680,
+      "category": 3,
+      "key": "Specify_a_set_of_entries_that_re_map_imports_to_additional_lookup_locations_6680",
+      "message": "Specify a set of entries that re-map imports to additional lookup locations."
+    },
+    "categoryCode": 6244,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "plugins",
+    "type": "list",
+    "isTSConfigOnly": true,
+    "element": {
+      "name": "plugin",
+      "type": "object"
+    },
+    "description": {
+      "code": 6681,
+      "category": 3,
+      "key": "Specify_a_list_of_language_service_plugins_to_include_6681",
+      "message": "Specify a list of language service plugins to include."
+    },
+    "categoryCode": 6249,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "preserveConstEnums",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6682,
+      "category": 3,
+      "key": "Disable_erasing_const_enum_declarations_in_generated_code_6682",
+      "message": "Disable erasing 'const enum' declarations in generated code."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "defaultValue": [
+      "`true` if [`isolatedModules`](#isolatedModules),",
+      "`false` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "preserveSymlinks",
+    "type": "boolean",
+    "description": {
+      "code": 6683,
+      "category": 3,
+      "key": "Disable_resolving_symlinks_to_their_realpath_This_correlates_to_the_same_flag_in_node_6683",
+      "message": "Disable resolving symlinks to their realpath. This correlates to the same flag in node."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6252,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "preserveValueImports",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 1449,
+      "category": 3,
+      "key": "Preserve_unused_imported_values_in_the_JavaScript_output_that_would_otherwise_be_removed_1449",
+      "message": "Preserve unused imported values in the JavaScript output that would otherwise be removed."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "related": ["isolatedModules", "importsNotUsedAsValues"],
+    "releaseVersion": "4.5",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "preserveWatchOutput",
+    "type": "boolean",
+    "description": {
+      "code": 6684,
+      "category": 3,
+      "key": "Disable_wiping_the_console_in_watch_mode_6684",
+      "message": "Disable wiping the console in watch mode."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6256,
+    "internal": true,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "pretty",
+    "type": "boolean",
+    "description": {
+      "code": 6685,
+      "category": 3,
+      "key": "Enable_color_and_formatting_in_TypeScript_s_output_to_make_compiler_errors_easier_to_read_6685",
+      "message": "Enable color and formatting in TypeScript's output to make compiler errors easier to read."
+    },
+    "defaultValueDescription": true,
+    "categoryCode": 6256,
+    "defaultValue": true,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "reactNamespace",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6686,
+      "category": 3,
+      "key": "Specify_the_object_invoked_for_createElement_This_only_applies_when_targeting_react_JSX_emit_6686",
+      "message": "Specify the object invoked for 'createElement'. This only applies when targeting 'react' JSX emit."
+    },
+    "defaultValueDescription": "`React`",
+    "categoryCode": 6254,
+    "defaultValue": "React",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "references",
+    "type": "string",
+    "categoryCode": 0,
+    "description": {
+      "message": "Print names of files part of the compilation."
+    },
+    "defaultValue": "false",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "removeComments",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "defaultValueDescription": false,
+    "description": {
+      "code": 6688,
+      "category": 3,
+      "key": "Disable_emitting_comments_6688",
+      "message": "Disable emitting comments."
+    },
+    "categoryCode": 6246,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "resolveJsonModule",
+    "type": "boolean",
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6689,
+      "category": 3,
+      "key": "Enable_importing_json_files_6689",
+      "message": "Enable importing .json files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6244,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "rootDir",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsDeclarationPath": true,
+    "isFilePath": true,
+    "paramType": {
+      "code": 6037,
+      "category": 3,
+      "key": "LOCATION_6037",
+      "message": "LOCATION"
+    },
+    "description": {
+      "code": 6690,
+      "category": 3,
+      "key": "Specify_the_root_folder_within_your_source_files_6690",
+      "message": "Specify the root folder within your source files."
+    },
+    "defaultValueDescription": {
+      "code": 6911,
+      "category": 3,
+      "key": "Computed_from_the_list_of_input_files_6911",
+      "message": "Computed from the list of input files"
+    },
+    "categoryCode": 6244,
+    "releaseVersion": "1.5",
+    "defaultValue": "Computed from the list of input files.",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "rootDirs",
+    "type": "list",
+    "isTSConfigOnly": true,
+    "element": {
+      "name": "rootDirs",
+      "type": "string",
+      "isFilePath": true
+    },
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6691,
+      "category": 3,
+      "key": "Allow_multiple_folders_to_be_treated_as_one_when_resolving_modules_6691",
+      "message": "Allow multiple folders to be treated as one when resolving modules."
+    },
+    "defaultValueDescription": {
+      "code": 6911,
+      "category": 3,
+      "key": "Computed_from_the_list_of_input_files_6911",
+      "message": "Computed from the list of input files"
+    },
+    "categoryCode": 6244,
+    "releaseVersion": "2.0",
+    "defaultValue": "Computed from the list of input files.",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "skipDefaultLibCheck",
+    "type": "boolean",
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6692,
+      "category": 3,
+      "key": "Skip_type_checking_d_ts_files_that_are_included_with_TypeScript_6692",
+      "message": "Skip type checking .d.ts files that are included with TypeScript."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6257,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "skipLibCheck",
+    "type": "boolean",
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6693,
+      "category": 3,
+      "key": "Skip_type_checking_all_d_ts_files_6693",
+      "message": "Skip type checking all .d.ts files."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6257,
+    "recommended": true,
+    "releaseVersion": "2.0",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "sourceMap",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "defaultValueDescription": false,
+    "description": {
+      "code": 6694,
+      "category": 3,
+      "key": "Create_source_map_files_for_emitted_JavaScript_files_6694",
+      "message": "Create source map files for emitted JavaScript files."
+    },
+    "categoryCode": 6246,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "sourceRoot",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "paramType": {
+      "code": 6037,
+      "category": 3,
+      "key": "LOCATION_6037",
+      "message": "LOCATION"
+    },
+    "description": {
+      "code": 6695,
+      "category": 3,
+      "key": "Specify_the_root_path_for_debuggers_to_find_the_reference_source_code_6695",
+      "message": "Specify the root path for debuggers to find the reference source code."
+    },
+    "categoryCode": 6246,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "strict",
+    "type": "boolean",
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6180,
+      "category": 3,
+      "key": "Enable_all_strict_type_checking_options_6180",
+      "message": "Enable all strict type-checking options."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "related": [
+      "alwaysStrict",
+      "strictNullChecks",
+      "strictBindCallApply",
+      "strictFunctionTypes",
+      "strictPropertyInitialization",
+      "noImplicitAny",
+      "noImplicitThis",
+      "useUnknownInCatchVariables"
+    ],
+    "recommended": true,
+    "releaseVersion": "2.3",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "strictBindCallApply",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6697,
+      "category": 3,
+      "key": "Check_that_the_arguments_for_bind_call_and_apply_methods_match_the_original_function_6697",
+      "message": "Check that the arguments for 'bind', 'call', and 'apply' methods match the original function."
+    },
+    "defaultValueDescription": {
+      "code": 6905,
+      "category": 3,
+      "key": "false_unless_strict_is_set_6905",
+      "message": "`false`, unless `strict` is set"
+    },
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "recommended": true,
+    "releaseVersion": "3.2",
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "strictFunctionTypes",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6698,
+      "category": 3,
+      "key": "When_assigning_functions_check_to_ensure_parameters_and_the_return_values_are_subtype_compatible_6698",
+      "message": "When assigning functions, check to ensure parameters and the return values are subtype-compatible."
+    },
+    "defaultValueDescription": {
+      "code": 6905,
+      "category": 3,
+      "key": "false_unless_strict_is_set_6905",
+      "message": "`false`, unless `strict` is set"
+    },
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "recommended": true,
+    "releaseVersion": "2.6",
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "strictNullChecks",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6699,
+      "category": 3,
+      "key": "When_type_checking_take_into_account_null_and_undefined_6699",
+      "message": "When type checking, take into account 'null' and 'undefined'."
+    },
+    "defaultValueDescription": {
+      "code": 6905,
+      "category": 3,
+      "key": "false_unless_strict_is_set_6905",
+      "message": "`false`, unless `strict` is set"
+    },
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "recommended": true,
+    "releaseVersion": "2.0",
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "strictPropertyInitialization",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6700,
+      "category": 3,
+      "key": "Check_for_class_properties_that_are_declared_but_not_set_in_the_constructor_6700",
+      "message": "Check for class properties that are declared but not set in the constructor."
+    },
+    "defaultValueDescription": {
+      "code": 6905,
+      "category": 3,
+      "key": "false_unless_strict_is_set_6905",
+      "message": "`false`, unless `strict` is set"
+    },
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "recommended": true,
+    "releaseVersion": "2.7",
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "stripInternal",
+    "type": "boolean",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6701,
+      "category": 3,
+      "key": "Disable_emitting_declarations_that_have_internal_in_their_JSDoc_comments_6701",
+      "message": "Disable emitting declarations that have '@internal' in their JSDoc comments."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6246,
+    "internal": true,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "suppressExcessPropertyErrors",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6702,
+      "category": 3,
+      "key": "Disable_reporting_of_excess_property_errors_during_the_creation_of_object_literals_6702",
+      "message": "Disable reporting of excess property errors during the creation of object literals."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6253,
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "suppressImplicitAnyIndexErrors",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6703,
+      "category": 3,
+      "key": "Suppress_noImplicitAny_errors_when_indexing_objects_that_lack_index_signatures_6703",
+      "message": "Suppress 'noImplicitAny' errors when indexing objects that lack index signatures."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6253,
+    "related": ["noImplicitAny"],
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "synchronousWatchDirectory",
+    "type": "boolean",
+    "description": {
+      "code": 6704,
+      "category": 3,
+      "key": "Synchronously_call_callbacks_and_update_the_state_of_directory_watchers_on_platforms_that_don_t_supp_6704",
+      "message": "Synchronously call callbacks and update the state of directory watchers on platforms that don`t support recursive watching natively."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6250,
+    "hostObj": "watchOptions"
+  },
+  {
+    "name": "target",
+    "type": {
+      "es3": 0,
+      "es5": 1,
+      "es6": 2,
+      "es2015": 2,
+      "es2016": 3,
+      "es2017": 4,
+      "es2018": 5,
+      "es2019": 6,
+      "es2020": 7,
+      "es2021": 8,
+      "es2022": 9,
+      "esnext": 99
+    },
+    "affectsSourceFile": true,
+    "affectsModuleResolution": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "paramType": {
+      "code": 6036,
+      "category": 3,
+      "key": "VERSION_6036",
+      "message": "VERSION"
+    },
+    "description": {
+      "code": 6705,
+      "category": 3,
+      "key": "Set_the_JavaScript_language_version_for_emitted_JavaScript_and_include_compatible_library_declaratio_6705",
+      "message": "Set the JavaScript language version for emitted JavaScript and include compatible library declarations."
+    },
+    "defaultValueDescription": 0,
+    "categoryCode": 6254,
+    "allowedValues": [
+      "es3",
+      "es5",
+      "`es6`/`es2015`",
+      "es2016",
+      "es2017",
+      "es2018",
+      "es2019",
+      "es2020",
+      "es2021",
+      "es2022",
+      "esnext"
+    ],
+    "releaseVersion": "1.0",
+    "defaultValue": "ES3",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "traceResolution",
+    "type": "boolean",
+    "description": {
+      "code": 6706,
+      "category": 3,
+      "key": "Log_paths_used_during_the_moduleResolution_process_6706",
+      "message": "Log paths used during the 'moduleResolution' process."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6251,
+    "releaseVersion": "2.0",
+    "defaultValue": false,
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "tsBuildInfoFile",
+    "type": "string",
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "affectsBundleEmitBuildInfo": true,
+    "isFilePath": true,
+    "paramType": {
+      "code": 6035,
+      "category": 3,
+      "key": "FILE_6035",
+      "message": "FILE"
+    },
+    "defaultValueDescription": ".tsbuildinfo",
+    "description": {
+      "code": 6707,
+      "category": 3,
+      "key": "Specify_the_path_to_tsbuildinfo_incremental_compilation_file_6707",
+      "message": "Specify the path to .tsbuildinfo incremental compilation file."
+    },
+    "categoryCode": 6255,
+    "related": ["incremental", "composite"],
+    "releaseVersion": "3.4",
+    "defaultValue": ".tsbuildinfo",
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "typeRoots",
+    "type": "list",
+    "element": {
+      "name": "typeRoots",
+      "type": "string",
+      "isFilePath": true
+    },
+    "affectsModuleResolution": true,
+    "description": {
+      "code": 6710,
+      "category": 3,
+      "key": "Specify_multiple_folders_that_act_like_Slashnode_modules_Slash_types_6710",
+      "message": "Specify multiple folders that act like './node_modules/@types'."
+    },
+    "categoryCode": 6244,
+    "related": ["types"],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "types",
+    "type": "list",
+    "element": {
+      "name": "types",
+      "type": "string"
+    },
+    "affectsProgramStructure": true,
+    "description": {
+      "code": 6711,
+      "category": 3,
+      "key": "Specify_type_package_names_to_be_included_without_being_referenced_in_a_source_file_6711",
+      "message": "Specify type package names to be included without being referenced in a source file."
+    },
+    "categoryCode": 6244,
+    "related": ["typeRoots"],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "useDefineForClassFields",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsEmit": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "description": {
+      "code": 6712,
+      "category": 3,
+      "key": "Emit_ECMAScript_standard_compliant_class_fields_6712",
+      "message": "Emit ECMAScript-standard-compliant class fields."
+    },
+    "defaultValueDescription": {
+      "code": 6930,
+      "category": 3,
+      "key": "true_for_ES2022_and_above_including_ESNext_6930",
+      "message": "`true` for ES2022 and above, including ESNext."
+    },
+    "categoryCode": 6254,
+    "releaseVersion": "3.7",
+    "defaultValue": [
+      "`true` if [`target`](#target) is `ES2022` or higher, including `ESNext`,",
+      "`false` otherwise."
+    ],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "useUnknownInCatchVariables",
+    "type": "boolean",
+    "affectsSemanticDiagnostics": true,
+    "affectsMultiFileEmitBuildInfo": true,
+    "strictFlag": true,
+    "description": {
+      "code": 6803,
+      "category": 3,
+      "key": "Default_catch_clause_variables_as_unknown_instead_of_any_6803",
+      "message": "Default catch clause variables as 'unknown' instead of 'any'."
+    },
+    "defaultValueDescription": false,
+    "categoryCode": 6248,
+    "related": ["strict"],
+    "releaseVersion": "4.4",
+    "defaultValue": ["`true` if [`strict`](#strict),", "`false` otherwise."],
+    "hostObj": "compilerOptions"
+  },
+  {
+    "name": "verbose",
+    "description": {
+      "code": 6713,
+      "category": 3,
+      "key": "Enable_verbose_logging_6713",
+      "message": "Enable verbose logging."
+    },
+    "type": "boolean",
+    "defaultValueDescription": false,
+    "categoryCode": 6171,
+    "hostObj": "build"
+  },
+  {
+    "name": "watchDirectory",
+    "type": {
+      "usefsevents": 0,
+      "fixedpollinginterval": 1,
+      "dynamicprioritypolling": 2,
+      "fixedchunksizepolling": 3
+    },
+    "description": {
+      "code": 6714,
+      "category": 3,
+      "key": "Specify_how_directories_are_watched_on_systems_that_lack_recursive_file_watching_functionality_6714",
+      "message": "Specify how directories are watched on systems that lack recursive file-watching functionality."
+    },
+    "defaultValueDescription": 0,
+    "categoryCode": 6250,
+    "allowedValues": [
+      "usefsevents",
+      "fixedpollinginterval",
+      "dynamicprioritypolling",
+      "fixedchunksizepolling"
+    ],
+    "releaseVersion": "3.8",
+    "hostObj": "watchOptions"
+  },
+  {
+    "name": "watchFile",
+    "type": {
+      "fixedpollinginterval": 0,
+      "prioritypollinginterval": 1,
+      "dynamicprioritypolling": 2,
+      "fixedchunksizepolling": 3,
+      "usefsevents": 4,
+      "usefseventsonparentdirectory": 5
+    },
+    "description": {
+      "code": 6715,
+      "category": 3,
+      "key": "Specify_how_the_TypeScript_watch_mode_works_6715",
+      "message": "Specify how the TypeScript watch mode works."
+    },
+    "defaultValueDescription": 4,
+    "categoryCode": 6250,
+    "allowedValues": [
+      "fixedpollinginterval",
+      "prioritypollinginterval",
+      "dynamicprioritypolling",
+      "fixedchunksizepolling",
+      "usefsevents",
+      "usefseventsonparentdirectory"
+    ],
+    "releaseVersion": "3.8",
+    "hostObj": "watchOptions"
+  }
+]

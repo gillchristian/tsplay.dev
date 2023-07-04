@@ -1,0 +1,23 @@
+{
+  "docs": [
+    { "type": "href", "title": "Compiler Settings", "href": "/handbook/compiler-settings.html" },
+    { "type": "href", "title": "Examples", "href": "/handbook/examples.html" },
+    { "type": "href", "title": "JS + DTS sidebars", "href": "/handbook/js---dts-sidebars.html" },
+    { "type": "href", "title": "Running Code", "href": "/handbook/running-code.html" },
+    { "type": "href", "title": "Type Acquisition", "href": "/handbook/type-acquisition.html" },
+    { "type": "href", "title": "Settings Panel", "href": "/handbook/settings-panel.html" },
+    { "type": "href", "title": "Writing JavaScript", "href": "/handbook/writing-javascript.html" },
+    { "type": "href", "title": "Writing DTS Files", "href": "/handbook/writing-dts-files.html" },
+    { "type": "href", "title": "TypeScript Versions", "href": "/handbook/typescript-versions.html" },
+    { "type": "href", "title": "URL Structure", "href": "/handbook/url-structure.html" },
+    { "type": "href", "title": "Plugins", "href": "/handbook/plugins.html" },
+    { "type": "href", "title": "Exporting Your Code", "href": "/handbook/exporting-your-code.html" },
+    { "type": "hr" },
+    { "type": "href", "title": "Extended Edition", "href": "/handbook/extended-edition.html" },
+    { "type": "href", "title": "Twoslash Annotations", "href": "/handbook/twoslash-annotations.html" },
+    { "type": "href", "title": "Gist Docsets", "href": "/handbook/gist-docsets.html" },
+    { "type": "href", "title": "Bug Workbench", "href": "/handbook/bug-workbench.html" },
+    { "type": "href", "title": "Writing Plugins", "href": "/handbook/writing-plugins.html" },
+    { "type": "href", "title": "Implementation Details", "href": "/handbook/implementation-details.html" }
+  ]
+}

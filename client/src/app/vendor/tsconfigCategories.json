@@ -1,0 +1,98 @@
+{
+  "0": {
+    "code": 0,
+    "category": 3,
+    "key": "Project_Files_0",
+    "message": "Project File Management"
+  },
+  "999": {
+    "code": 999,
+    "category": 4,
+    "key": "Watch_Options_999",
+    "message": "Watch Options"
+  },
+  "6171": {
+    "code": 6171,
+    "category": 3,
+    "key": "Command_line_Options_6171",
+    "message": "Command-line Options"
+  },
+  "6244": {
+    "code": 6244,
+    "category": 3,
+    "key": "Modules_6244",
+    "message": "Modules"
+  },
+  "6246": {
+    "code": 6246,
+    "category": 3,
+    "key": "Emit_6246",
+    "message": "Emit"
+  },
+  "6247": {
+    "code": 6247,
+    "category": 3,
+    "key": "JavaScript_Support_6247",
+    "message": "JavaScript Support"
+  },
+  "6248": {
+    "code": 6248,
+    "category": 3,
+    "key": "Type_Checking_6248",
+    "message": "Type Checking"
+  },
+  "6249": {
+    "code": 6249,
+    "category": 3,
+    "key": "Editor_Support_6249",
+    "message": "Editor Support"
+  },
+  "6250": {
+    "code": 6250,
+    "category": 3,
+    "key": "Watch_and_Build_Modes_6250",
+    "message": "Watch and Build Modes"
+  },
+  "6251": {
+    "code": 6251,
+    "category": 3,
+    "key": "Compiler_Diagnostics_6251",
+    "message": "Compiler Diagnostics"
+  },
+  "6252": {
+    "code": 6252,
+    "category": 3,
+    "key": "Interop_Constraints_6252",
+    "message": "Interop Constraints"
+  },
+  "6253": {
+    "code": 6253,
+    "category": 3,
+    "key": "Backwards_Compatibility_6253",
+    "message": "Backwards Compatibility"
+  },
+  "6254": {
+    "code": 6254,
+    "category": 3,
+    "key": "Language_and_Environment_6254",
+    "message": "Language and Environment"
+  },
+  "6255": {
+    "code": 6255,
+    "category": 3,
+    "key": "Projects_6255",
+    "message": "Projects"
+  },
+  "6256": {
+    "code": 6256,
+    "category": 3,
+    "key": "Output_Formatting_6256",
+    "message": "Output Formatting"
+  },
+  "6257": {
+    "code": 6257,
+    "category": 3,
+    "key": "Completeness_6257",
+    "message": "Completeness"
+  }
+}
